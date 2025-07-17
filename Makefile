@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
-#    Updated: 2025/07/17 16:30:56 by andcarva         ###   ########.fr        #
+#    Updated: 2025/07/17 16:44:44 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ MLX		=	minilibx-linux/libmlx.a
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g
-#RL		=	-lreadline 
 VAL		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 #FDFLAGS	=	--track-fds=yes #--trace-children=yes
 SUPP	=	--suppressions=readline.supp
@@ -33,15 +32,21 @@ PARSE_DIR		=	Parse
 # -->┊( SOURCES AND OBJS )
 MAIN_C			=	cube3D_main.c
 
-RENDER_FILES_C	=	render_main.c
+RENDER_MAIN_C	=	render_main.c
+RENDER_FILES_C	=	
 
-PARSE_FILES_C	=	parsing_main.c
+PARSE_MAIN_C	=	parsing_main.c
+PARSE_FILES_C	=	
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
+RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))
+PARSE_MAIN		=	$(addprefix	$(PARSE_DIR)/, $(PARSE_MAIN_C))
 
-OBJS_PARSE		=	$(addprefix $(OBJS_DIR)/, $(PARSE_FILES_C:.c=.o))
-OBJS_RENDER		=	$(addprefix $(OBJS_DIR)/, $(RENDER_FILES_C:.c=.o))
-OBJS_MAIN		=	$(addprefix $(OBJS_DIR)/, $(MAIN_C:.c=.o))
+OBJS_PARSE			=	$(addprefix $(OBJS_DIR)/, $(PARSE_FILES_C:.c=.o))
+OBJS_RENDER			=	$(addprefix $(OBJS_DIR)/, $(RENDER_FILES_C:.c=.o))
+OBJS_MAIN			=	$(addprefix $(OBJS_DIR)/, $(MAIN_C:.c=.o))
+OBJS_MAIN_RENDER	=	$(addprefix $(OBJS_DIR)/, $(RENDER_MAIN_C:.c=.o))
+OBJS_MAIN_PARSE		=	$(addprefix $(OBJS_DIR)/, $(PARSE_MAIN_C:.c=.o))
 
 # -->┊( RULES )
 all: $(NAME)
@@ -68,6 +73,16 @@ $(LIBFT):
 
 $(MLX):
 	@make -C ./minilibx -s
+
+render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT)
+	$(M_COMP_E)
+	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) -o $(NAME)
+	$(M_DONE)
+
+parse: $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT)
+	$(M_COMP_P)
+	@$(CC) $(CFLAGS) $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT) -o $(NAME)
+	$(M_DONE)
 
 clean:
 	@make clean -C ./Inc/Libft -s
