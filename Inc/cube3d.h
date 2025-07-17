@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:53:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/17 16:05:40 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:26:22 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/time.h>
 # include <math.h>
 # include <unistd.h>
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../Inc/Libft/libft.h"
 
 // Tudo o que eu coloquei aqui podes alterar,

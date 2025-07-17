@@ -1,8 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
+#    Updated: 2025/07/17 16:30:56 by andcarva         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # -->┊( NAMES )
 NAME	=	cube3D
 LIBFT	=	./Inc/Libft/libft.a
-MLX		=	minilibx/libmlx.a
+MLX		=	minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
@@ -35,7 +46,7 @@ OBJS_MAIN		=	$(addprefix $(OBJS_DIR)/, $(MAIN_C:.c=.o))
 # -->┊( RULES )
 all: $(NAME)
 
-$(NAME): $(OBJS_MAIN) $(OBJS_RENDER) $(OBJS_PARSE) $(LIBFT)
+$(NAME): $(OBJS_MAIN) $(OBJS_RENDER) $(OBJS_PARSE) $(LIBFT) $(MLX)
 	$(M_COMP)
 	@$(CC) $(CFLAGS) $(OBJS_MAIN) $(OBJS_RENDER) $(OBJS_PARSE) $(LIBFT) $(MLX) -lm -lz -lXext -lX11 -o $(NAME)
 	$(M_DONE)
@@ -55,8 +66,12 @@ $(OBJS_DIR):
 $(LIBFT):
 	@make -C ./Inc/Libft -s
 
+$(MLX):
+	@make -C ./minilibx -s
+
 clean:
 	@make clean -C ./Inc/Libft -s
+	@make clean -C ./minilibx -s
 	$(M_REMOBJS)
 	@rm -rf $(OBJS_DIR)
 	$(M_DONE)
@@ -81,8 +96,8 @@ rn: fclean render
 #	$(VAL) $(SUPP) ./cube3D
 
 # -->┊( EXE TEST RULES )
-#render: all
-#	./cube3D
+render: all
+	./cube3D
 
 # -->┊( COSMETICS )
 
