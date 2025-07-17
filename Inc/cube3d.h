@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:53:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/17 16:26:22 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/07/17 18:05:17 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@
 # define Z 2
 
 // ERRORS
-# define ERROR_ARGS "TO MANY ARGUMENTS"
+# define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
 # define ERROR_INIT "NOT INICIALIZED"
 # define ERROR_MAP_LEN "MAP TO BIG"
 # define ERROR_MAP "MAP EMPTY"
 # define ERROR_SPACE "TO MANY SAPCES"
 # define ERROR_CHAR "INVALID CHARACTER IN MAP"
 # define ERROR_FORMAT "MAP NOT RETANGULAR"
+
+
 
 #endif //CUBE3D_H
