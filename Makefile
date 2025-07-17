@@ -6,7 +6,7 @@
 #    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
-#    Updated: 2025/07/17 16:44:44 by andcarva         ###   ########.fr        #
+#    Updated: 2025/07/17 16:50:32 by andcarva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ $(LIBFT):
 	@make -C ./Inc/Libft -s
 
 $(MLX):
-	@make -C ./minilibx -s
+	@make -C ./minilibx-linux -s
 
 render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT)
 	$(M_COMP_E)
@@ -86,7 +86,7 @@ parse: $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT)
 
 clean:
 	@make clean -C ./Inc/Libft -s
-	@make clean -C ./minilibx -s
+	@make clean -C ./minilibx-linux -s
 	$(M_REMOBJS)
 	@rm -rf $(OBJS_DIR)
 	$(M_DONE)
@@ -111,8 +111,8 @@ rn: fclean render
 #	$(VAL) $(SUPP) ./cube3D
 
 # -->┊( EXE TEST RULES )
-render: all
-	./cube3D
+#render: all
+#	./cube3D
 
 # -->┊( COSMETICS )
 
@@ -131,8 +131,8 @@ WHTB 	=	\e[47m
 
 #->┊ messages
 M_COMP		= @echo "$(BLK)-->┊$(GRN)  Compiling: $(DEF)$(BLK)$(WHTB) $(NAME) $(BLK)$(DEF)"
-M_COMP_E	= @echo "$(BLK)-->┊$(GRN)  Compiling: $(DEF)$(BLK)$(WHTB) EXE $(NAME) $(BLK)$(DEF)"
-M_COMP_P	= @echo "$(BLK)-->┊$(GRN)  Compiling: $(DEF)$(BLK)$(WHTB) PAR $(NAME) $(BLK)$(DEF)"
+M_COMP_E	= @echo "$(BLK)-->┊$(GRN)  Compiling: $(DEF)$(BLK)$(WHTB) RENDER $(NAME) $(BLK)$(DEF)"
+M_COMP_P	= @echo "$(BLK)-->┊$(GRN)  Compiling: $(DEF)$(BLK)$(WHTB) PARSE $(NAME) $(BLK)$(DEF)"
 M_REM		= @echo "$(BLK)-->┊$(BLU)  Removing:  $(DEF)$(BLK)$(WHTB) $(NAME) $(BLK)$(DEF)"
 M_REMOBJS	= @echo "$(BLK)-->┊$(BLU)  Removing: $(BWHT) $(NAME)/objs $(BLK)$(DEF)"
 M_DONE		= @echo "$(BLK)-->┊$(BGRN)  DONE!!$(DEF)"
