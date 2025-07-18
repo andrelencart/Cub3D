@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 15:53:09 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/17 16:26:22 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/07/18 18:43:32 by darkless12       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // LIBS
 # include "Libft/libft.h"
 # include "cube_structs.h"
+# include "cube_parse.h"
 # include <limits.h>
 # include <stddef.h>
 # include <stdbool.h>

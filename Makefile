@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+         #
+#    By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
-#    Updated: 2025/07/17 16:50:32 by andcarva         ###   ########.fr        #
+#    Updated: 2025/07/18 18:56:11 by darkless12       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_DIR			=	Src
 OBJS_DIR		=	Objs
 CUBE3D_DIR		=	Cube3D
 RENDER_DIR		= 	Render
-PARSE_DIR		=	Parse
+PARSE_DIR		=	Parsing
 
 # -->┊( SOURCES AND OBJS )
 MAIN_C			=	cube3D_main.c
@@ -36,7 +36,8 @@ RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	
 
 PARSE_MAIN_C	=	parsing_main.c
-PARSE_FILES_C	=	
+PARSE_FILES_C	=	cube_checker.c \
+					parse_cleaning.c
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
 RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_main.c                                     :+:      :+:    :+:   */
+/*   cube_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 16:52:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/18 18:52:58 by darkless12       ###   ########.fr       */
+/*   Created: 2025/07/18 18:46:50 by darkless12        #+#    #+#             */
+/*   Updated: 2025/07/18 19:07:12 by darkless12       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../Inc/cube3d.h"
 
-int	main(int ac, char **av)
+//verifica se o nome termina em .cub
+int	parse_check_fname(char *fname)
 {
-	if (ac != 2 || !av)
-		return (parse_error("Wrong number of arguments"));
-	if (parse_check_fname(av[1]))
-		return(1);
-	//verificar se ficheiro existe e pode ser aberto ao abrir .cub para um **data
-	//com readline para contar nº linhas e usar isso no malloc de **data.
-	//Fazer outra vez readline para capturar ficheiro.
-	//capturo tudo num num **data ou faço linked list com uma string??
+	char	*ext;
+	int		len;
+
+	ext = ".cub";
+	len = ft_strlen(fname);
+	if (ft_strncmp(&fname[len - 4], ext, 4) || len < 5)
+		return (parse_error("Wrong file extension"));
 	return (0);
 }
