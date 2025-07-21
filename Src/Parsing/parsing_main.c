@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ddiogo-f <ddiogo-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:52:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/18 18:52:58 by darkless12       ###   ########.fr       */
+/*   Updated: 2025/07/21 14:17:45 by ddiogo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Inc/cube3d.h"
+#include "../../Inc/cube_parse.h"
 
 int	main(int ac, char **av)
 {
+	t_parse	*data;
+
 	if (ac != 2 || !av)
 		return (parse_error("Wrong number of arguments"));
-	if (parse_check_fname(av[1]))
+	data = ft_calloc(1, sizeof(t_parse));
+	if (!data)
+		return (parse_error("Failed to allocate *data"));
+	if (parse_check_fname(av[1], data))
 		return(1);
-	//verificar se ficheiro existe e pode ser aberto ao abrir .cub para um **data
-	//com readline para contar nº linhas e usar isso no malloc de **data.
-	//Fazer outra vez readline para capturar ficheiro.
-	//capturo tudo num num **data ou faço linked list com uma string??
 	return (0);
 }
