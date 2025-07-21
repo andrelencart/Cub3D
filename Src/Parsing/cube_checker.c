@@ -6,7 +6,7 @@
 /*   By: ddiogo-f <ddiogo-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:46:50 by darkless12        #+#    #+#             */
-/*   Updated: 2025/07/21 14:20:32 by ddiogo-f         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:51:33 by ddiogo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ int	get_data(char *fname, t_parse *data)
 		return (free_data(data), free(line), parse_error(strerror(errno)));
 	while (line != NULL)
 	{
-		free(line);
+		if (i == 0)
+			free(line);
 		line = get_next_line(fd);
 		data->map[i++] = line;
 	}
-	free(line);
 	close(fd);
+	i = 0;
+	while (data->map[i] != NULL)
+		printf("%s", data->map[i++]);
 	return (0);
 }
 

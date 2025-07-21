@@ -6,7 +6,7 @@
 /*   By: ddiogo-f <ddiogo-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:52:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/21 14:17:45 by ddiogo-f         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:49:18 by ddiogo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	main(int ac, char **av)
 		return (parse_error("Failed to allocate *data"));
 	if (parse_check_fname(av[1], data))
 		return(1);
+	free_data(data);
 	return (0);
 }
