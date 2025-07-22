@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_main.c                                     :+:      :+:    :+:   */
+/*   cube_parse.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiogo-f <ddiogo-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 16:52:52 by andcarva          #+#    #+#             */
-/*   Updated: 2025/07/21 15:49:18 by ddiogo-f         ###   ########.fr       */
+/*   Created: 2025/07/18 18:41:10 by darkless12        #+#    #+#             */
+/*   Updated: 2025/07/21 14:17:12 by ddiogo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
+#ifndef CUBE_PARSE_H
+# define CUBE_PARSE_H
 
-int	main(int ac, char **av)
+# include <errno.h>
+
+typedef struct	s_parse
 {
-	t_parse	*data;
+	char	*n_face;
+	char	*s_face;
+	char	*e_face;
+	char	*w_face;
+	char	**map;
+}	t_parse;
 
-	if (ac != 2 || !av)
-		return (parse_error("Wrong number of arguments"));
-	data = ft_calloc(1, sizeof(t_parse));
-	if (!data)
-		return (parse_error("Failed to allocate *data"));
-	if (parse_check_fname(av[1], data))
-		return(1);
-	free_data(data);
-	return (0);
-}
+//parse_cleaning.c
+int		parse_error(char *msg);
+void	free_data(t_parse *data);
+
+//cube_checker.c
+int	parse_check_fname(char *fname, t_parse *data);
+
+#endif
