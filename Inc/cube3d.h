@@ -58,6 +58,8 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define RED 0xFF0000
+# define CEILING_COLOR 0x333333
+# define FLOOR_COLOR   0xAAAAAA
 
 // CORD_DEF
 # define X 0
