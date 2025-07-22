@@ -1,19 +1,8 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
-#    Updated: 2025/07/18 18:56:11 by darkless12       ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 # -->┊( NAMES )
 NAME	=	cube3D
 LIBFT	=	./Inc/Libft/libft.a
-MLX		=	minilibx-linux/libmlx.a
+MLX		=	./minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
@@ -33,7 +22,7 @@ PARSE_DIR		=	Parsing
 MAIN_C			=	cube3D_main.c
 
 RENDER_MAIN_C	=	render_main.c
-RENDER_FILES_C	=	
+RENDER_FILES_C	=	hooks.c init.c map.c
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	cube_checker.c \
@@ -75,9 +64,9 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx-linux -s
 
-render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT)
+render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX)
 	$(M_COMP_E)
-	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX) -lm -lz -lXext -lX11 -o $(NAME)
 	$(M_DONE)
 
 parse: $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT)

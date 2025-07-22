@@ -5,7 +5,7 @@
 
 // LIBS
 # include "Libft/libft.h"
-# include "cube_structs.h"
+// # include "cube_structs.h"
 # include <limits.h>
 # include <stddef.h>
 # include <stdbool.h>
@@ -24,12 +24,6 @@
 // MAP_DEF
 # define WIDTH 1920
 # define HEIGHT 1080
-
-// PROJECTION_KEYS
-# define ISOMETRIC 0
-# define FRONT_VIEW 1
-# define SIDE_VIEW 2
-# define TOP_VIEW 3
 
 // MATH
 # define PI 3.14159265358979323846
@@ -93,24 +87,38 @@ typedef	struct s_window
 	int		endian;
 }			t_window;
 
-// This is mine from fdf: Change what u need to change
-typedef struct s_map
-{
-	// char 	**mtz;
-	// int		ang[3];
-	// int		scale;
-	// int		z_scale;
-	// float	zoom;
-	// float	orig_cord[3];
-	// int		hait;
-	// int		with;
-}			t_map;
+// // This is mine from fdf: Change what u need to change
+// typedef struct s_map
+// {
+// 	char 	**mtz;
+// 	int		ang[3];
+// 	int		scale;
+// 	int		z_scale;
+// 	float	zoom;
+// 	float	orig_cord[3];
+// 	int		hait;
+// 	int		with;
+// }			t_map;
 
 typedef struct s_cube
 {
-	t_map		map;
+	// t_map		map;
 	t_window	window;
 }				t_cube;
 
+// RENDER FUNCTIONS
+
+// INIT
+
+void	init_window(t_window *window);
+
+// HOOKS
+
+void	hook_control(t_cube *cube);
+int		key_press(int key_code, t_cube *cube);
+
+// CLOSE
+
+int		close_window(t_window *window);
 
 #endif //CUBE3D_H
