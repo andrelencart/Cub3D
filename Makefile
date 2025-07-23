@@ -22,7 +22,7 @@ PARSE_DIR		=	Parsing
 MAIN_C			=	cube3D_main.c
 
 RENDER_MAIN_C	=	render_main.c
-RENDER_FILES_C	=	hooks.c init.c map.c
+RENDER_FILES_C	=	hooks.c init.c render_utils.c draw_map.c
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	cube_checker.c \

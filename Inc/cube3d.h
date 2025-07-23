@@ -22,8 +22,9 @@
 // Isto sao coisas que eu tinha do FDF
 
 // MAP_DEF
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIND_WIDTH 1920
+# define WIND_HEIGHT 1080
+# define TILE_SIZE 20
 
 // MATH
 # define PI 3.14159265358979323846
@@ -75,9 +76,22 @@
 # define ERROR_CHAR "INVALID CHARACTER IN MAP"
 # define ERROR_FORMAT "MAP NOT RETANGULAR"
 
+// MAP's
+
+static char *test_map[] = {
+	"1111111111",
+    "1000000001",
+    "1011111101",
+    "1010000101",
+    "1010P00101",
+    "1010111101",
+    "1000000001",
+    "1111111111",
+    NULL
+};
+
 // STRUCTS
 
-//This is the struct for the mlx window
 typedef	struct s_window
 {
 	void	*mlx;
@@ -89,35 +103,50 @@ typedef	struct s_window
 	int		endian;
 }			t_window;
 
-// // This is mine from fdf: Change what u need to change
-// typedef struct s_map
-// {
-// 	char 	**mtz;
-// 	int		ang[3];
-// 	int		scale;
-// 	int		z_scale;
-// 	float	zoom;
-// 	float	orig_cord[3];
-// 	int		hait;
-// 	int		with;
-// }			t_map;
+typedef struct s_player
+{
+    double  x;         // Player position, in the map
+    double  y;
+    double  dir_x;     // Direction vector
+    double  dir_y;
+    double  plane_x;   // Camera plane for FOV
+    double  plane_y;
+}   t_player;
+
+typedef	struct s_map
+{
+	char	**grid;
+	int		width;
+	int		height;
+}			t_map;
 
 typedef struct s_cube
 {
-	// t_map		map;
+	t_map		map;
 	t_window	window;
+	t_player	player;
 }				t_cube;
 
 // RENDER FUNCTIONS
 
 // INIT
 
+void	init(t_cube *cube);
+void	init_player(t_player *player);
+void	init_map(t_map *temap);
 void	init_window(t_window *window);
 
 // HOOKS
 
 void	hook_control(t_cube *cube);
 int		key_press(int key_code, t_cube *cube);
+
+// DRAW
+
+void	draw(t_cube *cube);
+void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
+void	draw_tile(t_window *win, int start_x, int start_y, int color);
+void	draw_map(t_window *win, t_map *map);
 
 // CLOSE
 
