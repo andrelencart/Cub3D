@@ -9,6 +9,8 @@ typedef struct	s_parse
 	char	*s_face;
 	char	*e_face;
 	char	*w_face;
+	char	*f_str;
+	char	*c_str;
 	int		floor;
 	int		ceiling;
 	char	**map;
@@ -17,7 +19,6 @@ typedef struct	s_parse
 //parse_cleaning.c
 int		parse_error(char *msg);
 void	free_data(t_parse *data);
-int		bad_parse(char *msg, char *extra);
 
 //cube_checker.c
 int	parse_check_fname(char *fname, t_parse *data);
