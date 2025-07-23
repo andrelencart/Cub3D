@@ -27,3 +27,10 @@ int	parse_error(char *msg)
 	ft_printf_fd(STDERR_FILENO, "Cube3d: %s\n", msg);
 	return (1);
 }
+
+int	bad_parse(char *msg, char *extra)
+{
+	ft_printf_fd(STDERR_FILENO, "Error\n");
+	ft_printf_fd(STDERR_FILENO, "Cube3d: %s\n", msg);
+	return (1);
+}

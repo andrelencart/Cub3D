@@ -23,6 +23,8 @@ int	get_data(char *fname, t_parse *data)
 		data->map[i++] = line;
 	}
 	close(fd);
+	//Isto e so para ver se importei bem o .cub
+	//Remover no fim.
 	i = 0;
 	while (data->map[i] != NULL)
 		printf("%s", data->map[i++]);

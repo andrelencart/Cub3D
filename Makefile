@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: darkless12 <darkless12@student.42.fr>      +#+  +:+       +#+         #
+#    By: ddiogo-f <ddiogo-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 16:27:58 by andcarva          #+#    #+#              #
-#    Updated: 2025/07/18 18:56:11 by darkless12       ###   ########.fr        #
+#    Updated: 2025/07/23 11:32:29 by ddiogo-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,9 @@ RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	
 
 PARSE_MAIN_C	=	parsing_main.c
-PARSE_FILES_C	=	cube_checker.c \
-					parse_cleaning.c
+PARSE_FILES_C	=	cub_checker.c \
+					parse_cleaning.c \
+					texture_checker.c
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
 RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))
