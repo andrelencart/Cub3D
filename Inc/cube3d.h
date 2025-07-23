@@ -24,7 +24,7 @@
 // MAP_DEF
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
-# define TILE_SIZE 20
+# define TILE_SIZE 64
 
 // MATH
 # define PI 3.14159265358979323846
@@ -113,6 +113,21 @@ typedef struct s_player
     double  plane_y;
 }   t_player;
 
+typedef struct  s_ray
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	camera_x;
+	int    map_x;
+    int    map_y;
+    double delta_dist_x;
+    double delta_dist_y;
+	int    step_x;
+    int    step_y;
+    double side_dist_x;
+    double side_dist_y;
+}			t_ray;
+
 typedef	struct s_map
 {
 	char	**grid;
@@ -135,6 +150,7 @@ void	init(t_cube *cube);
 void	init_player(t_player *player);
 void	init_map(t_map *temap);
 void	init_window(t_window *window);
+void	init_ray(t_player *player, t_ray *ray, int x);
 
 // HOOKS
 
@@ -147,6 +163,7 @@ void	draw(t_cube *cube);
 void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_map(t_window *win, t_map *map);
+void	raycast(t_cube *cube);
 
 // CLOSE
 

@@ -22,8 +22,10 @@ void	init_player(t_player *player)
 void	init_map(t_map *map)
 {
 	map->grid = test_map;
-	map->height = 0;
 	map->width = strlen(test_map[0]);
+	map->height = 0;
+	while (map->grid[map->height])
+        map->height++;
 }
 
 void	init_window(t_window *window)

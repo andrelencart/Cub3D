@@ -31,15 +31,13 @@ void	draw_map(t_window *win, t_map *map)
 	int	x;
 	int	y;
 	int color = 0;
-    while (map->grid[map->height])
-        map->height++;
     int offset_x = (WIND_WIDTH - map->width * TILE_SIZE) / 2;
     int offset_y = (WIND_HEIGHT - map->height * TILE_SIZE) / 2;
 	y = 0;
-	while (map->grid[y])
+	while (y < map->height)
 	{
 		x = 0;
-		while (map->grid[y][x])
+		while (x < map->width)
 		{
             if (map->grid[y][x] == '1')
                 color = CEILING_COLOR;
