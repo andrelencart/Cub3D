@@ -1,55 +1,53 @@
 #include "../../Inc/cube3d.h"
 #include "../../Inc/cube_parse.h"
 
-int	assign_color(char *str, int *color, char **line)
+int	assign_color(char *str, int *color)
 {
-	int	i;
-	int	channel;
-	int	tmp[3];
+	int	move;
 
-	i = 0;
-	channel = 0;
-	while (channel < 3)
+	move = 16;
+	if (*color > -1)
+		return (1);
+	*color = 0;
+	while (move >= 0)
 	{
-		while (str[i] && str[i] == ' ')
-			i++;
-		tmp[channel] = ft_atoi(&str[i]);
-		if (tmp[channel] < 0 || tmp[channel] > 255 || *line != NULL)
+		while (*str && *str == ' ')
+			str++;
+		if (!ft_isdigit(*str) || ft_atoi(&(*str)) < 0 || \
+					ft_atoi(&(*str)) > 255)
 			return (1);
-		while (str[i] && ft_isdigit(str[i]))
-			i++;
-		if (channel < 2 && str[i] != ',')
+		*color |= (ft_atoi(str)) << move;
+		while (*str && ft_isdigit(*str))
+			str++;
+		if (move > 0 && *str != ',')
 			return (1);
 		else
-			i++;
-		channel++;
+			str++;
+		move = move - 8;
 	}
-	*color = (tmp[0] << 16) | (tmp[1] << 8) | tmp[2];
-	*line = ft_strjoin("", str);
-	return (0);
+	return (check_line_end(str));
 }
 
-int	assign_texture(char *str, char *dest)
+int	assign_texture(char *str, char **dest)
 {
-	if (str && dest)
-		return (1);
+	*dest = ft_strdup(str);
 	return (0);
 }
 
 int	parse_line(t_parse *data, char *line)
 {
 	if (!ft_strncmp(line, "F", 1))
-		return (assign_color(&line[1], &data->floor, &data->f_str));
+		return (assign_color(&line[1], &data->floor));
 	else if (!ft_strncmp(line, "C", 1))
-		return (assign_color(&line[1], &data->ceiling, &data->c_str));
+		return (assign_color(&line[1], &data->ceiling));
 	else if (!ft_strncmp(line, "NO", 2))
-		return (assign_texture(&line[2], data->n_face));
+		return (assign_texture(&line[2], &data->n_face));
 	else if (!ft_strncmp(line, "SO", 2))
-		return (assign_texture(&line[2], data->s_face));
+		return (assign_texture(&line[2], &data->s_face));
 	else if (!ft_strncmp(line, "WE", 2))
-		return (assign_texture(&line[2], data->w_face));
+		return (assign_texture(&line[2], &data->w_face));
 	else if (!ft_strncmp(line, "EA", 2))
-		return (assign_texture(&line[2], data->e_face));
+		return (assign_texture(&line[2], &data->e_face));
 	else
 		return (1);
 }
@@ -61,30 +59,18 @@ int	parse_textures(t_parse *data)
 
 	i = 0;
 	j = 0;
-	while (data->map[i])
+	while (data->map[i] && is_data_filled(data))
 	{
-		j = 0;
-		while (data->map[i][j] == ' ')
-			j++;
-		if (data->map[i][j] == 10 || !parse_line(data, &data->map[i][j]))
+		while (data->map[i][j] == 10)
+			i++;
+		if (!parse_line(data, &data->map[i][j]))
 			i++;
 		else
 		{
 			ft_printf_fd(STDERR_FILENO, "Error\n");
-			ft_printf_fd(STDERR_FILENO, "Cube3d: .cub line %d is invalid\n", i);
-			free_data(data);
+			ft_printf_fd(2, "Cube3d: .cub line %d is invalid\n", i + 1);
 			return (1);
 		}
 	}
-	//check result
-	//remove
-	ft_printf("%s\n", data->c_str);
-	ft_printf("%X\n", data->ceiling);
-	ft_printf("%s\n", data->f_str);
-	ft_printf("%X\n", data->floor);
-	ft_printf("%s\n", data->e_face);
-	ft_printf("%s\n", data->n_face);
-	ft_printf("%s\n", data->s_face);
-	ft_printf("%s\n", data->w_face);
 	return (0);
 }

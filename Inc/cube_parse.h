@@ -9,8 +9,6 @@ typedef struct	s_parse
 	char	*s_face;
 	char	*e_face;
 	char	*w_face;
-	char	*f_str;
-	char	*c_str;
 	int		floor;
 	int		ceiling;
 	char	**map;
@@ -25,5 +23,9 @@ int	parse_check_fname(char *fname, t_parse *data);
 
 //texture_checker.c
 int	parse_textures(t_parse *data);
+
+//checker_helper.c
+int	check_line_end(char *str);
+int	is_data_filled(t_parse *data);
 
 #endif

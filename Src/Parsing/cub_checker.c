@@ -28,6 +28,7 @@ int	get_data(char *fname, t_parse *data)
 	i = 0;
 	while (data->map[i] != NULL)
 		printf("%s", data->map[i++]);
+	printf("\n");
 	return (0);
 }
 
