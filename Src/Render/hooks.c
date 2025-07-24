@@ -14,3 +14,13 @@ int	key_press(int key_code, t_cube *cube)
 		close_window(&cube->window);
 	return (0);
 }
+
+void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WIND_WIDTH || y < 0 || y >= WIND_HEIGHT)
+		return;
+	dst = win->addr + (y * win->line_length + x * (win->bitpp / 8));
+	*(unsigned int *)dst = color;
+}

@@ -24,7 +24,7 @@
 // MAP_DEF
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
-# define TILE_SIZE 64
+# define TILE_SIZE 20
 
 // MATH
 # define PI 3.14159265358979323846
@@ -59,8 +59,11 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define RED 0xFF0000
-# define CEILING_COLOR 0x333333
-# define FLOOR_COLOR   0xAAAAAA
+# define CEILING_COLOR_DK_G 0x333333
+# define FLOOR_COLOR_LGHT_G 0xAAAAAA
+# define WALL_COLOR_MG 0x666666
+# define WALL_COLOR_MB 0x225588
+
 
 // CORD_DEF
 # define X 0
@@ -78,25 +81,25 @@
 
 // MAP's
 
-// static char *test_map[] = {
-// 	"1111111111",
-//     "1000000001",
-//     "1011111101",
-//     "1010000101",
-//     "1010P00101",
-//     "1010111101",
-//     "1000000001",
-//     "1111111111",
-//     NULL
-// };
-
 static char *test_map[] = {
-    "111111",
-    "100001",
-    "100001",
-    "111111",
-	NULL
+	"1111111111",
+    "1000000001",
+    "1011111101",
+    "1010000101",
+    "1010P00101",
+    "1010111101",
+    "1000000001",
+    "1111111111",
+    NULL
 };
+
+// static char *test_map[] = {
+//     "111111",
+//     "100001",
+//     "100001",
+//     "111111",
+// 	NULL
+// };
 
 // STRUCTS
 
@@ -113,29 +116,32 @@ typedef	struct s_window
 
 typedef struct s_player
 {
-    double  x;         // Player position, in the map
-    double  y;
-    double  dir_x;     // Direction vector
-    double  dir_y;
-    double  plane_x;   // Camera plane for FOV
-    double  plane_y;
-}   t_player;
+	double	x;			// Player position, in the map
+	double	y;
+	double	dir_x;		// Direction vector
+	double	dir_y;
+	double	plane_x;	// Camera plane for FOV
+	double	plane_y;
+}			t_player;
 
 typedef struct  s_ray
 {
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	camera_x;
-	int    map_x;
-    int    map_y;
-    double delta_dist_x;
-    double delta_dist_y;
-	int    step_x;
-    int    step_y;
-    double side_dist_x;
-    double side_dist_y;
-	int    hit;
-	int    side;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		hit;
+	int		side;
+	int line_height;
+	int draw_start;
+	int draw_end;
 }			t_ray;
 
 typedef	struct s_map
@@ -174,11 +180,17 @@ int		key_press(int key_code, t_cube *cube);
 // DRAW
 
 void	draw(t_cube *cube);
-void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
-void	draw_map(t_window *win, t_map *map);
+void	draw_mini_map(t_window *win, t_map *map);
 void	raycast(t_cube *cube);
 void	dda_loop(t_ray *ray, char **map);
+void	calc_wall_dist(t_player *player, t_ray *ray);
+void	draw_3d_map(t_window *win, t_ray *ray, int x);
+
+// UTILS
+
+int	get_tile_color(char c);
 
 // CLOSE
 
