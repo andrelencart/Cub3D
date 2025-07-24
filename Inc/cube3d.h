@@ -78,16 +78,24 @@
 
 // MAP's
 
+// static char *test_map[] = {
+// 	"1111111111",
+//     "1000000001",
+//     "1011111101",
+//     "1010000101",
+//     "1010P00101",
+//     "1010111101",
+//     "1000000001",
+//     "1111111111",
+//     NULL
+// };
+
 static char *test_map[] = {
-	"1111111111",
-    "1000000001",
-    "1011111101",
-    "1010000101",
-    "1010P00101",
-    "1010111101",
-    "1000000001",
-    "1111111111",
-    NULL
+    "111111",
+    "100001",
+    "100001",
+    "111111",
+	NULL
 };
 
 // STRUCTS
@@ -126,6 +134,8 @@ typedef struct  s_ray
     int    step_y;
     double side_dist_x;
     double side_dist_y;
+	int    hit;
+	int    side;
 }			t_ray;
 
 typedef	struct s_map
@@ -138,6 +148,7 @@ typedef	struct s_map
 typedef struct s_cube
 {
 	t_map		map;
+	t_ray		ray;
 	t_window	window;
 	t_player	player;
 }				t_cube;
@@ -151,6 +162,9 @@ void	init_player(t_player *player);
 void	init_map(t_map *temap);
 void	init_window(t_window *window);
 void	init_ray(t_player *player, t_ray *ray, int x);
+void	init_ray(t_player *player, t_ray *ray, int x);
+void	init_dda(t_player *player, t_ray *ray);
+void	init_steps(t_player *player, t_ray *ray);
 
 // HOOKS
 
@@ -164,6 +178,7 @@ void	my_mlx_pixel_put(t_window *img, int x, int y, int color);
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_map(t_window *win, t_map *map);
 void	raycast(t_cube *cube);
+void	dda_loop(t_ray *ray, char **map);
 
 // CLOSE
 

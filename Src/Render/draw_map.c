@@ -4,8 +4,30 @@
 
 void	draw(t_cube *cube)
 {
+
+	raycast(cube);
 	draw_map(&cube->window, &cube->map);
 	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
+}
+
+void	raycast(t_cube *cube)
+{
+	int		x;
+	t_ray ray;
+
+	x = 0;
+	while (x < WIND_WIDTH)
+	{
+		init_ray(&cube->player, &ray, x);
+		init_dda(&cube->player, &ray);
+		init_steps(&cube->player, &ray);
+		dda_loop(&ray, cube->map.grid);
+		printf("Ray %d: dir_x=%.2f, dir_y=%.2f, map_x=%d, map_y=%d, step_x=%d, step_y=%d\n",
+       			x, ray.ray_dir_x, ray.ray_dir_y, ray.map_x, ray.map_y, ray.step_x, ray.step_y);
+		// calc_wall_dist(&cube->player, &ray);
+		// draw_wall(&cube->window, &ray, x);
+		x++;
+	}
 }
 
 void	draw_tile(t_window *win, int start_x, int start_y, int color)

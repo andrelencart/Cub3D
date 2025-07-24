@@ -7,7 +7,7 @@ void	init_ray(t_player *player, t_ray *ray, int x)
 	ray->camera_x = 2 * x / (double)WIND_WIDTH - 1;
 
 	ray->ray_dir_x = player->dir_x + player->plane_x * ray->camera_x; 
-	ray->ray_dir_x = player->dir_y + player->plane_y * ray->camera_x; 
+	ray->ray_dir_y = player->dir_y + player->plane_y * ray->camera_x; 
 }
 
 void	init_dda(t_player *player, t_ray *ray)
@@ -26,7 +26,7 @@ void	init_dda(t_player *player, t_ray *ray)
 
 void	init_steps(t_player *player, t_ray *ray)
 {
-	// Step direction and initial side distance for X
+	// direction and initial distance of the Ray for the X
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -38,7 +38,7 @@ void	init_steps(t_player *player, t_ray *ray)
 		ray->side_dist_x = (ray->map_x + 1.0 - player->x) * ray->delta_dist_x;
 	}
 
-	// Step direction and initial side distance for Y
+	// direction and initial distance of the Ray for the Y
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
@@ -51,20 +51,39 @@ void	init_steps(t_player *player, t_ray *ray)
 	}
 }
 
-void	raycast(t_cube *cube)
+void	dda_loop(t_ray *ray, char **map)
 {
-	int		x;
-	t_ray ray;
-
-	x = 0;
-	while (x < WIND_WIDTH)
+	int	map_width = 6;
+	int	map_height = 4;
+	ray->hit = 0;
+	while (ray->hit == 0)
 	{
-		init_ray(&cube->player, &ray, x);
-		init_dda(&cube->player, &ray);
-		init_steps(&cube->player, &ray);
-		// perform_dda(&map, &ray);
-		// calc_wall_dist(&cube->player, &ray);
-		// draw_wall(&cube->window, &ray, x);
-		// x++;
+		if (ray->map_x < 0 || ray->map_x >= map_width ||
+            ray->map_y < 0 || ray->map_y >= map_height)
+        {
+            printf("Ray out of bounds! map_x=%d map_y=%d\n", ray->map_x, ray->map_y);
+            break;
+        }
+
+        if (map[ray->map_y][ray->map_x] == '1')
+        {
+            ray->hit = 1;
+            break;
+        }
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		// if (map[ray->map_y][ray->map_x] == '1')
+		// 	ray->hit = 1;
+		// printf("DDA: map_x=%d, map_y=%d, side=%d, hit=%d\n", ray->map_x, ray->map_y, ray->side, ray->hit);
 	}
 }
