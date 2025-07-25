@@ -11,7 +11,8 @@ int	get_data(char *fname, t_parse *data)
 	i = 0;
 	line = ft_strjoin("maps/", fname);
 	if (!line)
-		return (free_data(data), parse_error("Failed to allocate *line"));
+		return (free_data(data), parse_error(" get_data: Failed \
+to allocate *line"));
 	fd = open(line, O_RDONLY);
 	if (fd < 0)
 		return (free_data(data), free(line), parse_error(strerror(errno)));
@@ -23,12 +24,6 @@ int	get_data(char *fname, t_parse *data)
 		data->map[i++] = line;
 	}
 	close(fd);
-	//Isto e so para ver se importei bem o .cub
-	//Remover no fim.
-	/* i = 0;
-	while (data->map[i] != NULL)
-		printf("%s", data->map[i++]);
-	printf("\n"); */
 	return (0);
 }
 

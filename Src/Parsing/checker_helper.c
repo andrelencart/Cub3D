@@ -17,9 +17,8 @@ int	is_data_filled(t_parse *data)
 	status = 0;
 	if (data->ceiling == -1 || data->floor == -1)
 		status |= 1;
-	if (data->e_face == NULL || data->w_face == NULL)
-		status |= 1;
-	if (data->n_face == NULL || data->s_face == NULL)
+	if (data->e_face == NULL || data->w_face == NULL || \
+data->n_face == NULL || data->s_face == NULL)
 		status |= 1;
 	return (status);
 }
@@ -38,7 +37,7 @@ int	lookfor_texture(char **dest)
 	if (!tmp)
 	{
 		ft_printf_fd(STDERR_FILENO, "Error\nCube3d: Could not allocate ");
-		return (write(2, *dest, 2), write(2, "\n", 1), 1);
+		return (ft_putstr_fd(*dest, 2), write(2, "\n", 1), 1);
 	}
 	ft_strlcpy(tmp, *dest, i + 1);
 	free(*dest);
@@ -47,7 +46,7 @@ int	lookfor_texture(char **dest)
 	if (fd < 0)
 	{
 		ft_printf_fd(STDERR_FILENO, "Error\nCube3d: \"%s\": ", *dest);
-		return (ft_putstr_fd(strerror(errno), 2), 1);
+		return (ft_putendl_fd(strerror(errno), 2), 1);
 	}
 	close(fd);
 	return (0);

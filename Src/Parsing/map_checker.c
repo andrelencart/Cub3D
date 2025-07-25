@@ -25,9 +25,10 @@ int	check_map(t_parse *data, int i)
 	{
 		tmp[k] = ft_strdup(data->map[i]);
 		if (!tmp[k])
-			return (parse_error("Failed to allocate memory for map line"));
+			return (free_split(tmp), parse_error("Failed \
+to allocate memory for map line"));
 		if (check_map_line(tmp[k]))
-			return (1);
+			return (free_split(tmp), 1);
 		i++;
 		k++;
 	}
