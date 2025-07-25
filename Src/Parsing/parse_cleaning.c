@@ -61,6 +61,7 @@ void	free_data(t_parse *data)
 	free(data);
 }
 */
+
 int	parse_error(char *msg)
 {
 	ft_printf_fd(STDERR_FILENO, "Error\n");

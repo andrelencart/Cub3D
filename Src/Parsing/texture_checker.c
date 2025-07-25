@@ -1,6 +1,19 @@
 #include "../../Inc/cube3d.h"
 #include "../../Inc/cube_parse.h"
 
+int	find_textures(t_parse *data)
+{
+	if (lookfor_texture(&data->n_face))
+		return (1);
+	if (lookfor_texture(&data->s_face))
+		return (1);
+	if (lookfor_texture(&data->e_face))
+		return (1);
+	if (lookfor_texture(&data->w_face))
+		return (1);
+	return (0);
+}
+
 int	assign_color(char *str, int *color)
 {
 	int	move;
@@ -13,8 +26,7 @@ int	assign_color(char *str, int *color)
 	{
 		while (*str && *str == ' ')
 			str++;
-		if (!ft_isdigit(*str) || ft_atoi(&(*str)) < 0 || \
-					ft_atoi(&(*str)) > 255)
+		if (!ft_isdigit(*str) || ft_atoi(&(*str)) < 0 || ft_atoi(&(*str)) > 255)
 			return (1);
 		*color |= (ft_atoi(str)) << move;
 		while (*str && ft_isdigit(*str))
@@ -30,7 +42,22 @@ int	assign_color(char *str, int *color)
 
 int	assign_texture(char *str, char **dest)
 {
-	*dest = ft_strdup(str);
+	while (*str && *str == ' ')
+		str++;
+	if (ft_strncmp(str, "./", 2))
+		return (1);
+	else
+	{
+		*dest = ft_strdup(str);
+		if (!(*dest))
+			return (2);
+	}
+	while (*str && *str != ' ' && *str != 10)
+		str++;
+	while (*str && (*str == ' ' || *str == 10))
+		str++;
+	if (*str && (*str != ' ' || *str != 10))
+		return (1);
 	return (0);
 }
 
@@ -55,22 +82,27 @@ int	parse_line(t_parse *data, char *line)
 int	parse_textures(t_parse *data)
 {
 	int	i;
-	int	j;
+	int	res;
 
 	i = 0;
-	j = 0;
 	while (data->map[i] && is_data_filled(data))
 	{
-		while (data->map[i][j] == 10)
+		res = 0;
+		while (data->map[i][0] == 10)
 			i++;
-		if (!parse_line(data, &data->map[i][j]))
-			i++;
-		else
+		res = parse_line(data, data->map[i]);
+		if (res == 1)
 		{
 			ft_printf_fd(STDERR_FILENO, "Error\n");
 			ft_printf_fd(2, "Cube3d: .cub line %d is invalid\n", i + 1);
 			return (1);
 		}
+		else if (res == 2)
+			return (parse_error("Failed texture path memory allocation"));
+		else
+			i++;
 	}
+	if (find_textures(data) || check_map(data, i))
+		return (1);
 	return (0);
 }

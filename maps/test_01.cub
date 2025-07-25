@@ -1,9 +1,17 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+
+
+NO ./maps/test_00.cub  
+SO ./Inc/cube3d.h   
+
+
+WE ./Src/Parsing/checker_helper.c 
+
+EA ./Src/Parsing/cub_checker.c 
+
 F 123,10,1
 C 225,30,132
+
+
       1111111111111111111111111
      1000000000110000000000001
     1011000001110000000000001

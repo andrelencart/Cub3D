@@ -25,10 +25,10 @@ int	get_data(char *fname, t_parse *data)
 	close(fd);
 	//Isto e so para ver se importei bem o .cub
 	//Remover no fim.
-	i = 0;
+	/* i = 0;
 	while (data->map[i] != NULL)
 		printf("%s", data->map[i++]);
-	printf("\n");
+	printf("\n"); */
 	return (0);
 }
 

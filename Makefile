@@ -26,6 +26,7 @@ RENDER_FILES_C	=
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
 					cub_checker.c \
+					map_checker.c \
 					parse_cleaning.c \
 					texture_checker.c
 
