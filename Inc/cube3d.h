@@ -122,6 +122,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;	// Camera plane for FOV
 	double	plane_y;
+	double	rot_speed;
 }			t_player;
 
 typedef struct  s_ray
@@ -139,9 +140,9 @@ typedef struct  s_ray
 	double	side_dist_y;
 	int		hit;
 	int		side;
-	int line_height;
-	int draw_start;
-	int draw_end;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }			t_ray;
 
 typedef	struct s_map
@@ -174,7 +175,9 @@ void	init_steps(t_player *player, t_ray *ray);
 
 // HOOKS
 
+int		testkey(int key_code, t_window *wind);
 void	hook_control(t_cube *cube);
+int		loop_hook(t_cube *cube);
 int		key_press(int key_code, t_cube *cube);
 
 // DRAW
@@ -190,7 +193,12 @@ void	draw_3d_map(t_window *win, t_ray *ray, int x);
 
 // UTILS
 
-int	get_tile_color(char c);
+int		get_tile_color(char c);
+
+// PLAYER MOVEMENT
+
+int		player_movement(t_player *player, int key_code);
+int		rotate_player(t_player *player, double rot_speed);
 
 // CLOSE
 

@@ -16,7 +16,8 @@ void	init_player(t_player *player)
 	player->dir_x = -1.0; // where is facing
 	player->dir_y = -1.0;
 	player->plane_x = 0;
-	player->plane_y = 0.66; // For the Field Of View, 0.66 comonly used for the type of game
+	player->plane_y = 0.66;
+	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
 }
 
 void	init_map(t_map *map)

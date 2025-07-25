@@ -84,10 +84,10 @@ void	calc_wall_dist(t_player *player, t_ray *ray)
 	else
 		perp_wall_dist = (ray->map_y - player->y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
 	ray->line_height = (int)(WIND_HEIGHT / perp_wall_dist);
-	ray->draw_start = (WIND_HEIGHT / 2) - (ray->line_height / 2); // Find the lowest pixel to start drawing the wall slice
+	ray->draw_start = (WIND_HEIGHT / 2) - (ray->line_height / 2); // Find the lowest pixel to start drawing the wall
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + WIND_HEIGHT / 2; // Find the highest pixel to end drawing the wall slice
+	ray->draw_end = ray->line_height / 2 + WIND_HEIGHT / 2; // Find the highest pixel to end drawing the wall
 	if (ray->draw_end >= WIND_HEIGHT)
 		ray->draw_end = WIND_HEIGHT - 1;
 

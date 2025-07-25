@@ -4,6 +4,7 @@
 
 void	draw(t_cube *cube)
 {
+	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT * (cube->window.bitpp / 8));
 	raycast(cube);
 	draw_mini_map(&cube->window, &cube->map);
 	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
