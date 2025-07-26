@@ -13,7 +13,7 @@ int	key_press(int key_code, t_cube *cube)
 	
 	if (key_code == ESC)
 		close_window(&cube->window);
-	else if (key_code == RA | key_code == LA)
+	else if (key_code == RA || key_code == LA)
 		player_movement(&cube->player, key_code);
 	return (0);
 }

@@ -2,6 +2,18 @@
 
 #include "../../Inc/cube3d.h"
 
+static char *test_map[] = {
+	"1111111111",
+    "1000000001",
+    "1011111101",
+    "1010000101",
+    "1010P00101",
+    "1010111101",
+    "1000000001",
+    "1111111111",
+    NULL
+};
+
 void	init(t_cube *cube)
 {
 	init_window(&cube->window);

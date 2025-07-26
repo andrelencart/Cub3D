@@ -4,9 +4,9 @@
 int	player_movement(t_player *player, int key_code)
 {
 	if (key_code == RA)
-		rotate_player(player, player->rot_speed);
-	else if (key_code == LA)
 		rotate_player(player, -player->rot_speed);
+	else if (key_code == LA)
+		rotate_player(player, player->rot_speed);
 	return (0);
 }
 
