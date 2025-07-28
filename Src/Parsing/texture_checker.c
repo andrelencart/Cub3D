@@ -102,7 +102,7 @@ int	parse_textures(t_parse *data)
 		else
 			i++;
 	}
-	if (find_textures(data) || check_map(data, i))
+	if (find_textures(data) || load_map(data, i))
 		return (1);
 	return (0);
 }

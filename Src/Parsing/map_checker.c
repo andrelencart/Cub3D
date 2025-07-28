@@ -1,14 +1,103 @@
 #include "../../Inc/cube3d.h"
 #include "../../Inc/cube_parse.h"
 
-int	check_map_line(char *line)
+int	look_around(char **map, int ln, int cl)
 {
-	if (!line)
+	if (ln == 0 || cl == 0)
+		return (1);
+	if (!ft_strchr("01", map[ln][cl + 1]))
+		return (1);
+	if (!ft_strchr("01", map[ln][cl - 1]))
+		return (1);
+	if (!ft_strchr("01", map[ln - 1][cl]))
+		return (1);
+	if (!map[ln + 1])
+		return (1);
+	if (!ft_strchr("01", map[ln + 1][cl]))
 		return (1);
 	return (0);
 }
 
-int	check_map(t_parse *data, int i)
+int	find_borders(t_parse *data)
+{
+	int	i;
+	int	j;
+
+	if (!data->player_dir)
+		return (parse_error("Map has no starting position"));
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == '0')
+			{
+				if (look_around(data->map, i, j))
+					return (map_error("Open tile at", i, j));
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	find_player(t_parse *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map[i++])
+	{
+		j = 0;
+		while (data->map[i - 1][j++])
+		{
+			if (ft_strchr("NSEW", data->map[i - 1][j - 1]))
+			{
+				if (data->player_dir)
+					return (map_error("Extra player in", i - 1, j - 1));
+				else
+				{
+					data->player_dir = data->map[i - 1][j - 1];
+					data->player_x = j - 1;
+					data->player_y = i - 1;
+					data->map[i - 1][j - 1] = '0';
+				}
+			}
+		}
+	}
+	return (find_borders(data));
+}
+
+int	validate_map(t_parse *data)
+{
+	int	i;
+	int	j;
+	int	nav;
+
+	i = 0;
+	nav = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (!ft_strchr(" 01\nNSEW", data->map[i][j]))
+				return (map_error("Invalid char in map", i, j));
+			if (ft_strchr("01NSEW", data->map[i][j]))
+				nav += 1;
+			j++;
+		}
+		i++;
+	}
+	if (nav == 0)
+		return (parse_error("Map is empty"));
+	return (find_player(data));
+}
+
+int	load_map(t_parse *data, int i)
 {
 	int		j;
 	int		k;
@@ -27,12 +116,10 @@ int	check_map(t_parse *data, int i)
 		if (!tmp[k])
 			return (free_split(tmp), parse_error("Failed \
 to allocate memory for map line"));
-		if (check_map_line(tmp[k]))
-			return (free_split(tmp), 1);
 		i++;
 		k++;
 	}
 	free_split(data->map);
 	data->map = tmp;
-	return (0);
+	return (validate_map(data));
 }

@@ -9,6 +9,9 @@ typedef struct s_parse
 	char	*s_face;
 	char	*e_face;
 	char	*w_face;
+	char	player_dir;
+	int		player_x;
+	int		player_y;
 	int		floor;
 	int		ceiling;
 	char	**map;
@@ -17,6 +20,7 @@ typedef struct s_parse
 //parse_cleaning.c
 int		parse_error(char *msg);
 void	free_data(t_parse *data);
+int		map_error(char *msg, int line, int column);
 
 //cube_checker.c
 int		parse_check_fname(char *fname, t_parse *data);
@@ -30,6 +34,6 @@ int		is_data_filled(t_parse *data);
 int		lookfor_texture(char **dest);
 
 //map_checker.c
-int		check_map(t_parse *data, int i);
+int		load_map(t_parse *data, int i);
 
 #endif
