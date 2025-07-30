@@ -14,7 +14,7 @@ void	free_data(t_parse *data)
 		free(data->e_face);
 	if (data->w_face != NULL)
 		free(data->w_face);
-	while (data->map[i] != NULL)
+	while (data->map != NULL && data->map[i] != NULL)
 		free(data->map[i++]);
 	if (data->map != NULL)
 		free(data->map);
