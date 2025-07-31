@@ -32,6 +32,7 @@ int		parse_textures(t_parse *data);
 int		check_line_end(char *str);
 int		is_data_filled(t_parse *data);
 int		lookfor_texture(char **dest);
+int		find_map(t_parse *data, int i);
 
 //map_checker.c
 int		load_map(t_parse *data, int i);

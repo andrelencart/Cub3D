@@ -1,6 +1,27 @@
 #include "../../Inc/cube3d.h"
 #include "../../Inc/cube_parse.h"
 
+int	find_map(t_parse *data, int i)
+{
+	int	j;
+
+	while (data->map[i] && data->map[i][0] == '\n')
+		i++;
+	j = 0;
+	while (data->map[i][j])
+	{
+		if (ft_strchr(" 01NSEW\n", data->map[i][j]))
+			j++;
+		else
+		{
+			ft_printf_fd(STDERR_FILENO, "Error\n");
+			ft_printf_fd(2, "Cube3d: .cub line %d is invalid\n", i + 1);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	check_line_end(char *str)
 {
 	while (*str == ' ')
@@ -37,7 +58,7 @@ int	lookfor_texture(char **dest)
 	if (!tmp)
 	{
 		ft_printf_fd(STDERR_FILENO, "Error\nCube3d: Could not allocate ");
-		return (ft_putstr_fd(*dest, 2), write(2, "\n", 1), 1);
+		return (ft_putstr_fd(*dest, 2), 1);
 	}
 	ft_strlcpy(tmp, *dest, i + 1);
 	free(*dest);

@@ -9,9 +9,11 @@ int	look_around(char **map, int ln, int cl)
 		return (1);
 	if (!ft_strchr("01", map[ln][cl - 1]))
 		return (1);
+	if (!map[ln - 1] || (int)ft_strlen(map[ln - 1]) < cl)
+		return (1);
 	if (!ft_strchr("01", map[ln - 1][cl]))
 		return (1);
-	if (!map[ln + 1])
+	if (!map[ln + 1] || (int)ft_strlen(map[ln + 1]) < cl)
 		return (1);
 	if (!ft_strchr("01", map[ln + 1][cl]))
 		return (1);
@@ -84,6 +86,8 @@ int	validate_map(t_parse *data)
 		j = 0;
 		while (data->map[i][j])
 		{
+			if (data->map[i][0] == '\n')
+				return (map_error("Empty line in map", i, 0));
 			if (!ft_strchr(" 01\nNSEW", data->map[i][j]))
 				return (map_error("Invalid char in map", i, j));
 			if (ft_strchr("01NSEW", data->map[i][j]))
@@ -103,6 +107,8 @@ int	load_map(t_parse *data, int i)
 	int		k;
 	char	**tmp;
 
+	while (data->map[i][0] == '\n')
+		i++;
 	j = i;
 	while (data->map[j])
 		j++;
@@ -115,7 +121,7 @@ int	load_map(t_parse *data, int i)
 		tmp[k] = ft_strdup(data->map[i]);
 		if (!tmp[k])
 			return (free_split(tmp), parse_error("Failed \
-to allocate memory for map line"));
+to allocate memory for a map line"));
 		i++;
 		k++;
 	}

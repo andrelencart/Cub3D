@@ -1,7 +1,7 @@
-NO ./maps/00_test_FewLines.cub 
-SO ./maps/02_test_NoPermiss.cub
-WE ./maps/04_test_ExtraMidLines.cub
-EA ./maps/test_00.cub
+NO ./mapsNotThere/00_test_FewLines.cub 
+SO ./mapsChmod/02_test_NoPermiss.cub
+WE ./mapsWhatevah/04_test_ExtraMidLines.cub
+EA ./mapsThisGood/test_00.cub
 F 123,10,1
 C 225,30,132
       1111111111111111111111111

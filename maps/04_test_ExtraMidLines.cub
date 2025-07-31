@@ -1,9 +1,13 @@
-NO ./maps/00_test_FewLines.cub 
-SO ./maps/02_test_NoPermiss.cub
-WE ./maps/04_test_ExtraMidLines.cub
-EA ./maps/test_00.cub
+NO ./maps/test_00.cub
+SO ./Inc/cube3d.h   
+WE ./Src/Parsing/checker_helper.c 
+EA ./Src/Parsing/cub_checker.c 
 F 123,10,1
 C 225,30,132
+
+EA ./Src/Parsing/cub_checker.c 
+
+123545
       1111111111111111111111111
      1000000000110000000000001
     1011000001110000000000001

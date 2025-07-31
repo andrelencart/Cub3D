@@ -31,6 +31,6 @@ int	parse_error(char *msg)
 int	map_error(char *msg, int ln, int cl)
 {
 	ft_printf_fd(STDERR_FILENO, "Error\n");
-	ft_printf_fd(STDERR_FILENO, "Cube3d: %s line %d col %d\n", msg, ln, cl);
+	ft_printf_fd(STDERR_FILENO, "Cube3d: %s x: %d y: %d\n", msg, cl, ln);
 	return (1);
 }

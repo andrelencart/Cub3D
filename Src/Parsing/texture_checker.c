@@ -42,16 +42,18 @@ int	assign_color(char *str, int *color)
 
 int	assign_texture(char *str, char **dest)
 {
+	if (*dest)
+		return (1);
 	while (*str && *str == ' ')
 		str++;
 	if (ft_strncmp(str, "./", 2))
 		return (1);
-	else
-	{
-		*dest = ft_strdup(str);
-		if (!(*dest))
-			return (2);
-	}
+	*dest = ft_strdup(str);
+	if (!(*dest))
+		return (2);
+	str += 2;
+	if (*str == 0 || *str == ' ' || *str == 10)
+		return (1);
 	while (*str && *str != ' ' && *str != 10)
 		str++;
 	while (*str && (*str == ' ' || *str == 10))
@@ -87,7 +89,6 @@ int	parse_textures(t_parse *data)
 	i = 0;
 	while (data->map[i] && is_data_filled(data))
 	{
-		res = 0;
 		while (data->map[i][0] == 10)
 			i++;
 		res = parse_line(data, data->map[i]);
@@ -98,11 +99,11 @@ int	parse_textures(t_parse *data)
 			return (1);
 		}
 		else if (res == 2)
-			return (parse_error("Failed texture path memory allocation"));
-		else
-			i++;
+			return (parse_error("assign_texture: Failed texture path memory \
+allocation"));
+		i++;
 	}
-	if (find_textures(data) || load_map(data, i))
+	if (find_map(data, i) || find_textures(data) || load_map(data, i))
 		return (1);
 	return (0);
 }
