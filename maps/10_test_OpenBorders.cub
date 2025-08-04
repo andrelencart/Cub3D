@@ -1,6 +1,6 @@
-NO ./maps/00_test_FewLines.cub 
-SO ./maps/02_test_NoPermiss.cub
-WE ./maps/04_test_ExtraMidLines.cub
+NO ./maps/00_test_EmptyLines.cub 
+SO ./maps/04_test_ExtraMidLines.cub
+WE ./maps/09_test_ExtraPlayer.cub
 EA ./maps/test_00.cub
 F 123,10,1
 C 225,30,132

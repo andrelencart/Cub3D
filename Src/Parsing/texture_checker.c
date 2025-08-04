@@ -22,11 +22,11 @@ int	assign_color(char *str, int *color)
 	if (*color > -1)
 		return (1);
 	*color = 0;
+	while (*str && *str == ' ')
+		str++;
 	while (move >= 0)
 	{
-		while (*str && *str == ' ')
-			str++;
-		if (!ft_isdigit(*str) || ft_atoi(&(*str)) < 0 || ft_atoi(&(*str)) > 255)
+		if (!ft_isdigit(*str) || ft_atoi(str) < 0 || ft_atoi(str) > 255)
 			return (1);
 		*color |= (ft_atoi(str)) << move;
 		while (*str && ft_isdigit(*str))

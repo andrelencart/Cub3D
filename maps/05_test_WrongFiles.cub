@@ -1,4 +1,4 @@
-NO ./mapsNotThere/00_test_FewLines.cub 
+NO ./mapsNotThere/00_test_EmptyLines.cub 
 SO ./mapsChmod/02_test_NoPermiss.cub
 WE ./mapsWhatevah/04_test_ExtraMidLines.cub
 EA ./mapsThisGood/test_00.cub
