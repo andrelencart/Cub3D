@@ -64,11 +64,10 @@
 # define WALL_COLOR_MG 0x666666
 # define WALL_COLOR_MB 0x225588
 
-
-// CORD_DEF
-# define X 0
-# define Y 1
-# define Z 2
+// // CORD_DEF
+// # define X 0
+// # define Y 1
+// # define Z 2
 
 // ERRORS
 # define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
@@ -156,9 +155,25 @@ typedef	struct s_map
 	int		height;
 }			t_map;
 
+typedef	struct s_mini_map
+{
+	int		offset_x;
+	int		offset_y;
+	int 	player_size;
+	int		player_mini_x;
+	int		player_mini_y;
+	int 	num_rays;
+	int 	ray_length;
+	int		tile_size;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+}			t_mini_map;
+
 typedef struct s_cube
 {
 	t_map			map;
+	t_mini_map		mini_map;
 	t_ray			ray;
 	t_window		window;
 	t_player		player;
@@ -173,6 +188,7 @@ typedef struct s_cube
 void	init(t_cube *cube);
 void	init_player(t_player *player);
 void	init_map(t_map *temap);
+void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
 void	init_ray(t_player *player, t_ray *ray, int x);
 void	init_ray(t_player *player, t_ray *ray, int x);
@@ -193,12 +209,15 @@ int		move_update_flag_press(int keycode, t_cube *cube);
 
 void	draw(t_cube *cube);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
-void	draw_tile(t_window *win, int start_x, int start_y, int color);
-void	draw_mini_map(t_window *win, t_map *map);
 void	raycast(t_cube *cube);
 void	dda_loop(t_ray *ray, char **map);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_window *win, t_ray *ray, int x);
+
+// MINI MAP
+void	draw_tile(t_window *win, int start_x, int start_y, int color);
+void	draw_mini_map(t_cube *cube);
+void	draw_player_mini_map(t_cube *cube);
 
 // UTILS
 

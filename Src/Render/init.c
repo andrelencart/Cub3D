@@ -45,6 +45,18 @@ void	init_map(t_map *map)
 		map->height++;
 }
 
+void	init_mini_map(t_mini_map *mini_map)
+{
+	mini_map->offset_x = 0;
+	mini_map->offset_y = 0;
+	mini_map->tile_size = TILE_SIZE;
+	mini_map->num_rays = 60;
+	mini_map->ray_length = TILE_SIZE * 3;
+	mini_map->player_mini_x = 0;
+	mini_map->player_mini_y = 0;
+	mini_map->player_size = 0;
+}
+
 void	init_window(t_window *window)
 {
 	window->mlx = mlx_init();
