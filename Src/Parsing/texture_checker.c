@@ -89,8 +89,10 @@ int	parse_textures(t_parse *data)
 	i = 0;
 	while (data->map[i] && is_data_filled(data))
 	{
-		while (data->map[i][0] == 10)
+		while (data->map[i] && data->map[i][0] == 10)
 			i++;
+		if (!data->map[i])
+			return (parse_error("Map is has incomplete information"));
 		res = parse_line(data, data->map[i]);
 		if (res == 1)
 		{
@@ -99,8 +101,7 @@ int	parse_textures(t_parse *data)
 			return (1);
 		}
 		else if (res == 2)
-			return (parse_error("assign_texture: Failed texture path memory \
-allocation"));
+			return (parse_error("assign_texture: Failed memory allocation"));
 		i++;
 	}
 	if (find_map(data, i) || find_textures(data) || load_map(data, i))

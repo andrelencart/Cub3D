@@ -48,7 +48,7 @@ int	find_file(char *fname, t_parse *data)
 	}
 	free(line);
 	close(fd);
-	if (i < 9)
+	if (i < 10)
 		return (parse_error("Not enough lines for valid map"));
 	data->map = ft_calloc(i + 1, sizeof(char *));
 	if (!data->map)
