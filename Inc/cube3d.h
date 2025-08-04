@@ -123,6 +123,10 @@ typedef struct s_player
 	double	plane_x;	// Camera plane for FOV
 	double	plane_y;
 	double	rot_speed;
+	int		moving_forward;
+	int		moving_backward;
+	int		strafing_left;
+	int		strafing_right;
 }			t_player;
 
 typedef struct  s_ray
@@ -154,11 +158,13 @@ typedef	struct s_map
 
 typedef struct s_cube
 {
-	t_map		map;
-	t_ray		ray;
-	t_window	window;
-	t_player	player;
-}				t_cube;
+	t_map			map;
+	t_ray			ray;
+	t_window		window;
+	t_player		player;
+	double			frame_time;
+	struct timeval	last_time;
+}					t_cube;
 
 // RENDER FUNCTIONS
 
@@ -179,6 +185,9 @@ int		testkey(int key_code, t_window *wind);
 void	hook_control(t_cube *cube);
 int		loop_hook(t_cube *cube);
 int		key_press(int key_code, t_cube *cube);
+int		key_release(int key_code, t_cube *cube);
+int		move_update_flag_release(int keycode, t_cube *cube);
+int		move_update_flag_press(int keycode, t_cube *cube);
 
 // DRAW
 
@@ -194,11 +203,14 @@ void	draw_3d_map(t_window *win, t_ray *ray, int x);
 // UTILS
 
 int		get_tile_color(char c);
+void	update_frame_time(t_cube *cube);
 
 // PLAYER MOVEMENT
 
-int		player_movement(t_player *player, int key_code);
+int		player_rotation(t_player *player, int key_code);
 int		rotate_player(t_player *player, double rot_speed);
+int		player_move_left_right(t_player *player, char **map, double frame_time);
+int		player_move_front_back(t_player *player, char **map, double frame_time);
 
 // CLOSE
 

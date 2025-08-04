@@ -15,5 +15,4 @@ int	main(int ac, char **av)
 	hook_control(&cube);
 	mlx_loop_hook(cube.window.mlx, loop_hook, &cube);
 	mlx_loop(cube.window.mlx);
-	
 }

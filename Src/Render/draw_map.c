@@ -5,6 +5,9 @@
 void	draw(t_cube *cube)
 {
 	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT * (cube->window.bitpp / 8));
+	// mlx_destroy_image(cube->window.mlx, cube->window.img);
+	// cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+	// mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
 	raycast(cube);
 	draw_mini_map(&cube->window, &cube->map);
 	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
@@ -37,7 +40,7 @@ void	draw_3d_map(t_window *win, t_ray *ray, int x)
 	y = ray->draw_start;
 	if (y < 0)
 		y = 0;
-	while (y <= ray->draw_start) // CEILING
+	while (y < ray->draw_start) // CEILING
 	{
 		my_mlx_pixel_put(win, x, y, CEILING_COLOR_DK_G);
 		y++;

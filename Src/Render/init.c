@@ -26,10 +26,14 @@ void	init_player(t_player *player)
 	player->x = 4.5; // Position
 	player->y = 4.5;
 	player->dir_x = -1.0; // where is facing
-	player->dir_y = -1.0;
+	player->dir_y = 0.0;
 	player->plane_x = 0;
 	player->plane_y = 0.66;
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
+	player->moving_forward = 0;
+	player->moving_backward = 0;
+	player->strafing_left = 0;
+	player->strafing_right = 0;
 }
 
 void	init_map(t_map *map)
@@ -38,7 +42,7 @@ void	init_map(t_map *map)
 	map->width = strlen(test_map[0]);
 	map->height = 0;
 	while (map->grid[map->height])
-        map->height++;
+		map->height++;
 }
 
 void	init_window(t_window *window)

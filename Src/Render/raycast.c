@@ -6,8 +6,8 @@ void	init_ray(t_player *player, t_ray *ray, int x)
 	// Map the current screen column x to a value from -1 (left) to +1 (right).
 	ray->camera_x = 2 * x / (double)WIND_WIDTH - 1;
 
-	ray->ray_dir_x = player->dir_x + player->plane_x * ray->camera_x; 
-	ray->ray_dir_y = player->dir_y + player->plane_y * ray->camera_x; 
+	ray->ray_dir_x = player->dir_x + player->plane_x * ray->camera_x;
+	ray->ray_dir_y = player->dir_y + player->plane_y * ray->camera_x;
 }
 
 void	init_dda(t_player *player, t_ray *ray)
@@ -90,5 +90,4 @@ void	calc_wall_dist(t_player *player, t_ray *ray)
 	ray->draw_end = ray->line_height / 2 + WIND_HEIGHT / 2; // Find the highest pixel to end drawing the wall
 	if (ray->draw_end >= WIND_HEIGHT)
 		ray->draw_end = WIND_HEIGHT - 1;
-
 }
