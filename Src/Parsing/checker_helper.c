@@ -1,5 +1,4 @@
 #include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
 
 int	find_map(t_parse *data, int i)
 {

@@ -1,5 +1,4 @@
 #include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
 
 void	free_data(t_parse *data)
 {

@@ -1,5 +1,4 @@
 #include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
 
 int	look_around(char **map, int ln, int cl)
 {

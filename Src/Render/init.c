@@ -14,17 +14,17 @@ static char *test_map[] = {
     NULL
 };
 
-void	init(t_cube *cube)
+void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
-	init_player(&cube->player);
+	init_player(&cube->player, data);
 	init_map(&cube->map);
 }
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_parse *data)
 {
-	player->x = 4.5; // Position
-	player->y = 4.5;
+	player->x = data->player_x + 0.5; // x Position
+	player->y = data->player_y + 0.5; // y Position
 	player->dir_x = -1.0; // where is facing
 	player->dir_y = 0.0;
 	player->plane_x = 0;

@@ -1,5 +1,4 @@
 #include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
 
 //copying fname to data->map.
 int	get_data(char *fname, t_parse *data)

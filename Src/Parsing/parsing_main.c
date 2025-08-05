@@ -1,5 +1,4 @@
 #include "../../Inc/cube3d.h"
-#include "../../Inc/cube_parse.h"
 
 int	init_parse_data(t_parse	**tmp)
 {

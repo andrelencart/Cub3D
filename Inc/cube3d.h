@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "../minilibx-linux/mlx.h"
 # include "../Inc/Libft/libft.h"
+# include "../Inc/cube_parse.h"//Parsing structs & functions - by ddiogo-f
 
 // Tudo o que eu coloquei aqui podes alterar,
 // Isto sao coisas que eu tinha do FDF
@@ -185,8 +186,8 @@ typedef struct s_cube
 
 // INIT
 
-void	init(t_cube *cube);
-void	init_player(t_player *player);
+void	init(t_cube *cube, t_parse *data);
+void	init_player(t_player *player, t_parse *data);
 void	init_map(t_map *temap);
 void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
