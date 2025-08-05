@@ -1,7 +1,8 @@
+
 # -->┊( NAMES )
 NAME	=	cube3D
 LIBFT	=	./Inc/Libft/libft.a
-MLX		=	minilibx-linux/libmlx.a
+MLX		=	./minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
@@ -21,7 +22,8 @@ PARSE_DIR		=	Parsing
 MAIN_C			=	cube3D_main.c
 
 RENDER_MAIN_C	=	render_main.c
-RENDER_FILES_C	=	
+RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c player_move.c \
+					key_handling.c mini_map.c
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
@@ -66,9 +68,9 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx-linux -s
 
-render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT)
+render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX)
 	$(M_COMP_E)
-	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX) -lm -lz -lXext -lX11 -o $(NAME)
 	$(M_DONE)
 
 parse: $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT)
