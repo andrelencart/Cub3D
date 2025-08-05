@@ -19,6 +19,7 @@ void	init(t_cube *cube)
 	init_window(&cube->window);
 	init_player(&cube->player);
 	init_map(&cube->map);
+	init_mini_map(&cube->mini_map);
 }
 
 void	init_player(t_player *player)
@@ -50,7 +51,7 @@ void	init_mini_map(t_mini_map *mini_map)
 	mini_map->offset_x = 0;
 	mini_map->offset_y = 0;
 	mini_map->tile_size = TILE_SIZE;
-	mini_map->num_rays = 60;
+	mini_map->num_rays = 20;
 	mini_map->ray_length = TILE_SIZE * 3;
 	mini_map->player_mini_x = 0;
 	mini_map->player_mini_y = 0;

@@ -218,6 +218,7 @@ void	draw_3d_map(t_window *win, t_ray *ray, int x);
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_mini_map(t_cube *cube);
 void	draw_player_mini_map(t_cube *cube);
+void	draw_vision_mini_map(t_cube *cube);
 
 // UTILS
 

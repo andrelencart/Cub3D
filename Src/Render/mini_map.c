@@ -22,6 +22,7 @@ void	draw_mini_map(t_cube *cube)
 		}
 		y++;
 	}
+	draw_vision_mini_map(cube);
 	draw_player_mini_map(cube);
 }
 
@@ -47,30 +48,31 @@ void	draw_player_mini_map(t_cube *cube)
 	}
 }
 
-// void	draw_vision_mini_map(t_cube *cube)
-// {
-// 	// double	camera_x;
-// 	// double	ray_dir_x;
-// 	// double	ray_dir_y;
-// 	int		draw_x;
-// 	int		draw_y;
-// 	int	x;
-// 	int	y;
+void	draw_vision_mini_map(t_cube *cube)
+{
+	int		draw_x;
+	int		draw_y;
+	int		x;
+	int		y;
 
-// 	draw_x = 0;
-// 	draw_y = 0;
-// 	cube->mini_map.player_mini_x = (int)(cube->player.x * TILE_SIZE);
-// 	cube->mini_map.player_mini_y = (int)(cube->player.y * TILE_SIZE);
-// 	y = 0;
-// 	while (y < cube->mini_map.num_rays)
-// 	{
-// 		x = 0;
-// 		cube->mini_map.camera_x = 2 * x / (double)(cube->mini_map.num_rays - 1) - 1;
-// 		cube->mini_map.ray_dir_x = cube->player.dir_x + cube->player.plane_x * cube->mini_map.camera_x;
-// 		cube->mini_map.ray_dir_y = cube->player.dir_y + cube->player.plane_y * cube->mini_map.camera_x;
-// 		while (x < cube->mini_map.ray_length)
-// 		{
-// 			draw_x = 
-// 		}
-// 	}
-// }
+	draw_x = 0;
+	draw_y = 0;
+	cube->mini_map.player_mini_x = (int)(cube->player.x * TILE_SIZE);
+	cube->mini_map.player_mini_y = (int)(cube->player.y * TILE_SIZE);
+	y = 0;
+	while (y < cube->mini_map.num_rays)
+	{
+		cube->mini_map.camera_x = 2 * y / (double)(cube->mini_map.num_rays - 1) - 1;
+		cube->mini_map.ray_dir_x = cube->player.dir_x + cube->player.plane_x * cube->mini_map.camera_x;
+		cube->mini_map.ray_dir_y = cube->player.dir_y + cube->player.plane_y * cube->mini_map.camera_x;
+		x = 0;
+		while (x < cube->mini_map.ray_length)
+		{
+			draw_x = (int)(cube->mini_map.player_mini_x + cube->mini_map.ray_dir_x * x);
+			draw_y = (int)(cube->mini_map.player_mini_y + cube->mini_map.ray_dir_y * x);
+			my_mlx_pixel_put(&cube->window, draw_x, draw_y, RED);
+			x++;
+		}
+		y++;
+	}
+}
