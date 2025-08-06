@@ -195,6 +195,7 @@ void	init_ray(t_player *player, t_ray *ray, int x);
 void	init_ray(t_player *player, t_ray *ray, int x);
 void	init_dda(t_player *player, t_ray *ray);
 void	init_steps(t_player *player, t_ray *ray);
+void	set_player_camera_plane(t_player *player);
 
 // HOOKS
 

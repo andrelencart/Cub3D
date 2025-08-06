@@ -30,6 +30,35 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 	}
 }
 
+void set_player_camera_plane(t_player *player)
+{
+	if (player->dir_x == -1.0 && player->dir_y == 0.0) // East
+	{
+		player->plane_x = 0.0;
+		player->plane_y = 0.66;
+	}
+	else if (player->dir_x == 1.0 && player->dir_y == 0.0)// West
+	{
+		player->plane_x = 0.0;
+		player->plane_y = -0.66;
+	}
+	else if (player->dir_x == 0.0 && player->dir_y == 1.0) // North
+	{
+		player->plane_x = 0.66;
+		player->plane_y = 0.0;
+	}
+	else if (player->dir_x == 0.0 && player->dir_y == -1.0) // South
+	{
+		player->plane_x = -0.66;
+		player->plane_y = 0.0;
+	}
+	else
+	{
+		player->plane_x = 0.0;
+		player->plane_y = 0.66;
+	}
+}
+
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {
 	char	*dst;
@@ -46,3 +75,4 @@ int	testkey(int key_code, t_window *wind)
 	ft_printf("key_code: %d\n", key_code);
 	return (0);
 }
+

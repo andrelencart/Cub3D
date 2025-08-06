@@ -28,8 +28,9 @@ void	init_player(t_player *player, t_parse *data)
 	player->y = data->player_y + 0.5; // y Position
 	player->dir_x = data->player_dir_x;//assumed E is x -1.0
 	player->dir_y = data->player_dir_y;//assumed N is y -1.0
-	player->plane_x = 0;
-	player->plane_y = 0.66;
+	// player->plane_x = 0;
+	// player->plane_y = 0.66;
+	set_player_camera_plane(player);
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
 	player->moving_forward = 0;
 	player->moving_backward = 0;
