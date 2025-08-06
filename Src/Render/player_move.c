@@ -32,19 +32,20 @@ int	player_move_front_back(t_player *player, char **map, double frame_time)
 		// printf("entrou move front\n");
 		new_x = player->x + player->dir_x * move_speed;
 		new_y = player->y + player->dir_y * move_speed;
-		player->x = new_x;
-		player->y = new_y;
-		// if (map[(int)new_y][(int)new_x] != '1') // For Collisions
-		// {
-		// }
+		if (map[(int)player->y][(int)new_x] != '1')
+			player->x = new_x;
+		if (map[(int)new_y][(int)player->x] != '1')
+			player->y = new_y;
 	}
 	if (player->moving_backward)
 	{
 		// printf("entrou move back\n");
 		new_x = player->x - player->dir_x * move_speed;
 		new_y = player->y - player->dir_y * move_speed;
-		player->x = new_x;
-		player->y = new_y;
+		if (map[(int)player->y][(int)new_x] != '1')
+			player->x = new_x;
+		if (map[(int)new_y][(int)player->x] != '1')
+			player->y = new_y;
 	}
 	return (0);
 }
@@ -62,19 +63,20 @@ int	player_move_left_right(t_player *player, char **map, double frame_time)
 		// printf("entrou move right\n");
 		new_x = player->x + player->plane_x * move_speed;
 		new_y = player->y + player->plane_y * move_speed;
-		player->x = new_x;
-		player->y = new_y;
-		// if (map[(int)new_y][(int)new_x] != '1') // For Collisions
-		// {
-		// }
+		if (map[(int)player->y][(int)new_x] != '1')
+			player->x = new_x;
+		if (map[(int)new_y][(int)player->x] != '1')
+			player->y = new_y;
 	}
 	if (player->strafing_left)
 	{
 		// printf("entrou move left\n");
 		new_x = player->x - player->plane_x * move_speed;
 		new_y = player->y - player->plane_y * move_speed;
-		player->x = new_x;
-		player->y = new_y;
+		if (map[(int)player->y][(int)new_x] != '1')
+			player->x = new_x;
+		if (map[(int)new_y][(int)player->x] != '1')
+			player->y = new_y;
 	}
 	return (0);
 }
