@@ -1,15 +1,5 @@
 #include "../../Inc/cube3d.h"
 
-int	init_parse_data(t_parse	**tmp)
-{
-	*tmp = ft_calloc(1, sizeof(t_parse));
-	if (!(*tmp))
-		return (parse_error("init_parse_data: Failed to allocate *data"));
-	(*tmp)->ceiling = -1;
-	(*tmp)->floor = -1;
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_parse	*data;

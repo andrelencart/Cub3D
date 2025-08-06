@@ -10,6 +10,8 @@ typedef struct s_parse
 	char	*e_face;
 	char	*w_face;
 	char	player_dir;
+	double	player_dir_x;
+	double	player_dir_y;
 	int		player_x;
 	int		player_y;
 	int		floor;
@@ -33,6 +35,7 @@ int		check_line_end(char *str);
 int		is_data_filled(t_parse *data);
 int		lookfor_texture(char **dest);
 int		find_map(t_parse *data, int i);
+void	assign_player_pos(t_parse *data, int i, int j);
 
 //map_checker.c
 int		load_map(t_parse *data, int i);

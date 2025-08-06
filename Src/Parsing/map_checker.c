@@ -58,14 +58,9 @@ int	find_player(t_parse *data)
 			if (ft_strchr("NSEW", data->map[i - 1][j - 1]))
 			{
 				if (data->player_dir)
-					return (map_error("Extra player in", i - 1, j - 1));
+					return (map_error("Extra player in", (i - 1), (j - 1)));
 				else
-				{
-					data->player_dir = data->map[i - 1][j - 1];
-					data->player_x = j - 1;
-					data->player_y = i - 1;
-					data->map[i - 1][j - 1] = '0';
-				}
+					assign_player_pos(data, (i - 1), (j - 1));
 			}
 		}
 	}

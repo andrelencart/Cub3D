@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include "../minilibx-linux/mlx.h"
 # include "../Inc/Libft/libft.h"
-# include "../Inc/cube_parse.h"//Parsing structs & functions - by ddiogo-f
+# include "cube_parse.h"//Parsing structs & functions - by ddiogo-f
 
 // Tudo o que eu coloquei aqui podes alterar,
 // Isto sao coisas que eu tinha do FDF
