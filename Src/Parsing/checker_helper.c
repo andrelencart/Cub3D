@@ -1,6 +1,5 @@
 #include "../../Inc/cube3d.h"
 
-
 void	assign_player_pos(t_parse *data, int i, int j)
 {
 	data->player_dir = data->map[i][j];

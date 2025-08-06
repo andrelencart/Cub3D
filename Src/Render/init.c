@@ -18,7 +18,7 @@ void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
 	init_player(&cube->player, data);
-	init_map(&cube->map);
+	init_map(&cube->map, data);
 }
 
 void	init_player(t_player *player, t_parse *data)
@@ -36,9 +36,9 @@ void	init_player(t_player *player, t_parse *data)
 	player->strafing_right = 0;
 }
 
-void	init_map(t_map *map)
+void	init_map(t_map *map, t_parse *data)
 {
-	map->grid = test_map;
+	map->grid = data->map;
 	map->width = strlen(test_map[0]);
 	map->height = 0;
 	while (map->grid[map->height])

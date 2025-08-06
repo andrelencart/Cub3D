@@ -188,7 +188,7 @@ typedef struct s_cube
 
 void	init(t_cube *cube, t_parse *data);
 void	init_player(t_player *player, t_parse *data);
-void	init_map(t_map *temap);
+void	init_map(t_map *temap, t_parse *data);
 void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
 void	init_ray(t_player *player, t_ray *ray, int x);

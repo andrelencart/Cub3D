@@ -33,3 +33,13 @@ int	map_error(char *msg, int ln, int cl)
 	ft_printf_fd(STDERR_FILENO, "Cube3d: %s x: %d y: %d\n", msg, cl, ln);
 	return (1);
 }
+
+int	init_parse_data(t_parse	**tmp)
+{
+	*tmp = ft_calloc(1, sizeof(t_parse));
+	if (!(*tmp))
+		return (parse_error("init_parse_data: Failed to allocate *data"));
+	(*tmp)->ceiling = -1;
+	(*tmp)->floor = -1;
+	return (0);
+}

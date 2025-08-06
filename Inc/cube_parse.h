@@ -19,10 +19,11 @@ typedef struct s_parse
 	char	**map;
 }	t_parse;
 
-//parse_cleaning.c
+//parse_init_cleaning.c
 int		parse_error(char *msg);
 void	free_data(t_parse *data);
 int		map_error(char *msg, int line, int column);
+int		init_parse_data(t_parse	**tmp);
 
 //cube_checker.c
 int		parse_check_fname(char *fname, t_parse *data);
