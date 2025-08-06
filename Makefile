@@ -26,8 +26,12 @@ RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c player_move.c 
 					key_handling.c mini_map.c
 
 PARSE_MAIN_C	=	parsing_main.c
-PARSE_FILES_C	=	cube_checker.c \
-					parse_cleaning.c
+PARSE_FILES_C	=	checker_helper.c \
+					cub_checker.c \
+					map_checker.c \
+					parse_init_cleaning.c \
+					square_map.c \
+					texture_checker.c
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
 RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))

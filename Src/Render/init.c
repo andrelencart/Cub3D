@@ -1,7 +1,7 @@
 
 
 #include "../../Inc/cube3d.h"
-
+/* 
 static char *test_map[] = {
 	"1111111111",
     "1000000001",
@@ -13,21 +13,21 @@ static char *test_map[] = {
     "1111111111",
     NULL
 };
-
-void	init(t_cube *cube)
+ */
+void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
-	init_player(&cube->player);
-	init_map(&cube->map);
+	init_player(&cube->player, data);
+	init_map(&cube->map, data);
 	init_mini_map(&cube->mini_map);
 }
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_parse *data)
 {
-	player->x = 4.5; // Position
-	player->y = 4.5;
-	player->dir_x = -1.0; // where is facing
-	player->dir_y = 0.0;
+	player->x = data->player_x + 0.5; // x Position
+	player->y = data->player_y + 0.5; // y Position
+	player->dir_x = data->player_dir_x;//assumed E is x -1.0
+	player->dir_y = data->player_dir_y;//assumed N is y -1.0
 	player->plane_x = 0;
 	player->plane_y = 0.66;
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
@@ -37,10 +37,10 @@ void	init_player(t_player *player)
 	player->strafing_right = 0;
 }
 
-void	init_map(t_map *map)
+void	init_map(t_map *map, t_parse *data)
 {
-	map->grid = test_map;
-	map->width = strlen(test_map[0]);
+	map->grid = data->map;
+	map->width = strlen(map->grid[0]);
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
