@@ -1,0 +1,14 @@
+NO ./maps/00_test_EmptyLines.cub 
+SO ./maps/04_test_ExtraMidLines.cub
+WE ./maps/09_test_ExtraPlayer.cub
+EA ./maps/test_00.cub
+F 123,10,1
+C 225,30,132
+1111111111
+1000000001
+1011111101
+1010000101
+1010N00101
+1010111101
+1000000001
+1111111111

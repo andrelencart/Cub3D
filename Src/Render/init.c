@@ -1,7 +1,7 @@
 
 
 #include "../../Inc/cube3d.h"
-
+/* 
 static char *test_map[] = {
 	"1111111111",
     "1000000001",
@@ -13,7 +13,7 @@ static char *test_map[] = {
     "1111111111",
     NULL
 };
-
+ */
 void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
@@ -25,8 +25,8 @@ void	init_player(t_player *player, t_parse *data)
 {
 	player->x = data->player_x + 0.5; // x Position
 	player->y = data->player_y + 0.5; // y Position
-	player->dir_x = data->player_dir_x;//assumed N is x -1.0
-	player->dir_y = data->player_dir_y;//assumed E is y -1.0
+	player->dir_x = data->player_dir_x;//assumed E is x -1.0
+	player->dir_y = data->player_dir_y;//assumed N is y -1.0
 	player->plane_x = 0;
 	player->plane_y = 0.66;
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
@@ -39,7 +39,7 @@ void	init_player(t_player *player, t_parse *data)
 void	init_map(t_map *map, t_parse *data)
 {
 	map->grid = data->map;
-	map->width = strlen(test_map[0]);
+	map->width = strlen(map->grid[0]);
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
