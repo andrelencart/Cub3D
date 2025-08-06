@@ -30,6 +30,7 @@ PARSE_FILES_C	=	checker_helper.c \
 					cub_checker.c \
 					map_checker.c \
 					parse_init_cleaning.c \
+					square_map.c \
 					texture_checker.c
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))

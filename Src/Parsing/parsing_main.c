@@ -11,22 +11,10 @@ int	main(int ac, char **av)
 		return (1);
 	if (parse_check_fname(av[1], data))
 		return (free_data(data), 1);
-	if (parse_textures(data))
-	{
-		/*printf("Ceiling->%X,<-\n", data->ceiling);
-		printf("Floor->%X<-\n", data->floor);
-		printf("NO->%s<-\n", data->n_face);
-		printf("SO->%s<-\n", data->s_face);
-		printf("EA->%s<-\n", data->e_face);
-		printf("WE->%s<-\n", data->w_face);*/
+	if (parse_cub(data))
 		return (free_data(data), 1);
-	}
-	/*printf("Ceiling->%X<-\n", data->ceiling);
-	printf("Floor->%X<-\n", data->floor);
-	printf("NO->%s<-\n", data->n_face);
-	printf("SO->%s<-\n", data->s_face);
-	printf("EA->%s<-\n", data->e_face);
-	printf("WE->%s<-\n", data->w_face); */
+	if (square_map(data))
+		return (free_data(data), 1);
 	free_data(data);
 	return (0);
 }

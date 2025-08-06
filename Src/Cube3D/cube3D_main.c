@@ -12,7 +12,9 @@ int	main(int ac, char **av)
 		return (1);
 	if (parse_check_fname(av[1], data))
 		return (free_data(data), 1);
-	if (parse_textures(data))
+	if (parse_cub(data))
+		return (free_data(data), 1);
+	if (square_map(data))
 		return (free_data(data), 1);
 	init(&cube, data);
 	free_data(data);//Either strdup map or get a special free data in success

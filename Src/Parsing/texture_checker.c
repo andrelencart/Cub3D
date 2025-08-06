@@ -80,7 +80,7 @@ int	parse_line(t_parse *data, char *line)
 		return (1);
 }
 
-int	parse_textures(t_parse *data)
+int	parse_cub(t_parse *data)
 {
 	int	i;
 	int	res;

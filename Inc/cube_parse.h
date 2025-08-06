@@ -29,7 +29,7 @@ int		init_parse_data(t_parse	**tmp);
 int		parse_check_fname(char *fname, t_parse *data);
 
 //texture_checker.c
-int		parse_textures(t_parse *data);
+int		parse_cub(t_parse *data);
 
 //checker_helper.c
 int		check_line_end(char *str);
@@ -40,5 +40,8 @@ void	assign_player_pos(t_parse *data, int i, int j);
 
 //map_checker.c
 int		load_map(t_parse *data, int i);
+
+//square_map.c
+int		square_map(t_parse *data);
 
 #endif
