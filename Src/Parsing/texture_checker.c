@@ -91,7 +91,7 @@ int	parse_cub(t_parse *data)
 		while (data->map[i] && data->map[i][0] == 10)
 			i++;
 		if (!data->map[i])
-			return (parse_error("Map is has incomplete information"));
+			return (parse_error("Map appears empty", 0));
 		res = parse_line(data, data->map[i]);
 		if (res == 1)
 		{
@@ -100,7 +100,7 @@ int	parse_cub(t_parse *data)
 			return (1);
 		}
 		else if (res == 2)
-			return (parse_error("assign_texture: Failed memory allocation"));
+			return (parse_error("assign_texture: Failed memory allocation", 0));
 		i++;
 	}
 	if (find_map(data, i) || find_textures(data) || load_map(data, i))

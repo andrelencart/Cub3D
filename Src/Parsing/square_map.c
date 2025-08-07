@@ -28,7 +28,7 @@ int	allocate_square_map(t_parse *data, int i, int x)
 
 	tmp = ft_calloc(i + 1, sizeof(char *));
 	if (!tmp)
-		return (parse_error("square_map(): No allocation of **tmp"));
+		return (parse_error("square_map: No allocation of **tmp", 0));
 	i = 0;
 	while (data->map[i])
 	{
@@ -37,7 +37,7 @@ int	allocate_square_map(t_parse *data, int i, int x)
 		if (!tmp[i])
 		{
 			free_split(tmp);
-			return (parse_error("square_map(): No allocation of *tmp"));
+			return (parse_error("square_map: No allocation of *tmp", 0));
 		}
 		while (data->map[i][j] != 0 && data->map[i][j++] != '\n')
 			tmp[i][j - 1] = data->map[i][j - 1];

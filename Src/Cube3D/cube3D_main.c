@@ -6,7 +6,7 @@ int	main(int ac, char **av)
 	t_cube	cube;
 
 	if (ac != 2 || !av)
-		return (parse_error("Wrong number of arguments"));
+		return (parse_error("Wrong number of arguments", 0));
 	data = NULL;
 	if (init_parse_data(&data))
 		return (1);

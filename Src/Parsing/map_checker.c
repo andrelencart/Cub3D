@@ -25,7 +25,7 @@ int	find_borders(t_parse *data)
 	int	j;
 
 	if (!data->player_dir)
-		return (parse_error("Map has no starting position"));
+		return (parse_error("Map has no starting position", 0));
 	i = 0;
 	while (data->map[i])
 	{
@@ -91,7 +91,7 @@ int	validate_map(t_parse *data)
 		i++;
 	}
 	if (nav == 0)
-		return (parse_error("Map is empty"));
+		return (parse_error("Map is empty", 0));
 	return (find_player(data));
 }
 
@@ -108,14 +108,14 @@ int	load_map(t_parse *data, int i)
 		j++;
 	tmp = ft_calloc(j - i + 1, sizeof(char *));
 	if (!tmp)
-		return (parse_error("Failed to allocate memory for map"));
+		return (parse_error("Failed to allocate memory for map", 0));
 	k = 0;
 	while (i < j)
 	{
 		tmp[k] = ft_strdup(data->map[i]);
 		if (!tmp[k])
 			return (free_split(tmp), parse_error("Failed \
-to allocate memory for a map line"));
+to allocate memory for a map line", 0));
 		i++;
 		k++;
 	}

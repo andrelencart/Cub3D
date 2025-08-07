@@ -20,7 +20,7 @@ typedef struct s_parse
 }	t_parse;
 
 //parse_init_cleaning.c
-int		parse_error(char *msg);
+int		parse_error(char *msg, char *extra);
 void	free_data(t_parse *data);
 int		map_error(char *msg, int line, int column);
 int		init_parse_data(t_parse	**tmp);

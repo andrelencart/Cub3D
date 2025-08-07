@@ -20,10 +20,13 @@ void	free_data(t_parse *data)
 	free(data);
 }
 
-int	parse_error(char *msg)
+int	parse_error(char *msg, char *other)
 {
 	ft_printf_fd(STDERR_FILENO, "Error\n");
-	ft_printf_fd(STDERR_FILENO, "Cube3d: %s\n", msg);
+	ft_printf_fd(STDERR_FILENO, "Cube3d: %s", msg);
+	if (other)
+		ft_printf_fd(STDERR_FILENO, ": %s", other);
+	ft_printf_fd(STDERR_FILENO, "\n");
 	return (1);
 }
 
@@ -38,7 +41,7 @@ int	init_parse_data(t_parse	**tmp)
 {
 	*tmp = ft_calloc(1, sizeof(t_parse));
 	if (!(*tmp))
-		return (parse_error("init_parse_data: Failed to allocate *data"));
+		return (parse_error("init_parse_data: Failed to allocate *data", 0));
 	(*tmp)->ceiling = -1;
 	(*tmp)->floor = -1;
 	return (0);
