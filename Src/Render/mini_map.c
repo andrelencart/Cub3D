@@ -32,7 +32,7 @@ void	draw_player_mini_map(t_cube *cube)
 	int	y;
 
 	cube->mini_map.player_mini_x = (int)(cube->player.x * TILE_SIZE);
-	cube->mini_map.player_mini_y = (int)(cube->player.y * TILE_SIZE);
+	cube->mini_map.player_mini_y = (int)((cube->map.height - cube->player.y - 0.5) * TILE_SIZE);
 	cube->mini_map.player_size = TILE_SIZE / 4;
 	y = -cube->mini_map.player_size;
 	while (y <= cube->mini_map.player_size)
@@ -58,13 +58,13 @@ void	draw_vision_mini_map(t_cube *cube)
 	draw_x = 0;
 	draw_y = 0;
 	cube->mini_map.player_mini_x = (int)(cube->player.x * TILE_SIZE);
-	cube->mini_map.player_mini_y = (int)(cube->player.y * TILE_SIZE);
+	cube->mini_map.player_mini_y = (int)((cube->map.height - cube->player.y - 0.5) * TILE_SIZE);
 	y = 0;
 	while (y < cube->mini_map.num_rays)
 	{
 		cube->mini_map.camera_x = 2 * y / (double)(cube->mini_map.num_rays - 1) - 1;
-		cube->mini_map.ray_dir_x = cube->player.dir_x + cube->player.plane_x * cube->mini_map.camera_x;
-		cube->mini_map.ray_dir_y = cube->player.dir_y + cube->player.plane_y * cube->mini_map.camera_x;
+		cube->mini_map.ray_dir_x = (cube->player.dir_x + cube->player.plane_x * cube->mini_map.camera_x);
+		cube->mini_map.ray_dir_y = (cube->player.dir_y + cube->player.plane_y * cube->mini_map.camera_x);
 		x = 0;
 		while (x < cube->mini_map.ray_length)
 		{

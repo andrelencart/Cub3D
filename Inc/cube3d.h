@@ -187,7 +187,7 @@ typedef struct s_cube
 // INIT
 
 void	init(t_cube *cube, t_parse *data);
-void	init_player(t_player *player, t_parse *data);
+void	init_player(t_player *player, t_parse *data, int map_height);
 void	init_map(t_map *temap, t_parse *data);
 void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
@@ -212,7 +212,7 @@ int		move_update_flag_press(int keycode, t_cube *cube);
 void	draw(t_cube *cube);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void	raycast(t_cube *cube);
-void	dda_loop(t_ray *ray, char **map);
+void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_window *win, t_ray *ray, int x);
 
@@ -231,8 +231,8 @@ void	update_frame_time(t_cube *cube);
 
 int		player_rotation(t_player *player, int key_code);
 int		rotate_player(t_player *player, double rot_speed);
-int		player_move_left_right(t_player *player, char **map, double frame_time);
-int		player_move_front_back(t_player *player, char **map, double frame_time);
+int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
+int		player_move_front_back(t_player *player, char **map, double frame_time, int map_height);
 
 // CLOSE
 

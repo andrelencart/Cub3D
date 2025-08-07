@@ -59,6 +59,7 @@ void set_player_camera_plane(t_player *player)
 	}
 }
 
+
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {
 	char	*dst;

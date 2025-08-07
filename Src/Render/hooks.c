@@ -44,8 +44,8 @@ void	update_frame_time(t_cube *cube)
 int	loop_hook(t_cube *cube)
 {
 	update_frame_time(cube);
-	player_move_front_back(&cube->player, cube->map.grid, cube->frame_time);
-	player_move_left_right(&cube->player, cube->map.grid, cube->frame_time);
+	player_move_front_back(&cube->player, cube->map.grid, cube->frame_time, cube->map.height);
+	player_move_left_right(&cube->player, cube->map.grid, cube->frame_time, cube->map.height);
 	draw(cube);
 	return (0);
 }

@@ -17,15 +17,15 @@ static char *test_map[] = {
 void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
-	init_player(&cube->player, data);
 	init_map(&cube->map, data);
+	init_player(&cube->player, data, cube->map.height);
 	init_mini_map(&cube->mini_map);
 }
 
-void	init_player(t_player *player, t_parse *data)
+void	init_player(t_player *player, t_parse *data, int map_height)
 {
 	player->x = data->player_x + 0.5; // x Position
-	player->y = data->player_y + 0.5; // y Position
+	player->y = (map_height - 1 - data->player_y) + 0.5; // y Position (INVERTED)
 	player->dir_x = data->player_dir_x;//assumed E is x -1.0
 	player->dir_y = data->player_dir_y;//assumed N is y -1.0
 	// player->plane_x = 0;
@@ -36,6 +36,7 @@ void	init_player(t_player *player, t_parse *data)
 	player->moving_backward = 0;
 	player->strafing_left = 0;
 	player->strafing_right = 0;
+	// printf("Player spawn: x=%f, y=%f (map_height=%d)\n", player->x, player->y, map_height);
 }
 
 void	init_map(t_map *map, t_parse *data)
@@ -45,7 +46,11 @@ void	init_map(t_map *map, t_parse *data)
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
+	// for (int i = 0; map->grid[i]; i++) {
+	// 	printf("map line %d: %s\n", i, map->grid[i]);
+	// }
 }
+
 
 void	init_mini_map(t_mini_map *mini_map)
 {
