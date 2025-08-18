@@ -233,6 +233,7 @@ int		player_rotation(t_player *player, int key_code);
 int		rotate_player(t_player *player, double rot_speed);
 int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
 int		player_move_front_back(t_player *player, char **map, double frame_time, int map_height);
+int		mouse_move_handler(int x, int y, t_cube *cube);
 
 // CLOSE
 
