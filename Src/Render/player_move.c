@@ -19,6 +19,8 @@ int	rotate_player(t_player *player, double rot_speed)
 	return (0);
 }
 
+// int	mouse_move_handler
+
 int	player_move_front_back(t_player *player, char **map, double frame_time, int map_height)
 {
 	double	move_speed;

@@ -17,9 +17,9 @@ void	raycast(t_cube *cube)
 {
 	t_ray	ray;
 	int		x;
-	int		map_height;
+	// int		map_height;
 
-	map_height = cube->map.height;
+	// map_height = cube->map.height;
 	x = 0;
 	while (x < WIND_WIDTH)
 	{

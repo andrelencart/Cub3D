@@ -7,6 +7,7 @@ void	hook_control(t_cube *cube)
 	mlx_key_hook(cube->window.mlx_window, testkey, cube);
 	mlx_hook(cube->window.mlx_window, 2, 1L<<0, key_press, cube);
 	mlx_hook(cube->window.mlx_window, 3, 1L<<1, key_release, cube);
+	mlx_hook(cube->window.mlx_window, 6, 1L<<6, mouse_move_handler, cube);
 }
 
 int	key_press(int key_code, t_cube *cube)
