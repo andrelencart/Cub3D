@@ -6,9 +6,9 @@ void	assign_player_pos(t_parse *data, int i, int j)
 	data->player_dir_x = 0.0;
 	data->player_dir_y = 0.0;
 	if (data->player_dir == 'E')
-		data->player_dir_x = -1.0;
-	else if (data->player_dir == 'W')
 		data->player_dir_x = 1.0;
+	else if (data->player_dir == 'W')
+		data->player_dir_x = -1.0;
 	else if (data->player_dir == 'N')
 		data->player_dir_y = -1.0;
 	else

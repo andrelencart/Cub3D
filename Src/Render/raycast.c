@@ -51,8 +51,9 @@ void	init_steps(t_player *player, t_ray *ray)
 	}
 }
 
-void	dda_loop(t_ray *ray, char **map)
+void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 {
+	// (void)map_width;
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
@@ -68,7 +69,13 @@ void	dda_loop(t_ray *ray, char **map)
 			ray->map_y += ray->step_y;
 			ray->side = 1; // Horizontal Wall
 		}
-		if (map[ray->map_y][ray->map_x] == '1')
+		if (ray->map_x < 0 || ray->map_x >= map_width ||
+			ray->map_y < 0 || ray->map_y >= map_height)
+		{
+			ray->hit = 1; // Stop if out of bounds
+			break;
+		}
+		if (map[map_height - 1 - ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 		// printf("DDA: map_x=%d, map_y=%d, side=%d, hit=%d\n", ray->map_x, ray->map_y, ray->side, ray->hit);
 	}

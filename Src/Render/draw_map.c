@@ -17,17 +17,20 @@ void	raycast(t_cube *cube)
 {
 	t_ray	ray;
 	int		x;
+	// int		map_height;
 
+	// map_height = cube->map.height;
 	x = 0;
 	while (x < WIND_WIDTH)
 	{
+		memset(&ray, 0, sizeof(ray));
 		init_ray(&cube->player, &ray, x);
 		init_dda(&cube->player, &ray);
 		init_steps(&cube->player, &ray);
-		dda_loop(&ray, cube->map.grid);
-		// printf("Ray %d: dir_x=%.2f, dir_y=%.2f, map_x=%d, map_y=%d, step_x=%d, step_y=%d\n",
-		// 		x, ray.ray_dir_x, ray.ray_dir_y, ray.map_x, ray.map_y, ray.step_x, ray.step_y);
+		dda_loop(&ray, cube->map.grid, cube->map.height, cube->map.width);
 		calc_wall_dist(&cube->player, &ray);
+		// printf("Ray %d: dir_x=%.2f, dir_y=%.2f, map_x=%d, map_y=%d, step_x=%d, step_y=%d\n",
+				// x, ray.ray_dir_x, ray.ray_dir_y, ray.map_x, ray.map_y, ray.step_x, ray.step_y);
 		draw_3d_map(&cube->window, &ray, x);
 		x++;
 	}
