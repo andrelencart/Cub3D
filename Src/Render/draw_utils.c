@@ -23,7 +23,7 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 		x = 0;
 		while (x < TILE_SIZE)
 		{
-			my_mlx_pixel_put(win, start_x + x, start_y + y, color);
+			my_mlx_pixel_put(win, start_x + x, start_y + y, dim_color(color, DIM_FACTOR));
 			x++;
 		}
 		y++;
@@ -58,35 +58,6 @@ void set_player_camera_plane(t_player *player)
 		player->plane_y = 0.66;
 	}
 }
-
-// void set_player_camera_plane(t_player *player)
-// {
-//     if (player->dir_x == 0.0 && player->dir_y == -1.0) // North
-//     {
-//         player->plane_x = 0.66;
-//         player->plane_y = 0.0;
-//     }
-//     else if (player->dir_x == 0.0 && player->dir_y == 1.0) // South
-//     {
-//         player->plane_x = -0.66;
-//         player->plane_y = 0.0;
-//     }
-//     else if (player->dir_x == 1.0 && player->dir_y == 0.0) // East
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = 0.66;
-//     }
-//     else if (player->dir_x == -1.0 && player->dir_y == 0.0) // West
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = -0.66;
-//     }
-//     else
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = 0.66; // Default to East
-//     }
-// }
 
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {

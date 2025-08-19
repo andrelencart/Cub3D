@@ -23,7 +23,7 @@ void	raycast(t_cube *cube)
 	x = 0;
 	while (x < WIND_WIDTH)
 	{
-		memset(&ray, 0, sizeof(ray));
+		ft_memset(&ray, 0, sizeof(ray));
 		init_ray(&cube->player, &ray, x);
 		init_dda(&cube->player, &ray);
 		init_steps(&cube->player, &ray);
@@ -45,17 +45,17 @@ void	draw_3d_map(t_window *win, t_ray *ray, int x)
 		y = 0;
 	while (y < ray->draw_start) // CEILING
 	{
-		my_mlx_pixel_put(win, x, y, CEILING_COLOR_DK_G);
+		my_mlx_pixel_put(win, x, y, dim_color(CEILING_COLOR_DK_G, DIM_FACTOR));
 		y++;
 	}
 	while (y <= ray->draw_end && y < WIND_HEIGHT) // WALL
 	{
-		my_mlx_pixel_put(win, x, y, WALL_COLOR_MG);
+		my_mlx_pixel_put(win, x, y, dim_color(WALL_COLOR_MG, DIM_FACTOR));
 		y++;
 	}
 	while (y < WIND_HEIGHT) // FLOOR
 	{
-		my_mlx_pixel_put(win, x, y, FLOOR_COLOR_LGHT_G);
+		my_mlx_pixel_put(win, x, y, dim_color(FLOOR_COLOR_LGHT_G, DIM_FACTOR));
 		y++;
 	}
 }

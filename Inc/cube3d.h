@@ -19,9 +19,6 @@
 # include "../Inc/Libft/libft.h"
 # include "cube_parse.h"//Parsing structs & functions - by ddiogo-f
 
-// Tudo o que eu coloquei aqui podes alterar,
-// Isto sao coisas que eu tinha do FDF
-
 // MAP_DEF
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
@@ -59,11 +56,16 @@
 // COLOR_DEF
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-# define RED 0xFF0000
+# define RED 0xFF0000 
+# define BLUE 0x00FF00
+# define GREEN 0x0000FF
 # define CEILING_COLOR_DK_G 0x333333
 # define FLOOR_COLOR_LGHT_G 0xAAAAAA
 # define WALL_COLOR_MG 0x666666
 # define WALL_COLOR_MB 0x225588
+
+// UTILS
+# define DIM_FACTOR 0.3
 
 // // CORD_DEF
 // # define X 0
@@ -216,6 +218,10 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_window *win, t_ray *ray, int x);
 
+// LIGHT
+
+unsigned int	dim_color(unsigned int color, double factor);
+
 // MINI MAP
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_mini_map(t_cube *cube);
@@ -234,7 +240,7 @@ int		rotate_player(t_player *player, double rot_speed);
 int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
 int		player_move_front_back(t_player *player, char **map, double frame_time, int map_height);
 int		mouse_move_handler(int x, int y, t_cube *cube);
-
+int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
 // CLOSE
 
 int		close_window(t_window *window);
