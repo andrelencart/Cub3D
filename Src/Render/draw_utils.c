@@ -59,6 +59,15 @@ void set_player_camera_plane(t_player *player)
 	}
 }
 
+void	calc_wall_x(t_ray *ray, t_player *player)
+{
+	if (ray->side == 0)
+		ray->wall_x = player->y + ray->perp_wall_dist * ray->ray_dir_y;
+	else
+		ray->wall_x = player->x + ray->perp_wall_dist * ray->ray_dir_x;
+	ray->wall_x -= floor(ray->wall_x); // Keep only the fractional part [0,1)
+}
+
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {
 	char	*dst;

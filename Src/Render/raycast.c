@@ -53,7 +53,6 @@ void	init_steps(t_player *player, t_ray *ray)
 
 void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 {
-	// (void)map_width;
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
@@ -84,13 +83,11 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 void	calc_wall_dist(t_player *player, t_ray *ray)
 {
 	//perpendicular distance from the player to the wall that the ray hits
-	double	perp_wall_dist;
-
 	if (ray->side == 0)
-		perp_wall_dist = (ray->map_x - player->x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->perp_wall_dist = (ray->map_x - player->x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		perp_wall_dist = (ray->map_y - player->y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
-	ray->line_height = (int)(WIND_HEIGHT / perp_wall_dist);
+		ray->perp_wall_dist = (ray->map_y - player->y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
+	ray->line_height = (int)(WIND_HEIGHT / ray->perp_wall_dist);
 	ray->draw_start = (WIND_HEIGHT / 2) - (ray->line_height / 2); // Find the lowest pixel to start drawing the wall
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;

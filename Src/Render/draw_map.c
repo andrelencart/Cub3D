@@ -31,31 +31,47 @@ void	raycast(t_cube *cube)
 		calc_wall_dist(&cube->player, &ray);
 		// printf("Ray %d: dir_x=%.2f, dir_y=%.2f, map_x=%d, map_y=%d, step_x=%d, step_y=%d\n",
 				// x, ray.ray_dir_x, ray.ray_dir_y, ray.map_x, ray.map_y, ray.step_x, ray.step_y);
-		draw_3d_map(&cube->window, &ray, x);
+		calc_wall_x(&cube->ray, &cube->player);
+		draw_3d_map(cube, &ray, x);
 		x++;
 	}
 }
 
-void	draw_3d_map(t_window *win, t_ray *ray, int x)
+void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 {
-	int	y;
+	int		y;
 
 	y = ray->draw_start;
 	if (y < 0)
 		y = 0;
 	while (y < ray->draw_start) // CEILING
 	{
-		my_mlx_pixel_put(win, x, y, dim_color(CEILING_COLOR_DK_G, DIM_FACTOR));
+		my_mlx_pixel_put(&cube->window, x, y, dim_color(CEILING_COLOR_DK_G, cube->light.min));
 		y++;
 	}
-	while (y <= ray->draw_end && y < WIND_HEIGHT) // WALL
+	floors_walls(cube, ray, x, &y);
+}
+
+void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
+{
+	double	hit_x;
+	double	hit_y;
+	double	floor[2];
+	double	factor;
+
+	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
 	{
-		my_mlx_pixel_put(win, x, y, dim_color(WALL_COLOR_MG, DIM_FACTOR));
-		y++;
+		get_wall_pixel_pos(ray, *y, &hit_x, &hit_y);
+		factor = get_light_factor(hit_x, hit_y, &cube->player, &cube->light);
+		my_mlx_pixel_put(&cube->window, x, *y, dim_color(WALL_COLOR_MG, factor));
+		(*y)++;
 	}
-	while (y < WIND_HEIGHT) // FLOOR
+	while (*y < WIND_HEIGHT)
 	{
-		my_mlx_pixel_put(win, x, y, dim_color(FLOOR_COLOR_LGHT_G, DIM_FACTOR));
-		y++;
+		get_floor_pixel_pos(ray, &cube->player, *y, floor);
+		factor = get_light_factor(floor[0], floor[1], &cube->player, &cube->light);
+		// printf("floor_x: %f, floor_y: %f, factor: %f\n", floor_x, floor_y, factor);
+		my_mlx_pixel_put(&cube->window, x, *y, dim_color(FLOOR_COLOR_LGHT_G, factor));
+		(*y)++;
 	}
 }

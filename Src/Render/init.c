@@ -20,6 +20,7 @@ void	init(t_cube *cube, t_parse *data)
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
 	init_mini_map(&cube->mini_map);
+	init_lighting(&cube->light);
 }
 
 void	init_player(t_player *player, t_parse *data, int map_height)
@@ -50,7 +51,6 @@ void	init_map(t_map *map, t_parse *data)
 	// 	printf("map line %d: %s\n", i, map->grid[i]);
 	// }
 }
-
 
 void	init_mini_map(t_mini_map *mini_map)
 {

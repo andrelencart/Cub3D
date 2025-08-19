@@ -65,7 +65,7 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.3
+# define DIM_FACTOR 0.25
 
 // // CORD_DEF
 // # define X 0
@@ -138,6 +138,8 @@ typedef struct  s_ray
 	double	camera_x;
 	int		map_x;
 	int		map_y;
+	double	wall_x;
+	double	perp_wall_dist;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	int		step_x;
@@ -157,6 +159,13 @@ typedef	struct s_map
 	int		width;
 	int		height;
 }			t_map;
+
+typedef struct s_light
+{
+	double	radius;
+	double	min;
+	double	max;
+}			t_light;
 
 typedef	struct s_mini_map
 {
@@ -180,6 +189,7 @@ typedef struct s_cube
 	t_ray			ray;
 	t_window		window;
 	t_player		player;
+	t_light			light;
 	double			frame_time;
 	struct timeval	last_time;
 }					t_cube;
@@ -189,6 +199,7 @@ typedef struct s_cube
 // INIT
 
 void	init(t_cube *cube, t_parse *data);
+void	init_lighting(t_light *light);
 void	init_player(t_player *player, t_parse *data, int map_height);
 void	init_map(t_map *temap, t_parse *data);
 void	init_mini_map(t_mini_map *mini_map);
@@ -216,11 +227,12 @@ void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void	raycast(t_cube *cube);
 void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
-void	draw_3d_map(t_window *win, t_ray *ray, int x);
+void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
 
 // LIGHT
 
 unsigned int	dim_color(unsigned int color, double factor);
+double			get_light_factor(double px, double py, t_player *player, t_light *light);
 
 // MINI MAP
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
@@ -232,6 +244,10 @@ void	draw_vision_mini_map(t_cube *cube);
 
 int		get_tile_color(char c);
 void	update_frame_time(t_cube *cube);
+void	get_wall_pixel_pos(t_ray *ray, int y, double *hit_x, double *hit_y);
+void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
+void	calc_wall_x(t_ray *ray, t_player *player);
+void	get_floor_pixel_pos(t_ray *ray, t_player *player, int y, double floor[2]);
 
 // PLAYER MOVEMENT
 
@@ -241,6 +257,7 @@ int		player_move_left_right(t_player *player, char **map, double frame_time, int
 int		player_move_front_back(t_player *player, char **map, double frame_time, int map_height);
 int		mouse_move_handler(int x, int y, t_cube *cube);
 int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
+
 // CLOSE
 
 int		close_window(t_window *window);
