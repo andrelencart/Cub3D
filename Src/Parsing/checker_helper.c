@@ -88,5 +88,5 @@ int	lookfor_texture(char **dest)
 		return (ft_putendl_fd(strerror(errno), 2), 1);
 	}
 	close(fd);
-	return (0);
+	return (test_mlx_texture(*dest));
 }

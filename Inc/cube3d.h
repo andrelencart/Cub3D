@@ -103,6 +103,31 @@
 
 // STRUCTS
 
+//struct for texture storage & usage
+typedef struct	s_sprite
+{
+	void	*img;
+	char	*addr;
+
+	int		bpp;
+	int		endian;
+	int		line;
+
+	int		x;
+	int		y;
+}	t_sprite;
+
+//Wall textures, floor & ceiling colors
+typedef struct	s_imgsmap
+{
+	t_sprite	north;
+	t_sprite	south;
+	t_sprite	east;
+	t_sprite	west;
+	int			floor;
+	int			ceiling;
+}	t_imgsmap;
+
 typedef	struct s_window
 {
 	void	*mlx;
@@ -178,6 +203,7 @@ typedef struct s_cube
 	t_ray			ray;
 	t_window		window;
 	t_player		player;
+	t_imgsmap		imgsmap;
 	double			frame_time;
 	struct timeval	last_time;
 }					t_cube;
@@ -196,6 +222,7 @@ void	init_ray(t_player *player, t_ray *ray, int x);
 void	init_dda(t_player *player, t_ray *ray);
 void	init_steps(t_player *player, t_ray *ray);
 void	set_player_camera_plane(t_player *player);
+void	init_imgsmap(t_imgsmap *imgsmap, t_parse *data);
 
 // HOOKS
 

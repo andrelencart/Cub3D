@@ -17,6 +17,7 @@ static char *test_map[] = {
 void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
+	init_imgsmap(&cube->imgsmap, data);
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
 	init_mini_map(&cube->mini_map);

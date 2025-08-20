@@ -44,4 +44,7 @@ int		load_map(t_parse *data, int i);
 //square_map.c
 int		square_map(t_parse *data);
 
+//test_mlx_texture.c
+int		test_mlx_texture(char *filepath);
+
 #endif

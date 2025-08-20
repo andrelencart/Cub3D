@@ -31,7 +31,9 @@ PARSE_FILES_C	=	checker_helper.c \
 					map_checker.c \
 					parse_init_cleaning.c \
 					square_map.c \
-					texture_checker.c
+					texture_checker.c \
+					test_mlx_texture.c \
+					texture_loader.c
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
 RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))
