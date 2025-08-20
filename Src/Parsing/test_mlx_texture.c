@@ -17,8 +17,11 @@ int	test_mlx_texture(char *filepath)
 parse_error("Mlx failed to open", filepath));
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line, &img.endian);
 	if (!img.addr)
+	{
+		mlx_destroy_image(ptrmlx, img.img);
 		return (mlx_destroy_display(ptrmlx), free(ptrmlx),\
 parse_error("Mlx failed to get", filepath));
+	}
 	mlx_destroy_image(ptrmlx, img.img);
 	mlx_destroy_display(ptrmlx);
 	free(ptrmlx);
