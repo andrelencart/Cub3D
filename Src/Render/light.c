@@ -3,7 +3,7 @@
 
 void init_lighting(t_light *light)
 {
-	light->radius = 2.5;
+	light->radius = 2;
 	light->min = DIM_FACTOR;
 	light->max = 1.0;
 }
@@ -30,50 +30,28 @@ unsigned int dim_color(unsigned int color, double factor)
 
 double get_light_factor(double px, double py, t_player *player, t_light *light)
 {
-	double dx;
-	double dy;
+	double d[2];
 	double dist;
 	double factor;
 
-	dx = px - player->x;
-	dy = py - player->y;
-	dist = sqrt(dx * dx + dy * dy);
-	if (dist > light->radius)
-		return light->min;
-
-	factor = light->min + (light->max - light->min) * (1.0 - dist / light->radius);
-	if (factor > light->max)
-		factor = light->max;
-	if (factor < light->min)
+	d[0] = px - player->x;
+	d[1] = py - player->y;
+	dist = sqrt(d[0] * d[0] + d[1] * d[1]);
+	if (dist <= light->radius)
+		factor = light->min + (light->max - light->min) * (1.0 - dist / light->radius);
+	else
 		factor = light->min;
 	return (factor);
 }
 
-void get_wall_pixel_pos(t_ray *ray, int y, double *hit_x, double *hit_y)
-{
-	double offset_on_wall;
-
-	offset_on_wall = ((double)(y - ray->draw_start) / ray->line_height);
-	if (ray->side == 0)
-	{
-		*hit_x = ray->map_x;
-		*hit_y = ray->map_y + offset_on_wall * ray->ray_dir_y;
-	}
-	else
-	{
-		*hit_x = ray->map_x + offset_on_wall * ray->ray_dir_x;
-		*hit_y = ray->map_y;
-	}
-}
-
-void get_floor_pixel_pos(t_ray *ray, t_player *player, int y, double floor[2])
+void get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2])
 {
 	double	row_distance;
 	double	floor_wall_x;
 	double	floor_wall_y;
 	double	weight;
 
-
+	// (void)y;
 	row_distance = (double)WIND_HEIGHT / (2.0 * y - WIND_HEIGHT);
 	if (ray->side == 0)
 	{
@@ -86,6 +64,60 @@ void get_floor_pixel_pos(t_ray *ray, t_player *player, int y, double floor[2])
 		floor_wall_y = ray->map_y + ray->wall_x;
 	}
 	weight = row_distance / ray->perp_wall_dist;
-	floor[0] = weight * floor_wall_x + (1.0 - weight) * player->x;
-	floor[1] = weight * floor_wall_y + (1.0 - weight) * player->y;
+	floor[0] = weight * floor_wall_x + (1.0 - weight) * cube->player.x;
+	floor[1] = weight * floor_wall_y + (1.0 - weight) * cube->player.y;
 }
+
+// double get_light_factor(double px, double py, t_player *player, t_light *light)
+// {
+// 	double d[2];
+// 	double dist;
+// 	double factor;
+
+// 	d[0] = px - player->x;
+// 	d[1] = py - player->y;
+// 	dist = sqrt(d[0] * d[0] + d[1] * d[1]);
+// 	if (dist > light->radius)
+// 		return light->min;
+
+// 	factor = light->min + (light->max - light->min) * (1.0 - dist / light->radius);
+// 	if (factor > light->max)
+// 		factor = light->max;
+// 	if (factor < light->min)
+// 		factor = light->min;
+// 	return (factor);
+// }
+
+// void get_wall_pixel_pos(t_ray *ray, t_cube *cube, int y, double hit[2])
+// {
+// 	double offset_on_wall;
+
+// 	// (void)y;
+// 	(void)cube;
+// 	offset_on_wall = ((double)(y - ray->draw_start) / ray->line_height);
+// 	if (ray->side == 0)
+// 	{
+// 		hit[0] = ray->map_x;
+// 		hit[1] = ray->map_y + offset_on_wall * ray->ray_dir_y;
+// 	}
+// 	else
+// 	{
+// 		hit[0] = ray->map_x + offset_on_wall * ray->ray_dir_x;
+// 		hit[1] = ray->map_y;
+// 	}
+// 	// hit[1] = (double)(cube->map.height - 1) - hit[1];
+// }
+
+// void get_wall_pixel_pos(t_ray *ray, t_cube *cube, int y, double hit[2])
+// {
+// 	(void)cube;
+// 	(void)y;
+// 	if (ray->side == 0) {
+// 		hit[0] = ray->map_x;
+// 		hit[1] = ray->map_y + ray->wall_x;
+// 	} else {
+// 		hit[0] = ray->map_x + ray->wall_x;
+// 		hit[1] = ray->map_y;
+// 	}
+// }
+

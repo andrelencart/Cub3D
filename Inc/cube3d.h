@@ -57,8 +57,8 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define RED 0xFF0000 
-# define BLUE 0x00FF00
-# define GREEN 0x0000FF
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
 # define CEILING_COLOR_DK_G 0x333333
 # define FLOOR_COLOR_LGHT_G 0xAAAAAA
 # define WALL_COLOR_MG 0x666666
@@ -66,6 +66,7 @@
 
 // UTILS
 # define DIM_FACTOR 0.25
+# define MOVE_SPEED 1
 
 // // CORD_DEF
 // # define X 0
@@ -244,10 +245,10 @@ void	draw_vision_mini_map(t_cube *cube);
 
 int		get_tile_color(char c);
 void	update_frame_time(t_cube *cube);
-void	get_wall_pixel_pos(t_ray *ray, int y, double *hit_x, double *hit_y);
+// void get_wall_pixel_pos(t_ray *ray, t_cube *cube, double hit[2]);
 void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
 void	calc_wall_x(t_ray *ray, t_player *player);
-void	get_floor_pixel_pos(t_ray *ray, t_player *player, int y, double floor[2]);
+void 	get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2]);
 
 // PLAYER MOVEMENT
 

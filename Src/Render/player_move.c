@@ -64,7 +64,7 @@ int	player_move_front_back(t_player *player, char **map, double frame_time, int 
 	double	new_y;
 	(void) map;
 
-	move_speed = frame_time * 0.5;
+	move_speed = frame_time * MOVE_SPEED;
 	if (player->moving_forward)
 	{
 		new_x = player->x + player->dir_x * move_speed;
