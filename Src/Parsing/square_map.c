@@ -1,5 +1,30 @@
 #include "../../Inc/cube3d.h"
 
+int	find_map_edge(char **map, int i, int dir)
+{
+	int	j;
+
+	while (dir < 0 && map[i])
+		i++;
+	if (!map[i])
+		i--;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_strchr("01NSEW", map[i][j]))
+				return (i);
+			j++;
+		}
+		if (dir < 0)
+			i--;
+		else
+			i++;
+	}
+	return (0);
+}
+
 int	padd_map_end(t_parse *data, int x)
 {
 	int	i;

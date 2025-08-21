@@ -101,11 +101,8 @@ int	load_map(t_parse *data, int i)
 	int		k;
 	char	**tmp;
 
-	while (data->map[i][0] == '\n')
-		i++;
-	j = i;
-	while (data->map[j])
-		j++;
+	i = find_map_edge(data->map, i, 1);
+	j = find_map_edge(data->map, i, -1) + 1;
 	tmp = ft_calloc(j - i + 1, sizeof(char *));
 	if (!tmp)
 		return (parse_error("Failed to allocate memory for map", 0));

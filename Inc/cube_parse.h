@@ -44,6 +44,7 @@ int		load_map(t_parse *data, int i);
 
 //square_map.c
 int		square_map(t_parse *data);
+int		find_map_edge(char **map, int i, int dir);
 
 //test_mlx_texture.c
 int		test_mlx_texture(char *filepath);
