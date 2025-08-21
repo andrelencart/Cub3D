@@ -20,6 +20,19 @@ void	free_data(t_parse *data)
 	free(data);
 }
 
+void	release_data(t_parse *data)
+{
+	if (data->n_face != NULL)
+		free(data->n_face);
+	if (data->s_face != NULL)
+		free(data->s_face);
+	if (data->e_face != NULL)
+		free(data->e_face);
+	if (data->w_face != NULL)
+		free(data->w_face);
+	free(data);
+}
+
 int	parse_error(char *msg, char *other)
 {
 	ft_printf_fd(STDERR_FILENO, "Error\n");

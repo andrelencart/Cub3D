@@ -24,6 +24,7 @@ int		parse_error(char *msg, char *extra);
 void	free_data(t_parse *data);
 int		map_error(char *msg, int line, int column);
 int		init_parse_data(t_parse	**tmp);
+void	release_data(t_parse *data);
 
 //cube_checker.c
 int		parse_check_fname(char *fname, t_parse *data);

@@ -1,7 +1,7 @@
-NO ./maps/00_test_EmptyLines.cub 
-SO ./maps/04_test_ExtraMidLines.cub
-WE ./maps/09_test_ExtraPlayer.cub
-EA ./maps/test_00.cub
+NO ./textures/walls/wall_N.xpm
+SO ./textures/walls/wall_S.xpm
+WE ./textures/walls/wall_W.xpm
+EA ./textures/walls/wall_E.xpm
 F 123,10,1
 C 225,30,132
 1111111111
