@@ -1,0 +1,14 @@
+NO ./textures/walls/n_test.xpm
+SO ./textures/walls/s_test.xpm
+WE ./textures/walls/w_test.xpm
+EA ./textures/walls/e_test.xpm
+F 123,10,1
+C 225,30,132
+1111111111
+1000000001
+1001110001
+1010000001
+1010N00001
+1000010001
+1000000001
+1111111111
