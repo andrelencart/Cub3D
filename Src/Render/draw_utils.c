@@ -23,7 +23,7 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 		x = 0;
 		while (x < TILE_SIZE)
 		{
-			my_mlx_pixel_put(win, start_x + x, start_y + y, color);
+			my_mlx_pixel_put(win, start_x + x, start_y + y, dim_color(color, DIM_FACTOR));
 			x++;
 		}
 		y++;
@@ -32,61 +32,50 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 
 void set_player_camera_plane(t_player *player)
 {
-	if (player->dir_x == -1.0 && player->dir_y == 0.0) // East
-	{
-		player->plane_x = 0.0;
-		player->plane_y = 0.66;
-	}
-	else if (player->dir_x == 1.0 && player->dir_y == 0.0)// West
-	{
-		player->plane_x = 0.0;
-		player->plane_y = -0.66;
-	}
-	else if (player->dir_x == 0.0 && player->dir_y == 1.0) // North
-	{
-		player->plane_x = 0.66;
-		player->plane_y = 0.0;
-	}
-	else if (player->dir_x == 0.0 && player->dir_y == -1.0) // South
-	{
-		player->plane_x = -0.66;
-		player->plane_y = 0.0;
-	}
-	else
-	{
-		player->plane_x = 0.0;
-		player->plane_y = 0.66;
-	}
+	double fov = 0.66;
+	
+	player->plane_x = player->dir_y * fov;
+	player->plane_y = player->dir_x * fov;
 }
+
 
 // void set_player_camera_plane(t_player *player)
 // {
-//     if (player->dir_x == 0.0 && player->dir_y == -1.0) // North
-//     {
-//         player->plane_x = 0.66;
-//         player->plane_y = 0.0;
-//     }
-//     else if (player->dir_x == 0.0 && player->dir_y == 1.0) // South
-//     {
-//         player->plane_x = -0.66;
-//         player->plane_y = 0.0;
-//     }
-//     else if (player->dir_x == 1.0 && player->dir_y == 0.0) // East
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = 0.66;
-//     }
-//     else if (player->dir_x == -1.0 && player->dir_y == 0.0) // West
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = -0.66;
-//     }
-//     else
-//     {
-//         player->plane_x = 0.0;
-//         player->plane_y = 0.66; // Default to East
-//     }
+// 	if (player->dir_x == -1.0 && player->dir_y == 0.0) // East
+// 	{
+// 		player->plane_x = 0.0;
+// 		player->plane_y = 0.66;
+// 	}
+// 	else if (player->dir_x == 1.0 && player->dir_y == 0.0)// West
+// 	{
+// 		player->plane_x = 0.0;
+// 		player->plane_y = -0.66;
+// 	}
+// 	else if (player->dir_x == 0.0 && player->dir_y == 1.0) // North
+// 	{
+// 		player->plane_x = 0.66;
+// 		player->plane_y = 0.0;
+// 	}
+// 	else if (player->dir_x == 0.0 && player->dir_y == -1.0) // South
+// 	{
+// 		player->plane_x = -0.66;
+// 		player->plane_y = 0.0;
+// 	}
+// 	else
+// 	{
+// 		player->plane_x = 0.0;
+// 		player->plane_y = 0.66;
+// 	}
 // }
+
+void	calc_wall_x(t_ray *ray, t_player *player)
+{
+	if (ray->side == 0)
+		ray->wall_x = player->y + ray->perp_wall_dist * ray->ray_dir_y;
+	else
+		ray->wall_x = player->x + ray->perp_wall_dist * ray->ray_dir_x;
+	ray->wall_x -= floor(ray->wall_x); // Keep only the fractional part [0,1)
+}
 
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
 {

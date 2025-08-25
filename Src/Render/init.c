@@ -25,6 +25,7 @@ void	init(t_cube *cube, t_parse *data)
 		free_data(data);
 		close_window(cube);
 	}
+	init_lighting(&cube->light);
 }
 
 void	init_player(t_player *player, t_parse *data, int map_height)
@@ -33,8 +34,6 @@ void	init_player(t_player *player, t_parse *data, int map_height)
 	player->y = (map_height - 1 - data->player_y) + 0.5; // y Position (INVERTED)
 	player->dir_x = data->player_dir_x;//assumed E is x -1.0
 	player->dir_y = data->player_dir_y;//assumed N is y -1.0
-	// player->plane_x = 0;
-	// player->plane_y = 0.66;
 	set_player_camera_plane(player);
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
 	player->moving_forward = 0;
@@ -51,11 +50,7 @@ void	init_map(t_map *map, t_parse *data)
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
-	// for (int i = 0; map->grid[i]; i++) {
-	// 	printf("map line %d: %s\n", i, map->grid[i]);
-	// }
 }
-
 
 void	init_mini_map(t_mini_map *mini_map)
 {
