@@ -19,7 +19,9 @@ RENDER_DIR		= 	Render
 PARSE_DIR		=	Parsing
 
 # -->┊( SOURCES AND OBJS )
-MAIN_C			=	cube3D_main.c
+MAIN_C			=	cube3D_main.c \
+					texture_loader.c \
+					draw_tex_wall.c
 
 RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c player_move.c \
@@ -32,8 +34,7 @@ PARSE_FILES_C	=	checker_helper.c \
 					parse_init_cleaning.c \
 					square_map.c \
 					texture_checker.c \
-					test_mlx_texture.c \
-					texture_loader.c
+					test_mlx_texture.c 
 
 MAIN			=	$(addprefix	$(CUBE3D_DIR)/, $(MAIN_C))
 RENDER_MAIN		=	$(addprefix	$(RENDER_DIR)/, $(RENDER_MAIN_C))
