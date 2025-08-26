@@ -38,43 +38,6 @@ void set_player_camera_plane(t_player *player)
 	player->plane_y = player->dir_x * fov;
 }
 
-// void set_player_camera_plane(t_player *player)
-// {
-// 	double fov = 0.66;
-	
-// 	player->plane_x = player->dir_y * fov;
-// 	player->plane_y = player->dir_x * fov;
-// }
-
-
-// void set_player_camera_plane(t_player *player)
-// {
-// 	if (player->dir_x == -1.0 && player->dir_y == 0.0) // East
-// 	{
-// 		player->plane_x = 0.0;
-// 		player->plane_y = 0.66;
-// 	}
-// 	else if (player->dir_x == 1.0 && player->dir_y == 0.0)// West
-// 	{
-// 		player->plane_x = 0.0;
-// 		player->plane_y = -0.66;
-// 	}
-// 	else if (player->dir_x == 0.0 && player->dir_y == 1.0) // North
-// 	{
-// 		player->plane_x = 0.66;
-// 		player->plane_y = 0.0;
-// 	}
-// 	else if (player->dir_x == 0.0 && player->dir_y == -1.0) // South
-// 	{
-// 		player->plane_x = -0.66;
-// 		player->plane_y = 0.0;
-// 	}
-// 	else
-// 	{
-// 		player->plane_x = 0.0;
-// 		player->plane_y = 0.66;
-// 	}
-// }
 
 void	calc_wall_x(t_ray *ray, t_player *player)
 {

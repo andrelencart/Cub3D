@@ -25,7 +25,7 @@ MAIN_C			=	cube3D_main.c \
 
 RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c player_move.c \
-					key_handling.c mini_map.c light.c
+					key_handling.c mini_map.c light.c movement_utils.c
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
