@@ -10,9 +10,9 @@ void	assign_player_pos(t_parse *data, int i, int j)
 	else if (data->player_dir == 'W')
 		data->player_dir_x = -1.0;
 	else if (data->player_dir == 'N')
-		data->player_dir_y = -1.0;
-	else
 		data->player_dir_y = 1.0;
+	else
+		data->player_dir_y = -1.0;
 	data->player_x = j;
 	data->player_y = i;
 	// printf("x%d:y%d\n", j, i);
