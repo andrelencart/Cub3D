@@ -66,7 +66,7 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 			factor = cube->light.min + (cube->light.max - cube->light.min) * (1.0 - ray->perp_wall_dist / cube->light.radius);
 		else
 			factor = cube->light.min;
-		color = get_texture_color(&cube->imgsmap, ray, *y);
+		color = get_texture_color(cube, ray, *y);
 		//my_mlx_pixel_put(&cube->window, x, *y, color);
 		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));
 		(*y)++;

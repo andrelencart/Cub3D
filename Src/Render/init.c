@@ -32,8 +32,10 @@ void	init_player(t_player *player, t_parse *data, int map_height)
 {
 	player->x = data->player_x + 0.5; // x Position
 	player->y = (map_height - 1 - data->player_y) + 0.5; // y Position (INVERTED)
-	player->dir_x = data->player_dir_x;//assumed E is x -1.0
-	player->dir_y = data->player_dir_y;//assumed N is y -1.0
+	player->dir_x = data->player_dir_x;
+	player->dir_y = data->player_dir_y;
+	player->init_pos_x = data->player_dir_x;
+	player->init_pos_y = data->player_dir_y;
 	set_player_camera_plane(player);
 	player->rot_speed = 0.05; // For the Field Of View, 0.66 comonly used for the type of game
 	player->moving_forward = 0;
