@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 int	load_imgsmaps(void *ptrmlx, t_sprite *sprite, char *filepath)

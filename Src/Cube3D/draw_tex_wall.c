@@ -1,7 +1,5 @@
-
 #include "../../Inc/cube3d.h"
 
-//Isto provavelmente tera que ir para outro ficheiro
 t_sprite	get_tex_side(t_ray *ray, t_imgsmap *imgsmap)
 {
 	if (ray->side == 0)
@@ -22,8 +20,8 @@ t_sprite	get_tex_side(t_ray *ray, t_imgsmap *imgsmap)
 
 int	get_y_coord(t_ray *ray, int y, int sprite_y)
 {
-	int d;
-	
+	int	d;
+
 	d = y * 256 - WIND_HEIGHT * 128 + ray->line_height * 128;
 	return (((d * sprite_y) / ray->line_height) / 256);
 }
@@ -43,7 +41,5 @@ int	get_texture_color(t_imgsmap *imgsmap, t_ray *ray, int y)
 		tex_x = sprite.x - tex_x - 1;
 	tex_y = get_y_coord(ray, y, sprite.y);
 	pixel = sprite.addr + (tex_y * sprite.line + tex_x * (sprite.bpp / 8));
-	return (*(unsigned int*)pixel);
+	return (*(unsigned int *)pixel);
 }
-//o que esta daqui para cima deve ir para outro ficheiro
-
