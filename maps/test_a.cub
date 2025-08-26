@@ -2,8 +2,8 @@ NO ./textures/walls/wall_N.xpm
 SO ./textures/walls/wall_S.xpm
 WE ./textures/walls/wall_W.xpm
 EA ./textures/walls/wall_E.xpm
-F 123,10,1
-C 225,30,132
+F 80,20,15
+C 75,20,30
 1111111111
 1000000001
 1011111101
