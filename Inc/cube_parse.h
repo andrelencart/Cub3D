@@ -24,6 +24,7 @@ int		parse_error(char *msg, char *extra);
 void	free_data(t_parse *data);
 int		map_error(char *msg, int line, int column);
 int		init_parse_data(t_parse	**tmp);
+void	release_data(t_parse *data);
 
 //cube_checker.c
 int		parse_check_fname(char *fname, t_parse *data);
@@ -43,5 +44,9 @@ int		load_map(t_parse *data, int i);
 
 //square_map.c
 int		square_map(t_parse *data);
+int		find_map_edge(char **map, int i, int dir);
+
+//test_mlx_texture.c
+int		test_mlx_texture(char *filepath);
 
 #endif

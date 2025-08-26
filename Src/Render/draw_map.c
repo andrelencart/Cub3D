@@ -1,6 +1,4 @@
-
 #include "../../Inc/cube3d.h"
-
 
 void	draw(t_cube *cube)
 {
@@ -31,7 +29,7 @@ void	raycast(t_cube *cube)
 		calc_wall_dist(&cube->player, &ray);
 		// printf("Ray %d: dir_x=%.2f, dir_y=%.2f, map_x=%d, map_y=%d, step_x=%d, step_y=%d\n",
 				// x, ray.ray_dir_x, ray.ray_dir_y, ray.map_x, ray.map_y, ray.step_x, ray.step_y);
-		calc_wall_x(&cube->ray, &cube->player);
+		calc_wall_x(&ray, &cube->player);
 		draw_3d_map(cube, &ray, x);
 		x++;
 	}
@@ -57,6 +55,7 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 	// double	hit[2];
 	double	floor[2];
 	double	factor;
+	int		color;
 
 	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
 	{
@@ -67,7 +66,9 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 			factor = cube->light.min + (cube->light.max - cube->light.min) * (1.0 - ray->perp_wall_dist / cube->light.radius);
 		else
 			factor = cube->light.min;
-		my_mlx_pixel_put(&cube->window, x, *y, dim_color(WALL_COLOR_MG, factor));
+		color = get_texture_color(&cube->imgsmap, ray, *y);
+		//my_mlx_pixel_put(&cube->window, x, *y, color);
+		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));
 		(*y)++;
 	}
 	while (*y < WIND_HEIGHT)

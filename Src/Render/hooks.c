@@ -3,7 +3,7 @@
 
 void	hook_control(t_cube *cube)
 {
-	mlx_hook(cube->window.mlx_window, 17, 0, close_window,  &cube->window);
+	mlx_hook(cube->window.mlx_window, 17, 0, close_window, cube);
 	mlx_key_hook(cube->window.mlx_window, testkey, cube);
 	mlx_hook(cube->window.mlx_window, 2, 1L<<0, key_press, cube);
 	mlx_hook(cube->window.mlx_window, 3, 1L<<1, key_release, cube);
@@ -13,7 +13,7 @@ void	hook_control(t_cube *cube)
 int	key_press(int key_code, t_cube *cube)
 {
 	if (key_code == ESC)
-		close_window(&cube->window);
+		close_window(cube);
 	else if (key_code == RA || key_code == LA)
 		player_rotation(&cube->player, key_code);
 	else if (key_code == W || key_code == A || \

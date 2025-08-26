@@ -106,6 +106,31 @@
 
 // STRUCTS
 
+//struct for texture storage & usage
+typedef struct	s_sprite
+{
+	void	*img;
+	char	*addr;
+
+	int		bpp;
+	int		endian;
+	int		line;
+
+	int		x;
+	int		y;
+}	t_sprite;
+
+//Wall textures, floor & ceiling colors
+typedef struct	s_imgsmap
+{
+	t_sprite	north;
+	t_sprite	south;
+	t_sprite	east;
+	t_sprite	west;
+	int			floor;
+	int			ceiling;
+}	t_imgsmap;
+
 typedef	struct s_window
 {
 	void	*mlx;
@@ -190,6 +215,7 @@ typedef struct s_cube
 	t_ray			ray;
 	t_window		window;
 	t_player		player;
+	t_imgsmap		imgsmap;
 	t_light			light;
 	double			frame_time;
 	struct timeval	last_time;
@@ -210,6 +236,7 @@ void	init_ray(t_player *player, t_ray *ray, int x);
 void	init_dda(t_player *player, t_ray *ray);
 void	init_steps(t_player *player, t_ray *ray);
 void	set_player_camera_plane(t_player *player);
+int		init_imgsmap(void *ptrmlx, t_imgsmap *imgsmap, t_parse *data);
 
 // HOOKS
 
@@ -229,6 +256,7 @@ void	raycast(t_cube *cube);
 void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
+int		get_texture_color(t_imgsmap *imgsmap, t_ray *ray, int y);
 
 // LIGHT
 
@@ -261,6 +289,7 @@ int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
 
 // CLOSE
 
-int		close_window(t_window *window);
+int		close_window(t_cube *cube);
+void	destroy_maps(void *ptrmlx, t_imgsmap *imgsmap);
 
 #endif //CUBE3D_H

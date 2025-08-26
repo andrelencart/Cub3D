@@ -15,7 +15,6 @@ void	assign_player_pos(t_parse *data, int i, int j)
 		data->player_dir_y = -1.0;
 	data->player_x = j;
 	data->player_y = i;
-	// printf("x%d:y%d\n", j, i);
 	data->map[i][j] = '0';
 }
 
@@ -88,5 +87,5 @@ int	lookfor_texture(char **dest)
 		return (ft_putendl_fd(strerror(errno), 2), 1);
 	}
 	close(fd);
-	return (0);
+	return (test_mlx_texture(*dest));
 }
