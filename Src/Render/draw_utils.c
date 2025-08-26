@@ -33,10 +33,18 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 void set_player_camera_plane(t_player *player)
 {
 	double fov = 0.66;
-	
-	player->plane_x = player->dir_y * fov;
+
+	player->plane_x = -player->dir_y * fov;
 	player->plane_y = player->dir_x * fov;
 }
+
+// void set_player_camera_plane(t_player *player)
+// {
+// 	double fov = 0.66;
+	
+// 	player->plane_x = player->dir_y * fov;
+// 	player->plane_y = player->dir_x * fov;
+// }
 
 
 // void set_player_camera_plane(t_player *player)

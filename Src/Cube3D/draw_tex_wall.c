@@ -37,9 +37,9 @@ int	get_texture_color(t_cube *cube, t_ray *ray, int y)
 	tex_x = (int)(ray->wall_x * sprite.x);
 	if (cube->player.init_pos_y != 0)
 	{
-		if (ray->side == 0 && ray->ray_dir_x > 0)
+		if (ray->side == 0 && ray->ray_dir_x < 0)
 			tex_x = sprite.x - tex_x - 1;
-		if (ray->side == 1 && ray->ray_dir_y < 0)
+		if (ray->side == 1 && ray->ray_dir_y > 0)
 			tex_x = sprite.x - tex_x - 1;
 	}
 	else
