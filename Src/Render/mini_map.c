@@ -32,7 +32,7 @@ void	draw_player_mini_map(t_cube *cube)
 	int	y;
 
 	cube->mini_map.player_mini_x = (int)((cube->player.x + 0.5) * TILE_SIZE);
-	cube->mini_map.player_mini_y = (int)((cube->map.height - cube->player.y) * TILE_SIZE);
+	cube->mini_map.player_mini_y = (int)((cube->player.y) * TILE_SIZE);
 	cube->mini_map.player_size = TILE_SIZE / 4;
 	y = -cube->mini_map.player_size;
 	while (y <= cube->mini_map.player_size)
@@ -58,7 +58,7 @@ void	draw_vision_mini_map(t_cube *cube)
 	draw_x = 0;
 	draw_y = 0;
 	cube->mini_map.player_mini_x = (int)((cube->player.x + 0.5) * TILE_SIZE);
-	cube->mini_map.player_mini_y = (int)((cube->map.height - cube->player.y) * TILE_SIZE);
+	cube->mini_map.player_mini_y = (int)((cube->player.y) * TILE_SIZE);
 	y = 0;
 	while (y < cube->mini_map.num_rays)
 	{
@@ -69,7 +69,7 @@ void	draw_vision_mini_map(t_cube *cube)
 		while (x < cube->mini_map.ray_length)
 		{
 			draw_x = (int)(cube->mini_map.player_mini_x + cube->mini_map.ray_dir_x * x);
-			draw_y = (int)(cube->mini_map.player_mini_y - cube->mini_map.ray_dir_y * x);
+			draw_y = (int)(cube->mini_map.player_mini_y + cube->mini_map.ray_dir_y * x);
 			my_mlx_pixel_put(&cube->window, draw_x, draw_y, RED);
 			x++;
 		}

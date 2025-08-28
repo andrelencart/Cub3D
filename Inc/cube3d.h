@@ -65,7 +65,7 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.1
+# define DIM_FACTOR 0.5
 # define MOVE_SPEED 1
 
 // // CORD_DEF

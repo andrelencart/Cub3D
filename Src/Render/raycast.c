@@ -74,7 +74,9 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 			ray->hit = 1; // Stop if out of bounds
 			break;
 		}
-		if (map[map_height - 1 - ray->map_y][ray->map_x] == '1')
+		// if (map[map_height - 1 - ray->map_y][ray->map_x] == '1')
+		// 	ray->hit = 1;
+		if (map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 		// printf("DDA: map_x=%d, map_y=%d, side=%d, hit=%d\n", ray->map_x, ray->map_y, ray->side, ray->hit);
 	}

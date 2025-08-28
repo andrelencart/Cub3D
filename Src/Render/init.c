@@ -30,8 +30,9 @@ void	init(t_cube *cube, t_parse *data)
 
 void	init_player(t_player *player, t_parse *data, int map_height)
 {
+	(void)map_height;
 	player->x = data->player_x + 0.5; // x Position
-	player->y = (map_height - 1 - data->player_y) + 0.5; // y Position (INVERTED)
+	player->y = data->player_y + 0.5; // y Position (INVERTED)
 	player->dir_x = data->player_dir_x;
 	player->dir_y = data->player_dir_y;
 	player->init_pos_x = data->player_dir_x;
