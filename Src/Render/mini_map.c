@@ -1,23 +1,26 @@
 
 #include "../../Inc/cube3d.h"
 
-void	draw_mini_map(t_cube *cube)
+void	draw_mini_map(t_cube *cube, int half_view)
 {
 	int	x;
 	int	y;
+	int	map_x;
+	int	map_y;
 
-	// offset_x = (WIND_WIDTH - map->width * TILE_SIZE) / 2;
-	// offset_y = (WIND_HEIGHT - map->height * TILE_SIZE) / 2;
-	cube->mini_map.offset_x = 0;
-	cube->mini_map.offset_y = 0;
-	y = 0;
-	while (y < cube->map.height)
+	cube->mini_map.offset_x = 20;
+	cube->mini_map.offset_y = 20;
+	y = -half_view;
+	while (y <= half_view)
 	{
-		x = 0;
+		map_y = (int)(cube->player.y) + y;
+		x = -half_view;
 		while (x < cube->map.width)
 		{
-			draw_tile(&cube->window, cube->mini_map.offset_x + x * TILE_SIZE, cube->mini_map.offset_y + y * TILE_SIZE,
-			get_tile_color(cube->map.grid[y][x]));
+			map_x = (int)(cube->player.x) + x;
+			get_mini_map_color(cube, map_x, map_y, half_view);
+			// draw_tile(&cube->window, cube->mini_map.offset_x + x * TILE_SIZE, cube->mini_map.offset_y + y * TILE_SIZE,
+			// get_tile_color(cube->map.grid[y][x]));
 			x++;
 		}
 		y++;

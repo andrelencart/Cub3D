@@ -8,7 +8,7 @@ void	draw(t_cube *cube)
 	// cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
 	// mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
 	raycast(cube);
-	draw_mini_map(cube);
+	draw_mini_map(cube, MINIMAP_VIEW_SIZE / 2);
 	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
 }
 

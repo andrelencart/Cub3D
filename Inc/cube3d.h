@@ -68,6 +68,8 @@
 # define DIM_FACTOR 0.1
 # define MOVE_SPEED 1
 # define PLAYER_COLL_RAD 0.2
+# define MINIMAP_VIEW_SIZE 9 // Pixels
+# define MINIMAP_TILE_SIZE 8 // Pixels
 
 // // CORD_DEF
 // # define X 0
@@ -268,9 +270,10 @@ double			get_light_factor(double px, double py, t_player *player, t_light *light
 
 // MINI MAP
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
-void	draw_mini_map(t_cube *cube);
+void	draw_mini_map(t_cube *cube, int half_view);
 void	draw_player_mini_map(t_cube *cube);
 void	draw_vision_mini_map(t_cube *cube);
+void	get_mini_map_color(t_cube *cube, int map_x, int map_y, int half_view);
 
 // UTILS
 
