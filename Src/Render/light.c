@@ -3,7 +3,7 @@
 
 void init_lighting(t_light *light)
 {
-	light->radius = 2;
+	light->radius = LIGHT_RAD;
 	light->min = DIM_FACTOR;
 	light->max = 2.0;
 }
