@@ -12,9 +12,9 @@ t_sprite	get_tex_side(t_ray *ray, t_imgsmap *imgsmap)
 	else
 	{
 		if (ray->ray_dir_y > 0)
-			return (imgsmap->south);
-		else
 			return (imgsmap->north);
+		else
+			return (imgsmap->south);
 	}
 }
 
