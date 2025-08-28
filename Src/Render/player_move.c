@@ -57,7 +57,7 @@ int	window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity)
 	return (0);
 }
 
-int	player_move_front_back(t_player *player, char **map, double frame_time, int map_height)
+int	player_move_front_back(t_player *player, t_cube *cube, double frame_time)
 {
 	double	move_speed;
 	double	new_x;
@@ -68,47 +68,46 @@ int	player_move_front_back(t_player *player, char **map, double frame_time, int 
 	{
 		new_x = player->x + player->dir_x * move_speed;
 		new_y = player->y + player->dir_y * move_speed;
-		if (map[map_height - 1 - (int)player->y][(int)new_x] != '1')
+		if (can_move(cube, new_x, player->y, PLAYER_COLL_RAD))
 			player->x = new_x;
-		if (map[map_height - 1 - (int)new_y][(int)player->x] != '1')
+		if (can_move(cube, player->x, new_y, PLAYER_COLL_RAD))
 			player->y = new_y;
 	}
 	if (player->moving_backward)
 	{
 		new_x = player->x - player->dir_x * move_speed;
 		new_y = player->y - player->dir_y * move_speed;
-		if (map[map_height - 1 - (int)player->y][(int)new_x] != '1')
+		if (can_move(cube, new_x, player->y, PLAYER_COLL_RAD))
 			player->x = new_x;
-		if (map[map_height - 1 - (int)new_y][(int)player->x] != '1')
+		if (can_move(cube, player->x, new_y, PLAYER_COLL_RAD))
 			player->y = new_y;
 	}
 	return (0);
 }
 
-int	player_move_left_right(t_player *player, char **map, double frame_time, int map_height)
+int	player_move_left_right(t_player *player, t_cube *cube, double frame_time)
 {
 	double	move_speed;
 	double	new_x;
 	double	new_y;
-	(void) map;
 
-	move_speed = frame_time * 0.5;
+	move_speed = frame_time * MOVE_SPEED;
 	if (player->strafing_right)
 	{
 		new_x = player->x + player->plane_x * move_speed;
 		new_y = player->y + player->plane_y * move_speed;
-		if (map[map_height - 1 - (int)player->y][(int)new_x] != '1')
+		if (can_move(cube, new_x, player->y, PLAYER_COLL_RAD))
 			player->x = new_x;
-		if (map[map_height - 1 - (int)new_y][(int)player->x] != '1')
+		if (can_move(cube, player->x, new_y, PLAYER_COLL_RAD))
 			player->y = new_y;
 	}
 	if (player->strafing_left)
 	{
 		new_x = player->x - player->plane_x * move_speed;
 		new_y = player->y - player->plane_y * move_speed;
-		if (map[map_height - 1 - (int)player->y][(int)new_x] != '1')
+		if (can_move(cube, new_x, player->y, PLAYER_COLL_RAD))
 			player->x = new_x;
-		if (map[(int)new_y][(int)player->x] != '1')
+		if (can_move(cube, player->x, new_y, PLAYER_COLL_RAD))
 			player->y = new_y;
 	}
 	return (0);
