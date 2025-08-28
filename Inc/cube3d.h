@@ -159,6 +159,20 @@ typedef struct s_player
 	int		strafing_right;
 }			t_player;
 
+typedef struct s_enemy
+{
+	t_player	monster;
+	t_sprite	front[4];
+	t_sprite	back[4];
+	t_sprite	left[4];
+	t_sprite	right[4];
+	int			state;
+	double		last_x;
+	double		last_y;
+	double		speed;
+	int			frame;
+}				t_enemy;
+
 typedef struct  s_ray
 {
 	double	ray_dir_x;
@@ -219,6 +233,7 @@ typedef struct s_cube
 	t_player		player;
 	t_imgsmap		imgsmap;
 	t_light			light;
+	t_enemy			enemy;
 	double			frame_time;
 	struct timeval	last_time;
 }					t_cube;
