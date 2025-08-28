@@ -13,7 +13,7 @@ int	find_map_edge(char **map, int i, int dir)
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchr("01NSEW", map[i][j]))
+			if (ft_strchr("01NSEWM", map[i][j]))
 				return (i);
 			j++;
 		}

@@ -82,9 +82,9 @@ int	validate_map(t_parse *data)
 		{
 			if (data->map[i][0] == '\n')
 				return (map_error("Empty line in map", i, 0));
-			if (!ft_strchr(" 01\nNSEW", data->map[i][j]))
+			if (!ft_strchr(" 01\nNSEWM", data->map[i][j]))
 				return (map_error("Invalid char in map", i, j));
-			if (ft_strchr("01NSEW", data->map[i][j]))
+			if (ft_strchr("01NSEWM", data->map[i][j]))
 				nav += 1;
 			j++;
 		}
