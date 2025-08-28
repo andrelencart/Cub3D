@@ -65,8 +65,9 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.5
+# define DIM_FACTOR 0.1
 # define MOVE_SPEED 1
+# define PLAYER_COLL_RAD 0.2
 
 // // CORD_DEF
 // # define X 0
@@ -275,17 +276,19 @@ void	draw_vision_mini_map(t_cube *cube);
 
 int		get_tile_color(char c);
 void	update_frame_time(t_cube *cube);
-// void get_wall_pixel_pos(t_ray *ray, t_cube *cube, double hit[2]);
 void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
 void	calc_wall_x(t_ray *ray, t_player *player);
 void 	get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2]);
+int		can_move(t_cube *cube, double x, double y, double radius);
+int		is_wall(t_cube *cube, double x, double y);
 
 // PLAYER MOVEMENT
 
 int		player_rotation(t_player *player, int key_code);
 int		rotate_player(t_player *player, double rot_speed);
-int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
-int		player_move_front_back(t_player *player, char **map, double frame_time, int map_height);
+// int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
+int		player_move_left_right(t_player *player, t_cube *cube, double frame_time);
+int		player_move_front_back(t_player *player, t_cube *cube, double frame_time);
 int		mouse_move_handler(int x, int y, t_cube *cube);
 int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
 
