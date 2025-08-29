@@ -50,19 +50,22 @@ int	find_player(t_parse *data)
 	int	j;
 
 	i = 0;
-	while (data->map[i++])
+	while (data->map[i])
 	{
+		printf("%s\n", data->map[i]);
 		j = 0;
-		while (data->map[i - 1][j++])
+		while (data->map[i][j])
 		{
-			if (ft_strchr("NSEW", data->map[i - 1][j - 1]))
+			if (ft_strchr("NSEW", data->map[i][j]))
 			{
 				if (data->player_dir)
-					return (map_error("Extra player in", (i - 1), (j - 1)));
+					return (map_error("Extra player in", i, j));
 				else
-					assign_player_pos(data, (i - 1), (j - 1));
+					assign_player_pos(data, i, j);
 			}
+			j++;
 		}
+		i++;
 	}
 	return (find_borders(data));
 }

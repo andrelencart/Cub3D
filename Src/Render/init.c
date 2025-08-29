@@ -25,7 +25,6 @@ void	init(t_cube *cube, t_parse *data)
 		free_data(data);
 		close_window(cube);
 	}
-	init_monster(&cube->enemy, &cube->map);
 	init_lighting(&cube->light);
 }
 
