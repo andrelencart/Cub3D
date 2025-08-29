@@ -20,8 +20,9 @@ PARSE_DIR		=	Parsing
 
 # -->┊( SOURCES AND OBJS )
 MAIN_C			=	cube3D_main.c \
-					texture_loader.c \
-					draw_tex_wall.c
+					draw_tex_wall.c \
+					monster_loader.c \
+					texture_loader.c
 
 RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c player_move.c \

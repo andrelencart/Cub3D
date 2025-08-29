@@ -287,6 +287,10 @@ void	draw_mini_map(t_cube *cube);
 void	draw_player_mini_map(t_cube *cube);
 void	draw_vision_mini_map(t_cube *cube);
 
+// MONSTER
+int		init_monster(t_cube *cube, t_parse *data);
+
+
 // UTILS
 
 int		get_tile_color(char c);
@@ -310,6 +314,6 @@ int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
 // CLOSE
 
 int		close_window(t_cube *cube);
-void	destroy_maps(void *ptrmlx, t_imgsmap *imgsmap);
+void	destroy_maps(t_cube *cube);
 
 #endif //CUBE3D_H

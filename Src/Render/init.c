@@ -19,12 +19,17 @@ void	init(t_cube *cube, t_parse *data)
 	init_window(&cube->window);
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
-	init_mini_map(&cube->mini_map);
 	if (init_imgsmap(cube->window.mlx, &cube->imgsmap, data))
 	{
 		free_data(data);
 		close_window(cube);
 	}
+	if (init_monster(cube, data))
+	{
+		free_data(data);
+		close_window(cube);
+	}
+	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
 }
 
@@ -79,21 +84,21 @@ void	init_window(t_window *window)
 
 //A partir daqui ja esto funcoes a mais.
 //Vou acrescentar aqui mais uma para depois passar para outro ficheiro
-void	destroy_maps(void *ptrmlx, t_imgsmap *imgsmap)
+void	destroy_maps(t_cube *cube)
 {
-	if (imgsmap->north.img)
-		mlx_destroy_image(ptrmlx, imgsmap->north.img);
-	if (imgsmap->south.img)
-		mlx_destroy_image(ptrmlx, imgsmap->south.img);
-	if (imgsmap->east.img)
-		mlx_destroy_image(ptrmlx, imgsmap->east.img);
-	if (imgsmap->west.img)
-		mlx_destroy_image(ptrmlx, imgsmap->west.img);
+	if (cube->imgsmap.north.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.north.img);
+	if (cube->imgsmap.south.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.south.img);
+	if (cube->imgsmap.east.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.east.img);
+	if (cube->imgsmap.west.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
 }
 
 int	close_window(t_cube *cube)
 {
-	destroy_maps(cube->window.mlx, &cube->imgsmap);
+	destroy_maps(cube);
 	free_split(cube->map.grid);
 	mlx_destroy_image(cube->window.mlx, cube->window.img);
 	mlx_destroy_window(cube->window.mlx, cube->window.mlx_window);
