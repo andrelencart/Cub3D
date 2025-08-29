@@ -58,7 +58,11 @@ int	find_player(t_parse *data)
 			if (ft_strchr("NSEW", data->map[i][j]) && data->player_dir)
 				return (map_error("Extra player in", i, j));
 			else if (ft_strchr("NSEW", data->map[i][j]))
-				assign_player_pos(data, i, j);
+				assign_player_mons(data, i, j, 0);
+			if (ft_strchr("M", data->map[i][j]) && data->enemy_x > -1)
+				return (map_error("Extra monster in", i, j));
+			else if (ft_strchr("M", data->map[i][j]))
+				assign_player_mons(data, i, j, 1);
 			j++;
 		}
 		i++;
