@@ -10,7 +10,13 @@ int	find_textures(t_parse *data)
 		return (1);
 	if (lookfor_texture(&data->w_face))
 		return (1);
-	if (lookfor_mons_texture("textures/monster/monster_f_00.xpm"))
+	if (look_mon_tex(ft_strdup("textures/monster/monster_bb_X.xpm"), 'l'))
+		return (1);
+	if (look_mon_tex(ft_strdup("textures/monster/monster_ff_X.xpm"), 'r'))
+		return (1);
+	if (look_mon_tex(ft_strdup("textures/monster/monster_ll_X.xpm"), 'f'))
+		return (1);
+	if (look_mon_tex(ft_strdup("textures/monster/monster_rr_X.xpm"), 'b'))
 		return (1);
 	return (0);
 }
