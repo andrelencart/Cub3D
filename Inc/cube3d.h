@@ -65,9 +65,9 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.1
-# define LIGHT_RAD 1.7
-# define MOVE_SPEED 1
+# define DIM_FACTOR 0.05
+# define LIGHT_RAD 1.8
+# define MOVE_SPEED 1.5
 # define PLAYER_COLL_RAD 0.2
 # define MINIMAP_VIEW_SIZE 11 // Pixels
 # define MINIMAP_TILE_SIZE 20 // Pixels
@@ -197,6 +197,10 @@ typedef struct s_light
 	double	radius;
 	double	min;
 	double	max;
+	double	player_angle;
+	double	start_angle;
+	double	end_angle;
+	double	m_m_fov;
 }			t_light;
 
 typedef	struct s_mini_map
@@ -213,6 +217,7 @@ typedef	struct s_mini_map
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	t_light	light;
 }			t_mini_map;
 
 typedef struct s_cube
@@ -271,12 +276,15 @@ unsigned int	dim_color(unsigned int color, double factor);
 double			get_light_factor(double px, double py, t_player *player, t_light *light);
 
 // MINI MAP
+
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_mini_map(t_cube *cube);
 void	draw_centered_mini_map(t_cube *cube, int half_view);
 void	draw_player_mini_map(t_cube *cube, int half_view);
-void	draw_vision_mini_map(t_cube *cube, int half_view);
+void	vision_mini_map(t_cube *cube, int half_view);
 void	get_mini_map_color(t_cube *cube, int x, int y, int half_view);
+void	vision_mini_map_init(t_cube *cube, int half_view);
+void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // UTILS
 

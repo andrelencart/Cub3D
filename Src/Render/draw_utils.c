@@ -4,7 +4,7 @@
 int	get_tile_color(char c, t_cube *cube)
 {
 	(void)cube;
-	if (c == '1')
+	if (c == '1' || c == ' ')
 		return (CEILING_COLOR_DK_G);
 	if (c == '0' || c == 'P')
 		return (WALL_COLOR_MG);

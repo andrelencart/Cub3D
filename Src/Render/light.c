@@ -6,6 +6,9 @@ void init_lighting(t_light *light)
 	light->radius = LIGHT_RAD;
 	light->min = DIM_FACTOR;
 	light->max = 2.0;
+	light->player_angle = 0.0;
+	light->start_angle = 0.0;
+	light->end_angle = 0.0;
 }
 
 unsigned int dim_color(unsigned int color, double factor)
