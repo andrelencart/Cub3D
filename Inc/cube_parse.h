@@ -14,6 +14,8 @@ typedef struct s_parse
 	double	player_dir_y;
 	int		player_x;
 	int		player_y;
+	int		enemy_x;
+	int		enemy_y;
 	int		floor;
 	int		ceiling;
 	char	**map;

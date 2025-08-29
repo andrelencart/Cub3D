@@ -57,5 +57,7 @@ int	init_parse_data(t_parse	**tmp)
 		return (parse_error("init_parse_data: Failed to allocate *data", 0));
 	(*tmp)->ceiling = -1;
 	(*tmp)->floor = -1;
+	(*tmp)->enemy_x = -1;
+	(*tmp)->enemy_y = -1;
 	return (0);
 }
