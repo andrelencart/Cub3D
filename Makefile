@@ -31,6 +31,7 @@ PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
 					cub_checker.c \
 					map_checker.c \
+					monster_checking.c \
 					parse_init_cleaning.c \
 					square_map.c \
 					texture_checker.c \

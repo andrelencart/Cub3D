@@ -44,7 +44,7 @@ int	find_borders(t_parse *data)
 	return (0);
 }
 
-int	find_player(t_parse *data)
+int	find_player_mons(t_parse *data)
 {
 	int	i;
 	int	j;
@@ -95,7 +95,7 @@ int	validate_map(t_parse *data)
 	}
 	if (nav == 0)
 		return (parse_error("Map is empty", 0));
-	return (find_player(data));
+	return (find_player_mons(data));
 }
 
 int	load_map(t_parse *data, int i)

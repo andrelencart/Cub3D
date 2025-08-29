@@ -10,6 +10,8 @@ int	find_textures(t_parse *data)
 		return (1);
 	if (lookfor_texture(&data->w_face))
 		return (1);
+	if (lookfor_mons_texture("textures/monster/monster_f_00.xpm"))
+		return (1);
 	return (0);
 }
 
@@ -103,7 +105,7 @@ int	parse_cub(t_parse *data)
 			return (parse_error("assign_texture: Failed memory allocation", 0));
 		i++;
 	}
-	if (find_map(data, i) || find_textures(data) || load_map(data, i))
+	if (find_textures(data) || find_map(data, i) || load_map(data, i))
 		return (1);
 	return (0);
 }

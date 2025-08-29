@@ -34,6 +34,9 @@ int		parse_check_fname(char *fname, t_parse *data);
 //texture_checker.c
 int		parse_cub(t_parse *data);
 
+//monster_checking.c
+int		lookfor_mons_texture(char *tex);
+
 //checker_helper.c
 int		check_line_end(char *str);
 int		is_data_filled(t_parse *data);
