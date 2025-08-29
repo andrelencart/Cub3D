@@ -52,17 +52,13 @@ int	find_player(t_parse *data)
 	i = 0;
 	while (data->map[i])
 	{
-		printf("%s\n", data->map[i]);
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (ft_strchr("NSEW", data->map[i][j]))
-			{
-				if (data->player_dir)
-					return (map_error("Extra player in", i, j));
-				else
-					assign_player_pos(data, i, j);
-			}
+			if (ft_strchr("NSEW", data->map[i][j]) && data->player_dir)
+				return (map_error("Extra player in", i, j));
+			else if (ft_strchr("NSEW", data->map[i][j]))
+				assign_player_pos(data, i, j);
 			j++;
 		}
 		i++;
