@@ -65,7 +65,7 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.05
+# define DIM_FACTOR 0.2
 # define LIGHT_RAD 1.8
 # define MOVE_SPEED 1.5
 # define PLAYER_COLL_RAD 0.2
