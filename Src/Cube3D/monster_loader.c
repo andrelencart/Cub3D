@@ -55,6 +55,7 @@ cube->window.mlx, cube->enemy.rtbck))
 
 int	init_monster(t_cube *cube, t_parse *data)
 {
+	ft_memset(&cube->enemy, 0, sizeof(t_enemy));
 	cube->enemy.monster.x = data->enemy_x + 0.5;
 	cube->enemy.monster.y = data->enemy_y + 0.5;
 	cube->enemy.monster.dir_x = cube->player.dir_x;

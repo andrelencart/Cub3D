@@ -19,6 +19,13 @@ void	init(t_cube *cube, t_parse *data)
 	init_window(&cube->window);
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
+	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
+	if (!cube->zbuffer)
+	{
+		ft_printf_fd(2, "Failed to allocate zbuffer memory");
+		free_data(data);
+		close_window(cube);
+	}
 	if (init_imgsmap(cube->window.mlx, &cube->imgsmap, data))
 	{
 		free_data(data);
@@ -127,6 +134,8 @@ void	destroy_maps(t_cube *cube)
 
 int	close_window(t_cube *cube)
 {
+	if (cube->zbuffer)
+		free(cube->zbuffer);
 	destroy_maps(cube);
 	free_split(cube->map.grid);
 	mlx_destroy_image(cube->window.mlx, cube->window.img);

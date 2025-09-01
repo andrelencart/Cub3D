@@ -112,13 +112,30 @@ typedef struct	s_sprite
 {
 	void	*img;
 	char	*addr;
-
 	int		bpp;
 	int		endian;
 	int		line;
-
 	int		x;
 	int		y;
+
+	double	pos_x;//position in map
+	double	pos_y;
+
+	double	sprite_x;//coord relative to player/camera
+	double	sprite_y;
+
+	double	inv_det;//for camera space coord
+	double	trans_x;
+	double	trans_y;
+
+	int		sprt_scrn_x;//sprite center in screen coord
+	int		sprt_h;//sprite height
+	int		sprt_w;//sprite width
+
+	int		draw_s_y;//screen coord to start and end drawing
+	int		draw_e_y;
+	int		draw_s_x;
+	int		draw_e_x;
 }	t_sprite;
 
 //Wall textures, floor & ceiling colors
@@ -240,6 +257,7 @@ typedef struct s_cube
 	t_light			light;
 	t_enemy			enemy;
 	double			frame_time;
+	double			*zbuffer;
 	struct timeval	last_time;
 }					t_cube;
 

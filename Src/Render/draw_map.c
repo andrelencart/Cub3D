@@ -8,6 +8,7 @@ void	draw(t_cube *cube)
 	// cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
 	// mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
 	raycast(cube);
+	draw_monster(cube->enemy, cube->player, cube->window.mlx);
 	draw_mini_map(cube);
 	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
 }
@@ -28,6 +29,7 @@ void	raycast(t_cube *cube)
 		calc_wall_dist(&cube->player, &ray);
 		calc_wall_x(&ray, &cube->player);
 		draw_3d_map(cube, &ray, x);
+		cube->zbuffer[x] = ray.perp_wall_dist;
 		x++;
 	}
 }
