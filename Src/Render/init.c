@@ -83,7 +83,20 @@ void	init_window(t_window *window)
 }
 
 //A partir daqui ja esto funcoes a mais.
-//Vou acrescentar aqui mais uma para depois passar para outro ficheiro
+//Vou acrescentar aqui mais para depois passar para outro ficheiro
+
+void	destroy_image_array(t_sprite *array, void *ptrmlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		mlx_destroy_image(ptrmlx, array[i].img);
+		i++;
+	}
+}
+
 void	destroy_maps(t_cube *cube)
 {
 	if (cube->imgsmap.north.img)
@@ -94,6 +107,22 @@ void	destroy_maps(t_cube *cube)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.east.img);
 	if (cube->imgsmap.west.img)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
+	if (cube->enemy.back->img)
+		destroy_image_array(cube->enemy.back, cube->window.mlx);
+	if (cube->enemy.blft->img)
+		destroy_image_array(cube->enemy.blft, cube->window.mlx);
+	if (cube->enemy.frigt->img)
+		destroy_image_array(cube->enemy.frigt, cube->window.mlx);
+	if (cube->enemy.front->img)
+		destroy_image_array(cube->enemy.front, cube->window.mlx);
+	if (cube->enemy.left->img)
+		destroy_image_array(cube->enemy.left, cube->window.mlx);
+	if (cube->enemy.lfrt->img)
+		destroy_image_array(cube->enemy.lfrt, cube->window.mlx);
+	if (cube->enemy.right->img)
+		destroy_image_array(cube->enemy.right, cube->window.mlx);
+	if (cube->enemy.rtbck->img)
+		destroy_image_array(cube->enemy.rtbck, cube->window.mlx);
 }
 
 int	close_window(t_cube *cube)

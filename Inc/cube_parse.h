@@ -35,7 +35,7 @@ int		parse_check_fname(char *fname, t_parse *data);
 int		parse_cub(t_parse *data);
 
 //monster_checking.c
-int	look_mon_tex(char *tex, char t);
+int		look_mon_tex(char *tex, char t);
 
 //checker_helper.c
 int		check_line_end(char *str);

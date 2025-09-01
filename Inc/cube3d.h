@@ -164,9 +164,13 @@ typedef struct s_enemy
 {
 	t_player	monster;
 	t_sprite	front[4];
+	t_sprite	frigt[4];
 	t_sprite	back[4];
+	t_sprite	blft[4];
 	t_sprite	left[4];
+	t_sprite	lfrt[4];
 	t_sprite	right[4];
+	t_sprite	rtbck[4];
 	int			state;
 	double		last_x;
 	double		last_y;
@@ -255,6 +259,7 @@ void	init_dda(t_player *player, t_ray *ray);
 void	init_steps(t_player *player, t_ray *ray);
 void	set_player_camera_plane(t_player *player);
 int		init_imgsmap(void *ptrmlx, t_imgsmap *imgsmap, t_parse *data);
+int		load_imgsmaps(void *ptrmlx, t_sprite *sprite, char *filepath);
 
 // HOOKS
 
