@@ -139,6 +139,8 @@ typedef struct	s_sprite
 	int		draw_e_y;
 	int		draw_s_x;
 	int		draw_e_x;
+
+	double	factor;
 }	t_sprite;
 
 //Wall textures, floor & ceiling colors

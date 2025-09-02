@@ -15,16 +15,23 @@ void	draw_sprite_y(int col, int tex_x, t_sprite *img, t_cube *cube)
 		color = *(unsigned int *)(img->addr + (tex_y * img->line + tex_x * \
 (img->bpp / 8)));
 		if ((color & 0xFF000000) != 0xFF000000)
-			my_mlx_pixel_put(&cube->window, col, y, color);
+			my_mlx_pixel_put(&cube->window, col, y, dim_color(color, img->factor));
 		y++;
 	}
 }
 
 void	draw_sprite_x(t_sprite *img, t_cube * cube)
 {
-	int	col;
-	int	tex_x;
+	int		col;
+	int		tex_x;
+	double	dist;
 
+	dist = sqrt(img->sprite_x * img->sprite_x + img->sprite_y * img->sprite_y);
+	if (dist <= cube->light.radius)
+		img->factor = cube->light.min + (cube->light.max - cube->light.min) * \
+(1.0 - dist / cube->light.radius);
+	else
+		img->factor = cube->light.min;
 	col = img->draw_s_x;
 	while (col <= img->draw_e_x)
 	{
