@@ -118,8 +118,8 @@ typedef struct	s_sprite
 	int		bpp;
 	int		endian;
 	int		line;
-	int		x;
-	int		y;
+	int		x;//image width
+	int		y;//image height
 
 	double	pos_x;//position in map
 	double	pos_y;
@@ -307,7 +307,7 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
 int		get_texture_color(t_cube *cube, t_ray *ray, int y);
-void	draw_monster(t_enemy *enemy, t_player *player, void *ptrmlx);
+void	draw_monster(t_enemy *enemy, t_player *player, t_cube *cube);
 
 // LIGHT
 

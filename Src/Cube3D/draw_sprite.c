@@ -1,6 +1,38 @@
 #include "../../Inc/cube3d.h"
 
-void	draw_sprite(t_sprite *img, t_player *player, void *ptrmlx)
+void	draw_sprite_y(int tex_x, t_sprite *img, t_cube *cube)
+{
+	int	y;
+	int	d;
+	int	tex_y;
+
+	y = img->draw_s_y;
+	while (y < img->draw_e_y)
+	{
+		d = (y) * 256 - WIND_HEIGHT * 128 + img->sprt_h + 128;
+		tex_y = ((d *img->y) / img->sprt_h) / 256;
+		y++;
+	}
+}
+
+void	draw_sprite_x(t_sprite *img, t_cube * cube)
+{
+	int	col;
+	int	tex_x;
+
+	col = img->draw_s_x;
+	while (col <= img->draw_e_x)
+	{
+		tex_x = (int)(256 * (col - (-img->sprt_w / 2 + img->sprt_scrn_x)) * \
+img->x / img->sprt_w) / 256;
+		if (img->trans_y > 0 && col > 0 && col < WIND_WIDTH && img->trans_y < \
+cube->zbuffer[col])
+			draw_sprite_y(tex_x, img, cube);
+		col++;
+	}
+}
+
+void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube)
 {
 	img->sprite_x = img->x - player->x;
 	img->sprite_y = img->y - player->y;
@@ -29,11 +61,12 @@ player->plane_x * img->sprite_y);
 	img->draw_e_x = img->sprt_w /2 + img->sprt_scrn_x;
 	if (img->draw_e_x >= WIND_WIDTH)
 		img->draw_e_x = WIND_WIDTH - 1;
+	draw_sprite_x(img, cube);
 }
 
-void	draw_monster(t_enemy *enemy, t_player *player, void *ptrmlx)
+void	draw_monster(t_enemy *enemy, t_player *player, t_cube *cube)
 {
 	enemy->front->pos_x = enemy->monster.x;
 	enemy->front->pos_y = enemy->monster.y;
-	draw_sprite(enemy->front, player, ptrmlx);
+	calculate_sprite(enemy->front, player, cube);
 }
