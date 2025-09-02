@@ -118,8 +118,8 @@ typedef struct	s_sprite
 	int		bpp;
 	int		endian;
 	int		line;
-	int		x;//image width
-	int		y;//image height
+	int		width;//image width
+	int		height;//image height
 
 	double	pos_x;//position in map
 	double	pos_y;

@@ -34,22 +34,22 @@ int	get_texture_color(t_cube *cube, t_ray *ray, int y)
 	char		*pixel;
 
 	sprite = get_tex_side(ray, &cube->imgsmap);
-	tex_x = (int)(ray->wall_x * sprite->x);
+	tex_x = (int)(ray->wall_x * sprite->width);
 	if (cube->player.init_pos_y != 0)
 	{
 		if (ray->side == 0 && ray->ray_dir_x < 0)
-			tex_x = sprite->x - tex_x - 1;
+			tex_x = sprite->width - tex_x - 1;
 		if (ray->side == 1 && ray->ray_dir_y > 0)
-			tex_x = sprite->x - tex_x - 1;
+			tex_x = sprite->width - tex_x - 1;
 	}
 	else
 	{
 		if (ray->side == 0 && ray->ray_dir_x < 0)
-			tex_x = sprite->x - tex_x - 1;
+			tex_x = sprite->width - tex_x - 1;
 		if (ray->side == 1 && ray->ray_dir_y > 0)
-			tex_x = sprite->x - tex_x - 1;
+			tex_x = sprite->width - tex_x - 1;
 	}
-	tex_y = get_y_coord(ray, y, sprite->y);
+	tex_y = get_y_coord(ray, y, sprite->height);
 	pixel = sprite->addr + (tex_y * sprite->line + tex_x * (sprite->bpp / 8));
 	return (*(unsigned int *)pixel);
 }

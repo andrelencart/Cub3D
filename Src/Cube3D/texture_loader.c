@@ -4,8 +4,8 @@ int	load_imgsmaps(void *ptrmlx, t_sprite *sprite, char *filepath)
 {
 	sprite->img = NULL;
 	sprite->addr = NULL;
-	sprite->img = mlx_xpm_file_to_image(ptrmlx, filepath, &sprite->x, \
-&sprite->y);
+	sprite->img = mlx_xpm_file_to_image(ptrmlx, filepath, &sprite->width, \
+&sprite->height);
 	if (!sprite->img)
 		return (1);
 	sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bpp, \

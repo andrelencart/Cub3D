@@ -11,7 +11,7 @@ int	test_mlx_texture(char *filepath)
 	ptrmlx = mlx_init();
 	if (!ptrmlx)
 		return (parse_error("Mlx failed to initialize", NULL));
-	img.img = mlx_xpm_file_to_image(ptrmlx, filepath, &img.x, &img.y);
+	img.img = mlx_xpm_file_to_image(ptrmlx, filepath, &img.width, &img.height);
 	if (!img.img)
 		return (mlx_destroy_display(ptrmlx), free(ptrmlx), \
 parse_error("Mlx failed to open", filepath));
