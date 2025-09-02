@@ -25,7 +25,7 @@
 # define TILE_SIZE 20
 
 // MATH
-# define PI 3.14159265358979323846
+# define PI 3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912
 
 // KEY_DEF
 # define ESC 65307
@@ -65,9 +65,12 @@
 # define WALL_COLOR_MB 0x225588
 
 // UTILS
-# define DIM_FACTOR 0.1
-# define MOVE_SPEED 1
+# define DIM_FACTOR 0.2
+# define LIGHT_RAD 1.8
+# define MOVE_SPEED 1.5
 # define PLAYER_COLL_RAD 0.2
+# define MINIMAP_VIEW_SIZE 11 // Pixels
+# define MINIMAP_TILE_SIZE 20 // Pixels
 
 // // CORD_DEF
 // # define X 0
@@ -229,6 +232,10 @@ typedef struct s_light
 	double	radius;
 	double	min;
 	double	max;
+	double	player_angle;
+	double	start_angle;
+	double	end_angle;
+	double	m_m_fov;
 }			t_light;
 
 typedef	struct s_mini_map
@@ -241,9 +248,11 @@ typedef	struct s_mini_map
 	int 	num_rays;
 	int 	ray_length;
 	int		tile_size;
+	int		color;
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	t_light	light;
 }			t_mini_map;
 
 typedef struct s_cube
@@ -305,10 +314,15 @@ unsigned int	dim_color(unsigned int color, double factor);
 double			get_light_factor(double px, double py, t_player *player, t_light *light);
 
 // MINI MAP
+
 void	draw_tile(t_window *win, int start_x, int start_y, int color);
 void	draw_mini_map(t_cube *cube);
-void	draw_player_mini_map(t_cube *cube);
-void	draw_vision_mini_map(t_cube *cube);
+void	draw_centered_mini_map(t_cube *cube, int half_view);
+void	draw_player_mini_map(t_cube *cube, int half_view);
+void	vision_mini_map(t_cube *cube, int half_view);
+void	get_mini_map_color(t_cube *cube, int x, int y, int half_view);
+void	vision_mini_map_init(t_cube *cube, int half_view);
+void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
 int		init_monster(t_cube *cube, t_parse *data);
@@ -316,7 +330,7 @@ int		init_monster(t_cube *cube, t_parse *data);
 
 // UTILS
 
-int		get_tile_color(char c);
+int		get_tile_color(char c, t_cube *cube);
 void	update_frame_time(t_cube *cube);
 void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
 void	calc_wall_x(t_ray *ray, t_player *player);

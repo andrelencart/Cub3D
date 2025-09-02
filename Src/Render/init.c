@@ -61,7 +61,7 @@ void	init_player(t_player *player, t_parse *data, int map_height)
 void	init_map(t_map *map, t_parse *data)
 {
 	map->grid = data->map;
-	map->width = strlen(map->grid[0]);
+	map->width = ft_strlen(map->grid[0]);
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
@@ -71,12 +71,13 @@ void	init_mini_map(t_mini_map *mini_map)
 {
 	mini_map->offset_x = 0;
 	mini_map->offset_y = 0;
-	mini_map->tile_size = TILE_SIZE;
-	mini_map->num_rays = 20;
-	mini_map->ray_length = TILE_SIZE * 3;
+	mini_map->tile_size = MINIMAP_TILE_SIZE;
+	mini_map->num_rays = 100;
+	mini_map->ray_length = 0;
 	mini_map->player_mini_x = 0;
 	mini_map->player_mini_y = 0;
 	mini_map->player_size = 0;
+	mini_map->color = 0;
 }
 
 void	init_window(t_window *window)

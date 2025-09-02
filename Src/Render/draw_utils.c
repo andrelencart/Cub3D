@@ -1,12 +1,13 @@
 
 #include "../../Inc/cube3d.h"
 
-int	get_tile_color(char c)
+int	get_tile_color(char c, t_cube *cube)
 {
-	if (c == '1')
+	(void)cube;
+	if (c == '1' || c == ' ')
 		return (CEILING_COLOR_DK_G);
 	if (c == '0' || c == 'P')
-		return (FLOOR_COLOR_LGHT_G);
+		return (WALL_COLOR_MG);
 	// if (c == 'P')
 	// 	return (RED);
 	return (WHITE);
@@ -23,7 +24,8 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 		x = 0;
 		while (x < TILE_SIZE)
 		{
-			my_mlx_pixel_put(win, start_x + x, start_y + y, dim_color(color, DIM_FACTOR));
+			// my_mlx_pixel_put(win, start_x + x, start_y + y, dim_color(color, DIM_FACTOR));
+			my_mlx_pixel_put(win, start_x + x, start_y + y, color);
 			x++;
 		}
 		y++;
