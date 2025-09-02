@@ -4,17 +4,17 @@ int	look_around(char **map, int ln, int cl)
 {
 	if (ln == 0 || cl == 0)
 		return (1);
-	if (!ft_strchr("01", map[ln][cl + 1]))
+	if (!ft_strchr("01D", map[ln][cl + 1]))
 		return (1);
-	if (!ft_strchr("01", map[ln][cl - 1]))
+	if (!ft_strchr("01D", map[ln][cl - 1]))
 		return (1);
 	if (!map[ln - 1] || (int)ft_strlen(map[ln - 1]) < cl)
 		return (1);
-	if (!ft_strchr("01", map[ln - 1][cl]))
+	if (!ft_strchr("01D", map[ln - 1][cl]))
 		return (1);
 	if (!map[ln + 1] || (int)ft_strlen(map[ln + 1]) < cl)
 		return (1);
-	if (!ft_strchr("01", map[ln + 1][cl]))
+	if (!ft_strchr("01D", map[ln + 1][cl]))
 		return (1);
 	return (0);
 }
@@ -82,9 +82,9 @@ int	validate_map(t_parse *data)
 		{
 			if (data->map[i][0] == '\n')
 				return (map_error("Empty line in map", i, 0));
-			if (!ft_strchr(" 01\nNSEW", data->map[i][j]))
+			if (!ft_strchr(" 01\nNSEWD", data->map[i][j]))
 				return (map_error("Invalid char in map", i, j));
-			if (ft_strchr("01NSEW", data->map[i][j]))
+			if (ft_strchr("01NSEWD", data->map[i][j]))
 				nav += 1;
 			j++;
 		}

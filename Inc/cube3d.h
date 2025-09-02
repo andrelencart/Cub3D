@@ -63,9 +63,10 @@
 # define FLOOR_COLOR_LGHT_G 0xAAAAAA
 # define WALL_COLOR_MG 0x666666
 # define WALL_COLOR_MB 0x225588
+# define DOOR_COLOR 0x8B0000
 
 // UTILS
-# define DIM_FACTOR 0.2
+# define DIM_FACTOR 0.05
 # define LIGHT_RAD 1.8
 # define MOVE_SPEED 1.5
 # define PLAYER_COLL_RAD 0.2
@@ -131,6 +132,7 @@ typedef struct	s_imgsmap
 	t_sprite	south;
 	t_sprite	east;
 	t_sprite	west;
+	int			door;
 	int			floor;
 	int			ceiling;
 }	t_imgsmap;
@@ -179,6 +181,7 @@ typedef struct  s_ray
 	double	side_dist_x;
 	double	side_dist_y;
 	int		hit;
+	int		hit_door;
 	int		side;
 	int		line_height;
 	int		draw_start;
@@ -265,6 +268,7 @@ int		move_update_flag_press(int keycode, t_cube *cube);
 void	draw(t_cube *cube);
 void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
 void	raycast(t_cube *cube);
+int		raycast_wall_hit(t_ray *ray, int map_height, int map_width);
 void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
