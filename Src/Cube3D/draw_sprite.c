@@ -71,9 +71,46 @@ player->plane_x * img->sprite_y);
 	draw_sprite_x(img, cube);
 }
 
+t_sprite	*find_monster_dir(t_enemy *enemy, int index)
+{
+	if (index >= 8)
+		index = 0;
+	if (index == 0)
+		return (enemy->front);
+	if (index == 1)
+		return (enemy->frigt);
+	if (index == 2)
+		return (enemy->right);
+	if (index == 3)
+		return (enemy->rtbck);
+	if (index == 4)
+		return (enemy->back);
+	if (index == 5)
+		return (enemy->blft);
+	if (index == 6)
+		return (enemy->left);
+	if (index == 7)
+		return (enemy->lfrt);
+	return (enemy->front);
+}
+
 void	draw_monster(t_enemy *enemy, t_player *player, t_cube *cube)
 {
-	enemy->front->pos_x = enemy->monster.x;
-	enemy->front->pos_y = enemy->monster.y;
-	calculate_sprite(enemy->front, player, cube);
+	double	dx;
+	double	dy;
+	double	relative_angle;
+	t_sprite	*dir;
+
+	dx = cube->player.x - enemy->monster.x;
+	dy = cube->player.y - enemy->monster.y;
+	relative_angle = (atan2(dy, dx) - atan2(enemy->monster.dir_y, \
+enemy->monster.dir_x) + ((2 * PI / 8) / 2));
+	while (relative_angle < 0)
+		relative_angle += 2 * PI;
+	while (relative_angle >= 2 * PI)
+		relative_angle -= 2 * PI;
+	dir = find_monster_dir(enemy, (int)(relative_angle / (PI / 4)));
+	dir->pos_x = enemy->monster.x;
+	dir->pos_y = enemy->monster.y;
+	calculate_sprite(dir, player, cube);
 }
