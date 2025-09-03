@@ -8,6 +8,8 @@ int	get_tile_color(char c, t_cube *cube)
 		return (CEILING_COLOR_DK_G);
 	if (c == '0' || c == 'P')
 		return (WALL_COLOR_MG);
+	if (c == 'D')
+		return (DOOR_COLOR);
 	// if (c == 'P')
 	// 	return (RED);
 	return (WHITE);

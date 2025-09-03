@@ -1,19 +1,19 @@
 
 
 #include "../../Inc/cube3d.h"
-/* 
-static char *test_map[] = {
-	"1111111111",
-    "1000000001",
-    "1011111101",
-    "1010000101",
-    "1010P00101",
-    "1010111101",
-    "1000000001",
-    "1111111111",
-    NULL
-};
- */
+
+// static char *test_map[] = {
+// 	"1111111111",
+//     "1000000001",
+//     "1011111101",
+//     "1010000101",
+//     "1010P00101",
+//     "1010111101",
+//     "1000000001",
+//     "1111111111",
+//     NULL
+// };
+
 void	init(t_cube *cube, t_parse *data)
 {
 	init_window(&cube->window);
@@ -65,6 +65,12 @@ void	init_map(t_map *map, t_parse *data)
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
+	// (void)data;
+	// map->grid = test_map;
+	// map->width = ft_strlen(map->grid[0]);
+	// map->height = 0;
+	// while (map->grid[map->height])
+	// 	map->height++;
 }
 
 void	init_mini_map(t_mini_map *mini_map)

@@ -10,7 +10,7 @@ int	is_wall(t_cube *cube, double x, double y)
 	my = (int)y;
 	if (mx < 0 || mx >= cube->map.width || my < 0 || my >= cube->map.height)
 		return (1);
-	return(cube->map.grid[my][mx] == '1');
+	return(cube->map.grid[my][mx] == '1' || cube->map.grid[my][mx] == 'D');
 }
 
 int	can_move(t_cube *cube, double x, double y, double radius)
