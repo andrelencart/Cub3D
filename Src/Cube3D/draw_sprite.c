@@ -94,7 +94,7 @@ t_sprite	*find_monster_dir(t_enemy *enemy, int index)
 	return (enemy->front);
 }
 
-void	draw_monster(t_enemy *enemy, t_player *player, t_cube *cube)
+void	draw_monster(t_enemy *enemy, t_cube *cube)
 {
 	double	dx;
 	double	dy;
@@ -112,5 +112,5 @@ enemy->monster.dir_x) + ((2 * PI / 8) / 2));
 	dir = find_monster_dir(enemy, (int)(relative_angle / (PI / 4)));
 	dir[enemy->frame].pos_x = enemy->monster.x;
 	dir[enemy->frame].pos_y = enemy->monster.y;
-	calculate_sprite(&dir[enemy->frame], player, cube);
+	calculate_sprite(&dir[enemy->frame], &cube->player, cube);
 }

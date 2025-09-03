@@ -193,9 +193,10 @@ typedef struct s_enemy
 	t_sprite	lfrt[4];
 	t_sprite	right[4];
 	t_sprite	rtbck[4];
-	int			state;
+	bool		state;
 	double		last_x;
 	double		last_y;
+	double		speed;
 	int			frame;
 	double		anim_time;
 	double		anim_speed;
@@ -310,7 +311,8 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
 void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
 int		get_texture_color(t_cube *cube, t_ray *ray, int y);
-void	draw_monster(t_enemy *enemy, t_player *player, t_cube *cube);
+void	draw_monster(t_enemy *enemy, t_cube *cube);
+void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube);//img must have pos_x & pos_y assigned before entering this function
 
 // LIGHT
 
