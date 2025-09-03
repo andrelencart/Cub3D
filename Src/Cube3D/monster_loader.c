@@ -13,13 +13,12 @@ int	get_mon_tex(char *tex, void *ptrmlx, t_sprite *img)
 	while (tex[pos] != 'X')
 		pos++;
 	count = 0;
-	tex[pos] = count + '0';
-	while (count != 4)
+	while (count < 4)
 	{
+		tex[pos] = count + '0';
 		if (load_imgsmaps(ptrmlx, &img[count], tex))
 			return (parse_error("Failed to load texture", tex), free(tex), 1);
-		count += 1;
-		tex[pos] = count + '0';
+		count ++;
 	}
 	return (free(tex), 0);
 }
@@ -67,5 +66,6 @@ int	init_monster(t_cube *cube, t_parse *data)
 	cube->enemy.monster.rot_speed = 0.05;
 	cube->enemy.monster.strafing_left = 0;
 	cube->enemy.monster.strafing_right = 0;
+	cube->enemy.anim_speed = 0.17;
 	return (load_mons_tex(cube));
 }

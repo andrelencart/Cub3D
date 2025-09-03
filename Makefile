@@ -23,6 +23,7 @@ MAIN_C			=	cube3D_main.c \
 					draw_sprite.c \
 					draw_tex_wall.c \
 					monster_loader.c \
+					monster_logic.c \
 					texture_loader.c
 
 RENDER_MAIN_C	=	render_main.c

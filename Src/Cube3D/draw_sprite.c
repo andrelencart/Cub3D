@@ -110,7 +110,7 @@ enemy->monster.dir_x) + ((2 * PI / 8) / 2));
 	while (relative_angle >= 2 * PI)
 		relative_angle -= 2 * PI;
 	dir = find_monster_dir(enemy, (int)(relative_angle / (PI / 4)));
-	dir->pos_x = enemy->monster.x;
-	dir->pos_y = enemy->monster.y;
-	calculate_sprite(dir, player, cube);
+	dir[enemy->frame].pos_x = enemy->monster.x;
+	dir[enemy->frame].pos_y = enemy->monster.y;
+	calculate_sprite(&dir[enemy->frame], player, cube);
 }

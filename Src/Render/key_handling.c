@@ -31,8 +31,8 @@ int	move_update_flag_release(int keycode, t_cube *cube)
 int	player_rotation(t_player *player, int key_code)
 {
 	if (key_code == RA)
-		rotate_player(player, -player->rot_speed);
-	else if (key_code == LA)
 		rotate_player(player, player->rot_speed);
+	else if (key_code == LA)
+		rotate_player(player, -player->rot_speed);
 	return (0);
 }

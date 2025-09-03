@@ -47,6 +47,7 @@ int	loop_hook(t_cube *cube)
 	update_frame_time(cube);
 	player_move_front_back(&cube->player, cube, cube->frame_time);
 	player_move_left_right(&cube->player, cube, cube->frame_time);
+	monster_logic(cube);
 	draw(cube);
 	return (0);
 }

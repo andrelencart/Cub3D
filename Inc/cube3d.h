@@ -196,8 +196,9 @@ typedef struct s_enemy
 	int			state;
 	double		last_x;
 	double		last_y;
-	double		speed;
 	int			frame;
+	double		anim_time;
+	double		anim_speed;
 }				t_enemy;
 
 typedef struct  s_ray
@@ -329,6 +330,7 @@ void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
 int		init_monster(t_cube *cube, t_parse *data);
+void	monster_logic(t_cube *cube);
 
 
 // UTILS
