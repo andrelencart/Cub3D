@@ -67,9 +67,10 @@
 
 // UTILS
 # define DIM_FACTOR 0.05
-# define LIGHT_RAD 1.8
+# define LIGHT_RAD 2.5
 # define MOVE_SPEED 1.5
 # define PLAYER_COLL_RAD 0.2
+# define PLAYER_INTERACTION 0.7
 # define MINIMAP_VIEW_SIZE 11 // Pixels
 # define MINIMAP_TILE_SIZE 20 // Pixels
 
@@ -225,6 +226,7 @@ typedef struct  s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	double	raydir_light[4];
 }			t_ray;
 
 typedef	struct s_map
@@ -273,6 +275,7 @@ typedef struct s_cube
 	t_light			light;
 	t_enemy			enemy;
 	double			frame_time;
+	// double			row_distance;
 	double			*zbuffer;
 	struct timeval	last_time;
 }					t_cube;
@@ -321,7 +324,11 @@ void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube);//img must
 // LIGHT
 
 unsigned int	dim_color(unsigned int color, double factor);
+void			wall_light(t_cube *cube, t_ray *ray, double *factor);
+void			get_row_distance_and_rays(t_cube *cube, int y, double *row_distance);
+void			compute_floor_pos(int x, double row_distance, t_cube *cube, double floor[2]);
 double			get_light_factor(double px, double py, t_player *player, t_light *light);
+// double			get_vertical_light_factor(int y, int draw_end, int window_height, double min, double max);
 
 // MINI MAP
 
@@ -335,6 +342,7 @@ void	vision_mini_map_init(t_cube *cube, int half_view);
 void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
+
 int		init_monster(t_cube *cube, t_parse *data);
 void	monster_logic(t_cube *cube);
 
@@ -345,7 +353,8 @@ int		get_tile_color(char c, t_cube *cube);
 void	update_frame_time(t_cube *cube);
 void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
 void	calc_wall_x(t_ray *ray, t_player *player);
-void 	get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2]);
+// void 	get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2]);
+// void	get_floor_pixel_pos(int x, int y, t_cube *cube, double floor[2]);
 int		can_move(t_cube *cube, double x, double y, double radius);
 int		is_wall(t_cube *cube, double x, double y);
 

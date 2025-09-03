@@ -36,7 +36,7 @@ void	raycast(t_cube *cube)
 
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 {
-	int		y;
+	int	y;
 
 	y = 0;
 	while (y < ray->draw_start) // CEILING
@@ -51,15 +51,14 @@ void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 {
 	double	floor[2];
+	double	row_distance;
 	double	factor;
 	int		color;
 
+	factor = 0.0;
 	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
 	{
-		if (ray->perp_wall_dist <= cube->light.radius)
-			factor = cube->light.min + (cube->light.max - cube->light.min) * (1.0 - ray->perp_wall_dist / cube->light.radius);
-		else
-			factor = cube->light.min;
+		wall_light(cube, ray, &factor);
 		if (ray->hit_door)
 			color = DOOR_COLOR;
 		else
@@ -69,7 +68,8 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 	}
 	while (*y < WIND_HEIGHT)
 	{
-		get_floor_pixel_pos(ray, cube, *y, floor);
+		get_row_distance_and_rays(cube, *y, &row_distance);
+		compute_floor_pos(x, row_distance, cube, floor);
 		factor = get_light_factor(floor[0], floor[1], &cube->player, &cube->light);
 		my_mlx_pixel_put(&cube->window, x, *y, dim_color(cube->imgsmap.floor, factor));
 		(*y)++;

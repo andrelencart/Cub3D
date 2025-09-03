@@ -23,3 +23,11 @@ int	raycast_wall_hit(t_ray *ray, int map_height, int map_width)
 	}
 	return (0);
 }
+
+void	wall_light(t_cube *cube, t_ray *ray, double *factor)
+{
+	if (ray->perp_wall_dist <= cube->light.radius)
+		*factor = cube->light.min + (cube->light.max - cube->light.min) * (1.0 - ray->perp_wall_dist / cube->light.radius);
+	else
+		*factor = cube->light.min;
+}
