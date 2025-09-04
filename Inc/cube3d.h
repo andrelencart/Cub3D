@@ -68,7 +68,7 @@
 
 // UTILS
 # define DIM_FACTOR 0.05
-# define LIGHT_RAD 2.5
+# define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
 # define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
