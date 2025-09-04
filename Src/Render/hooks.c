@@ -19,6 +19,8 @@ int	key_press(int key_code, t_cube *cube)
 	else if (key_code == W || key_code == A || \
 		key_code == S || key_code == D)
 		move_update_flag_press(key_code, cube);
+	else if (key_code == E)
+		door_interaction(&cube->map, &cube->player);
 	return (0);
 }
 
@@ -48,6 +50,7 @@ int	loop_hook(t_cube *cube)
 	player_move_front_back(&cube->player, cube, cube->frame_time);
 	player_move_left_right(&cube->player, cube, cube->frame_time);
 	monster_logic(cube);
+	update_door_animation(&cube->map);
 	draw(cube);
 	return (0);
 }

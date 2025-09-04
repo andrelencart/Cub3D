@@ -65,12 +65,7 @@ void	init_map(t_map *map, t_parse *data)
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
-	// (void)data;
-	// map->grid = test_map;
-	// map->width = ft_strlen(map->grid[0]);
-	// map->height = 0;
-	// while (map->grid[map->height])
-	// 	map->height++;
+	init_door(&map->door);
 }
 
 void	init_mini_map(t_mini_map *mini_map)

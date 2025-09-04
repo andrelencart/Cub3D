@@ -52,6 +52,7 @@
 # define P 112
 # define M 109
 # define R 114
+# define E 101
 
 // COLOR_DEF
 # define WHITE 0xFFFFFF
@@ -69,6 +70,7 @@
 # define DIM_FACTOR 0.05
 # define LIGHT_RAD 2.5
 # define MOVE_SPEED 1.5
+# define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
 # define PLAYER_INTERACTION 0.7
 # define MINIMAP_VIEW_SIZE 11 // Pixels
@@ -229,11 +231,20 @@ typedef struct  s_ray
 	double	raydir_light[4];
 }			t_ray;
 
+typedef	struct s_door
+{
+	int		cord_x;
+	int		cord_y;
+	double	state; 		// 0.0 closed | 1.0 opened
+	int		anim_state;	// 1 opened | -1 closed | 0 idle
+}			t_door;
+
 typedef	struct s_map
 {
 	char	**grid;
 	int		width;
 	int		height;
+	t_door	door;
 }			t_map;
 
 typedef struct s_light
@@ -275,7 +286,6 @@ typedef struct s_cube
 	t_light			light;
 	t_enemy			enemy;
 	double			frame_time;
-	// double			row_distance;
 	double			*zbuffer;
 	struct timeval	last_time;
 }					t_cube;
@@ -288,6 +298,7 @@ void	init(t_cube *cube, t_parse *data);
 void	init_lighting(t_light *light);
 void	init_player(t_player *player, t_parse *data, int map_height);
 void	init_map(t_map *temap, t_parse *data);
+void	init_door(t_door *door);
 void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
 void	init_ray(t_player *player, t_ray *ray, int x);
@@ -346,6 +357,10 @@ void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 int		init_monster(t_cube *cube, t_parse *data);
 void	monster_logic(t_cube *cube);
 
+// DOORS
+
+void	door_interaction(t_map *map, t_player *player);
+void	update_door_animation(t_map *map);
 
 // UTILS
 
@@ -357,6 +372,7 @@ void	calc_wall_x(t_ray *ray, t_player *player);
 // void	get_floor_pixel_pos(int x, int y, t_cube *cube, double floor[2]);
 int		can_move(t_cube *cube, double x, double y, double radius);
 int		is_wall(t_cube *cube, double x, double y);
+void	print_map(t_map *map);
 
 // PLAYER MOVEMENT
 

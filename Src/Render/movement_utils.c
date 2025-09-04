@@ -25,3 +25,17 @@ int	can_move(t_cube *cube, double x, double y, double radius)
 		return (0);
 	return (1);
 }
+
+void print_map(t_map *map)
+{
+    int y, x;
+    for (y = 0; y < map->height; y++)
+    {
+        for (x = 0; x < map->width; x++)
+        {
+            printf("%c", map->grid[y][x]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}

@@ -42,7 +42,6 @@ void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 	while (y < ray->draw_start) // CEILING
 	{
 		my_mlx_pixel_put(&cube->window, x, y, dim_color(cube->imgsmap.ceiling, cube->light.min));
-		// my_mlx_pixel_put(&cube->window, x, y, cube->imgsmap.ceiling);
 		y++;
 	}
 	floors_walls(cube, ray, x, &y);
@@ -60,7 +59,10 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 	{
 		wall_light(cube, ray, &factor);
 		if (ray->hit_door)
-			color = DOOR_COLOR;
+		{
+			if (cube->map.door.state < 1.0)
+				color = DOOR_COLOR;
+		}
 		else
 			color = get_texture_color(cube, ray, *y);
 		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));

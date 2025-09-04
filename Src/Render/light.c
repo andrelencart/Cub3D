@@ -83,27 +83,6 @@ double get_light_factor(double px, double py, t_player *player, t_light *light)
 // 	floor[1] = weight * floor_wall_y + (1.0 - weight) * cube->player.y;
 // }
 
-// void get_floor_pixel_pos(int x, int y, t_cube *cube, double floor[2])
-// {
-// 	double rayDirX0 = cube->player.dir_x - cube->player.plane_x;
-// 	double rayDirY0 = cube->player.dir_y - cube->player.plane_y;
-// 	double rayDirX1 = cube->player.dir_x + cube->player.plane_x;
-// 	double rayDirY1 = cube->player.dir_y + cube->player.plane_y;
-
-// 	// Row (distance from player to floor for this y)
-// 	int p = y - (WIND_HEIGHT / 2);
-// 	double posZ = 0.5 * WIND_HEIGHT;
-// 	double rowDistance = posZ / p;
-
-// 	// Interpolate across the screen
-// 	double floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIND_WIDTH;
-// 	double floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIND_WIDTH;
-// 	double floorX = cube->player.x + rowDistance * rayDirX0 + x * floorStepX;
-// 	double floorY = cube->player.y + rowDistance * rayDirY0 + x * floorStepY;
-// 	floor[0] = floorX;
-// 	floor[1] = floorY;
-// }
-
 void	get_row_distance_and_rays(t_cube *cube, int y, double *row_distance)
 {
 	int		p;
