@@ -32,7 +32,7 @@ int	find_borders(t_parse *data)
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == '0')
+			if (data->map[i][j] == '0' || data->map[i][j] == 'D')
 			{
 				if (look_around(data->map, i, j))
 					return (map_error("Open tile at", i, j));

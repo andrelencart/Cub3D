@@ -16,6 +16,7 @@
 
 void	init(t_cube *cube, t_parse *data)
 {
+	ft_memset(cube, 0, sizeof(t_cube));
 	init_window(&cube->window);
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
