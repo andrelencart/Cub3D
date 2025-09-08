@@ -185,6 +185,7 @@ typedef struct s_player
 	int		moving_backward;
 	int		strafing_left;
 	int		strafing_right;
+	int		is_crouching;
 }			t_player;
 
 typedef struct s_enemy
