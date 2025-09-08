@@ -42,5 +42,13 @@ void	monster_logic(t_cube *cube)
 		cube->enemy.anim_time = 0;
 	}
 	if (cube->enemy.state == 0)
+	{
+		cube->enemy.anim_speed = 0.08;
 		enemy_wander(cube, &cube->enemy);
+	}
+	else if (cube->enemy.state == 1)
+	{
+		cube->enemy.anim_speed = 0.16;
+		//enemy_chase(cube, &cube->enemy);
+	}
 }

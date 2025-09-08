@@ -66,6 +66,6 @@ int	init_monster(t_cube *cube, t_parse *data)
 	cube->enemy.monster.rot_speed = 0.05;
 	cube->enemy.monster.strafing_left = 0;
 	cube->enemy.monster.strafing_right = 0;
-	cube->enemy.anim_speed = 0.17;
+	cube->enemy.anim_speed = 0.08;
 	return (load_mons_tex(cube));
 }
