@@ -1,5 +1,11 @@
 #include "../../Inc/cube3d.h"
 
+
+void	enemy_chase(t_cube *cube, t_enemy *enemy)
+{
+
+}
+
 void	enemy_wander(t_cube *cube, t_enemy *enemy)
 {
 	double	n_x;
@@ -7,7 +13,6 @@ void	enemy_wander(t_cube *cube, t_enemy *enemy)
 	double	angle;
 	double	delta;
 
-	enemy->speed = 0.5;
 	n_x = enemy->monster.x + enemy->monster.dir_x * enemy->speed * \
 cube->frame_time;
 	n_y = enemy->monster.y + enemy->monster.dir_y * enemy->speed * \
@@ -28,6 +33,52 @@ cube->frame_time;
 	}
 }
 
+void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sq)
+{
+	double dx;
+	double dy;
+	double ray_dist;
+
+	ray->hit = 0;
+	while (ray->hit == 0)
+	{
+		if (raycast_wall_hit(ray, cube->map.height, cube->map.width) == 1)
+			break;
+		if (cube->map.grid[ray->map_y][ray->map_x] == '1')
+			break;
+		else if (cube->map.grid[ray->map_y][ray->map_x] == 'D')
+			break;
+		dx = ray->map_x + 0.5 - cube->enemy.monster.x;
+		dy = ray->map_y + 0.5 - cube->enemy.monster.y;
+		ray_dist = sqrt(pow(dx, 2.0) + pow(dy, 2.0));
+		if (ray_dist >= dis_sq - 0.2)
+		{
+			cube->enemy.last_x = (int)cube->player.x + 0.5;
+			cube->enemy.last_y = (int)cube->player.y + 0.5;
+			cube->enemy.state = 1;
+			ray->hit = 1;
+		}
+	}
+}
+
+void	find_player(t_cube *cube, t_player *monster, t_player *player)
+{
+	t_ray	ray;
+	double	dis_sq;
+
+	ft_memset(&ray, 0, sizeof(t_ray));
+	ray.ray_dir_x = player->x - monster->x;
+	ray.ray_dir_y = player->y - monster->y;
+	dis_sq = pow(ray.ray_dir_x, 2.0) + pow(ray.ray_dir_y, 2.0);
+	if (sqrt(dis_sq) > 2.0)
+		return ;
+	ray.ray_dir_x /= sqrt(dis_sq);
+	ray.ray_dir_y /= sqrt(dis_sq);
+	init_dda(monster, &ray);
+	init_steps(monster, &ray);
+	dda_monster_loop(&ray, cube, dis_sq);
+}
+
 void	monster_logic(t_cube *cube)
 {
 	if (cube->frame_time < 0)
@@ -41,14 +92,17 @@ void	monster_logic(t_cube *cube)
 			cube->enemy.frame = 0;
 		cube->enemy.anim_time = 0;
 	}
+	find_player(cube, &cube->enemy.monster, &cube->player);
 	if (cube->enemy.state == 0)
 	{
-		cube->enemy.anim_speed = 0.08;
+		cube->enemy.speed = 0.5;
+		cube->enemy.anim_speed = 0.09;
 		enemy_wander(cube, &cube->enemy);
 	}
 	else if (cube->enemy.state == 1)
 	{
-		cube->enemy.anim_speed = 0.16;
-		//enemy_chase(cube, &cube->enemy);
+		cube->enemy.speed = 1.0;
+		cube->enemy.anim_speed = 0.03;
+		enemy_chase(cube, &cube->enemy);
 	}
 }
