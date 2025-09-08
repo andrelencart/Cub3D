@@ -67,7 +67,7 @@
 # define DOOR_COLOR 0x8B0000
 
 // UTILS
-# define DIM_FACTOR 0.05
+# define DIM_FACTOR 0.2
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
 # define DOOR_SPEED 0.2
@@ -244,7 +244,8 @@ typedef	struct s_map
 	char	**grid;
 	int		width;
 	int		height;
-	t_door	door;
+	t_door	*doors;
+	int		n_doors;
 }			t_map;
 
 typedef struct s_light
@@ -298,7 +299,7 @@ void	init(t_cube *cube, t_parse *data);
 void	init_lighting(t_light *light);
 void	init_player(t_player *player, t_parse *data, int map_height);
 void	init_map(t_map *temap, t_parse *data);
-void	init_door(t_door *door);
+void	init_door(t_map *map);
 void	init_mini_map(t_mini_map *mini_map);
 void	init_window(t_window *window);
 void	init_ray(t_player *player, t_ray *ray, int x);
@@ -361,6 +362,8 @@ void	monster_logic(t_cube *cube);
 
 void	door_interaction(t_map *map, t_player *player);
 void	update_door_animation(t_map *map);
+void	count_doors(t_map *map);
+t_door *find_door(t_map *map, int x, int y);
 
 // UTILS
 

@@ -53,6 +53,7 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 	double	row_distance;
 	double	factor;
 	int		color;
+	t_door *door;
 
 	factor = 0.0;
 	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
@@ -60,7 +61,8 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 		wall_light(cube, ray, &factor);
 		if (ray->hit_door)
 		{
-			if (cube->map.door.state < 1.0)
+			door = find_door(&cube->map, ray->map_x, ray->map_y);
+			if (door && door->state < 1.0)
 				color = DOOR_COLOR;
 		}
 		else
