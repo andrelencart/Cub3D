@@ -1,9 +1,33 @@
 #include "../../Inc/cube3d.h"
 
-
 void	enemy_chase(t_cube *cube, t_enemy *enemy)
 {
+	double	n_x;
+	double	n_y;
+	double	dis_sq;
 
+	enemy->monster.dir_x = enemy->last_x - enemy->monster.x;
+	enemy->monster.dir_y = enemy->last_y - enemy->monster.y;
+	dis_sq = pow(enemy->monster.dir_x, 2.0) + pow(enemy->monster.dir_y, 2.0);
+	if (sqrt(dis_sq) <= 0.3)
+	{
+		printf("EChase-Catched player x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
+		printf("EChase-Flayer dead at x:%f-y:%f\n", cube->enemy.last_x, cube->enemy.last_y);
+		printf("GAME OVER!!");
+		close_window(cube);
+	}
+	enemy->monster.dir_x /= sqrt(dis_sq);
+	enemy->monster.dir_y /= sqrt(dis_sq);
+	printf("EChase-Looking at x:%f-y:%f\n", enemy->monster.dir_x, enemy->monster.dir_y);
+	n_x = enemy->monster.x + enemy->monster.dir_x * enemy->speed * \
+cube->frame_time;
+	n_y = enemy->monster.y + enemy->monster.dir_y * enemy->speed * \
+cube->frame_time;
+	if (can_move(cube, n_x, enemy->monster.y, 0.2))
+		enemy->monster.x = n_x;
+	if (can_move(cube, enemy->monster.x, n_y, 0.2))
+		enemy->monster.y = n_y;
+	printf("EChase-Moving to x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
 }
 
 void	enemy_wander(t_cube *cube, t_enemy *enemy)
@@ -21,19 +45,21 @@ cube->frame_time;
 !can_move(cube, enemy->monster.x, n_y, 0.2))
 	{
 		angle = atan2(enemy->monster.dir_y, enemy->monster.dir_x);
-		delta = ((rand() % 180) - 90) * (PI / 90.0);
+		delta = ((rand() % 180) - 90) * (PI / 100.0);
 		angle = PI + delta;
 		enemy->monster.dir_x = cos(angle);
 		enemy->monster.dir_y = sin(angle);
+		printf("EWander-Looking at x:%f-y:%f\n", enemy->monster.dir_x, enemy->monster.dir_y);
 	}
 	else
 	{
 		enemy->monster.x = n_x;
 		enemy->monster.y = n_y;
+		printf("EWander-Moving to x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
 	}
 }
 
-void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sq)
+void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sqrt)
 {
 	double dx;
 	double dy;
@@ -44,21 +70,23 @@ void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sq)
 	{
 		if (raycast_wall_hit(ray, cube->map.height, cube->map.width) == 1)
 			break;
-		if (cube->map.grid[ray->map_y][ray->map_x] == '1')
-			break;
-		else if (cube->map.grid[ray->map_y][ray->map_x] == 'D')
+		if (ft_strchr("1D", cube->map.grid[ray->map_y][ray->map_x]))
 			break;
 		dx = ray->map_x + 0.5 - cube->enemy.monster.x;
 		dy = ray->map_y + 0.5 - cube->enemy.monster.y;
 		ray_dist = sqrt(pow(dx, 2.0) + pow(dy, 2.0));
-		if (ray_dist >= dis_sq - 0.2)
+		if (ray_dist >= dis_sqrt - 0.2)
 		{
-			cube->enemy.last_x = (int)cube->player.x + 0.5;
-			cube->enemy.last_y = (int)cube->player.y + 0.5;
+			cube->enemy.last_x = cube->player.x;
+			cube->enemy.last_y = cube->player.y;
 			cube->enemy.state = 1;
 			ray->hit = 1;
+			printf("DDA_ML-Found player at x:%f-y:%f\n", cube->enemy.last_x, cube->enemy.last_y);
+			return ;
 		}
 	}
+	printf("DDA_ML-Did not find\n");
+	cube->enemy.state = 0;
 }
 
 void	find_player(t_cube *cube, t_player *monster, t_player *player)
@@ -70,13 +98,13 @@ void	find_player(t_cube *cube, t_player *monster, t_player *player)
 	ray.ray_dir_x = player->x - monster->x;
 	ray.ray_dir_y = player->y - monster->y;
 	dis_sq = pow(ray.ray_dir_x, 2.0) + pow(ray.ray_dir_y, 2.0);
-	if (sqrt(dis_sq) > 2.0)
+	if (sqrt(dis_sq) > 5.0)
 		return ;
 	ray.ray_dir_x /= sqrt(dis_sq);
 	ray.ray_dir_y /= sqrt(dis_sq);
 	init_dda(monster, &ray);
 	init_steps(monster, &ray);
-	dda_monster_loop(&ray, cube, dis_sq);
+	dda_monster_loop(&ray, cube, sqrt(dis_sq));
 }
 
 void	monster_logic(t_cube *cube)
