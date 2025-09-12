@@ -11,14 +11,11 @@ void	enemy_chase(t_cube *cube, t_enemy *enemy)
 	dis_sq = pow(enemy->monster.dir_x, 2.0) + pow(enemy->monster.dir_y, 2.0);
 	if (sqrt(dis_sq) <= 0.3)
 	{
-		printf("EChase-Catched player x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
-		printf("EChase-Flayer dead at x:%f-y:%f\n", cube->enemy.last_x, cube->enemy.last_y);
-		printf("GAME OVER!!");
-		close_window(cube);
+		enemy->anim_speed = 0.09;
+		enemy->state = GAME_OVER;
 	}
 	enemy->monster.dir_x /= sqrt(dis_sq);
 	enemy->monster.dir_y /= sqrt(dis_sq);
-	printf("EChase-Looking at x:%f-y:%f\n", enemy->monster.dir_x, enemy->monster.dir_y);
 	n_x = enemy->monster.x + enemy->monster.dir_x * enemy->speed * \
 cube->frame_time;
 	n_y = enemy->monster.y + enemy->monster.dir_y * enemy->speed * \
@@ -27,7 +24,6 @@ cube->frame_time;
 		enemy->monster.x = n_x;
 	if (can_move(cube, enemy->monster.x, n_y, 0.2))
 		enemy->monster.y = n_y;
-	printf("EChase-Moving to x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
 }
 
 void	enemy_wander(t_cube *cube, t_enemy *enemy)
@@ -49,13 +45,11 @@ cube->frame_time;
 		angle = PI + delta;
 		enemy->monster.dir_x = cos(angle);
 		enemy->monster.dir_y = sin(angle);
-		printf("EWander-Looking at x:%f-y:%f\n", enemy->monster.dir_x, enemy->monster.dir_y);
 	}
 	else
 	{
 		enemy->monster.x = n_x;
 		enemy->monster.y = n_y;
-		printf("EWander-Moving to x:%f-y:%f\n", enemy->monster.x, enemy->monster.y);
 	}
 }
 
@@ -79,14 +73,12 @@ void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sqrt)
 		{
 			cube->enemy.last_x = cube->player.x;
 			cube->enemy.last_y = cube->player.y;
-			cube->enemy.state = 1;
+			cube->enemy.state = PURSUIT;
 			ray->hit = 1;
-			printf("DDA_ML-Found player at x:%f-y:%f\n", cube->enemy.last_x, cube->enemy.last_y);
 			return ;
 		}
 	}
-	printf("DDA_ML-Did not find\n");
-	cube->enemy.state = 0;
+	cube->enemy.state = WANDER;
 }
 
 void	find_player(t_cube *cube, t_player *monster, t_player *player)
@@ -121,13 +113,13 @@ void	monster_logic(t_cube *cube)
 		cube->enemy.anim_time = 0;
 	}
 	find_player(cube, &cube->enemy.monster, &cube->player);
-	if (cube->enemy.state == 0)
+	if (cube->enemy.state == WANDER)
 	{
 		cube->enemy.speed = 0.5;
 		cube->enemy.anim_speed = 0.09;
 		enemy_wander(cube, &cube->enemy);
 	}
-	else if (cube->enemy.state == 1)
+	else if (cube->enemy.state == PURSUIT)
 	{
 		cube->enemy.speed = 1.0;
 		cube->enemy.anim_speed = 0.03;

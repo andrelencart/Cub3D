@@ -125,8 +125,8 @@ typedef struct	s_sprite
 	int		width;//image width
 	int		height;//image height
 
-	double	pos_x;//position in map
-	double	pos_y;
+	double	pos_x;//position in map || posicion in texture x
+	double	pos_y;//position in map || posicion in texture y
 
 	double	sprite_x;//coord relative to player/camera
 	double	sprite_y;
@@ -136,15 +136,15 @@ typedef struct	s_sprite
 	double	trans_y;
 
 	int		sprt_scrn_x;//sprite center in screen coord
-	int		sprt_h;//sprite height
-	int		sprt_w;//sprite width
+	int		sprt_h;//sprite height || tex heigth * factor
+	int		sprt_w;//sprite width || tex width * factor
 
-	int		draw_s_y;//screen coord to start and end drawing
+	int		draw_s_y;//screen coord to start and end drawing // || draw start y
 	int		draw_e_y;
-	int		draw_s_x;
+	int		draw_s_x;// || draw start x
 	int		draw_e_x;
 
-	double	factor;
+	double	factor;// || zoom in end
 }	t_sprite;
 
 //Wall textures, floor & ceiling colors
@@ -187,6 +187,13 @@ typedef struct s_player
 	int		strafing_right;
 }			t_player;
 
+typedef enum e_state
+{
+	WANDER,
+	PURSUIT,
+	GAME_OVER
+}	t_state;
+
 typedef struct s_enemy
 {
 	t_player	monster;
@@ -198,13 +205,15 @@ typedef struct s_enemy
 	t_sprite	lfrt[4];
 	t_sprite	right[4];
 	t_sprite	rtbck[4];
-	bool		state;
+	t_state		state;
 	double		last_x;
 	double		last_y;
 	double		speed;
 	int			frame;
 	double		anim_time;
 	double		anim_speed;
+	double		fade;
+	int			fade_timer;
 }				t_enemy;
 
 typedef struct  s_ray
@@ -330,8 +339,8 @@ void	calc_wall_dist(t_player *player, t_ray *ray);
 void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
 int		get_texture_color(t_cube *cube, t_ray *ray, int y);
 void	draw_monster(t_enemy *enemy, t_cube *cube);
-void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube);//img must have pos_x & pos_y assigned before entering this function
-
+void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube);
+void	fade_out(t_cube *cube);
 // LIGHT
 
 unsigned int	dim_color(unsigned int color, double factor);
@@ -356,6 +365,7 @@ void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 int		init_monster(t_cube *cube, t_parse *data);
 void	monster_logic(t_cube *cube);
+void	death_monster(t_cube *cube);
 
 // DOORS
 
