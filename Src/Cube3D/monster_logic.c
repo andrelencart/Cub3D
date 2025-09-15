@@ -9,7 +9,7 @@ void	enemy_chase(t_cube *cube, t_enemy *enemy)
 	enemy->monster.dir_x = enemy->last_x - enemy->monster.x;
 	enemy->monster.dir_y = enemy->last_y - enemy->monster.y;
 	dis_sq = pow(enemy->monster.dir_x, 2.0) + pow(enemy->monster.dir_y, 2.0);
-	if (sqrt(dis_sq) <= 0.3)
+	if (sqrt(dis_sq) <= 0.8)
 	{
 		enemy->anim_speed = 0.09;
 		enemy->state = GAME_OVER;
@@ -55,17 +55,17 @@ cube->frame_time;
 
 void	dda_monster_loop(t_ray *ray, t_cube *cube, double dis_sqrt)
 {
-	double dx;
-	double dy;
-	double ray_dist;
+	double	dx;
+	double	dy;
+	double	ray_dist;
 
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
 		if (raycast_wall_hit(ray, cube->map.height, cube->map.width) == 1)
-			break;
+			break ;
 		if (ft_strchr("1D", cube->map.grid[ray->map_y][ray->map_x]))
-			break;
+			break ;
 		dx = ray->map_x + 0.5 - cube->enemy.monster.x;
 		dy = ray->map_y + 0.5 - cube->enemy.monster.y;
 		ray_dist = sqrt(pow(dx, 2.0) + pow(dy, 2.0));

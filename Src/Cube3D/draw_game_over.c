@@ -21,7 +21,7 @@ void	fade_out(t_cube *cube)
 	int		y;
 	char	*pixel;
 
-	if (cube->enemy.fade_timer % 8 == 0)
+	if (cube->enemy.fade_timer % 3 == 0)
 	{
 		y = 0;
 		while (y < WIND_HEIGHT)
@@ -41,7 +41,6 @@ void	fade_out(t_cube *cube)
 	cube->enemy.fade_timer++;
 }
 
-
 void	put_pixel(t_cube *cube, t_sprite *sprite, int x, int y)
 {
 	int		screen_x;
@@ -49,8 +48,8 @@ void	put_pixel(t_cube *cube, t_sprite *sprite, int x, int y)
 	int		color;
 	char	*dst;
 
-	color = *(int *)(sprite->addr + ((int)((double)y / sprite->factor)\
- * sprite->line + (int)((double)x / sprite->factor) * (sprite->bpp / 8)));
+	color = *(int *)(sprite->addr + (((int)((double)y / sprite->factor)) * \
+sprite->line + ((int)((double)x / sprite->factor)) * (sprite->bpp / 8)));
 	if ((color & 0x00FFFFFF) != 0)
 	{
 		screen_x = sprite->draw_s_x + x;
@@ -72,7 +71,6 @@ void	draw_scaled_sprite(t_cube *cube, t_sprite *sprite)
 
 	sprite->sprt_w = sprite->width * sprite->factor;
 	sprite->sprt_h = sprite->height * sprite->factor;
-
 	y = 0;
 	while (y < sprite->sprt_h)
 	{
@@ -101,7 +99,8 @@ void	death_monster(t_cube *cube)
 	sprite = &cube->enemy.front[cube->enemy.frame];
 	sprite->factor = 35.0;
 	sprite->draw_s_x = (WIND_WIDTH / 2) - (sprite->width * sprite->factor / 2);
-	sprite->draw_s_y = 0;//(WIND_HEIGHT / 2) - (sprite->height * sprite->factor / 2);
+	sprite->draw_s_y = 0;
 	draw_scaled_sprite(cube, sprite);
-	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
+	mlx_put_image_to_window(cube->window.mlx, cube->window.mlx_window, \
+cube->window.img, 0, 0);
 }

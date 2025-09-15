@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 int	get_mon_tex(char *tex, void *ptrmlx, t_sprite *img)
