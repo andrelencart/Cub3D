@@ -107,16 +107,8 @@ void	destroy_image_array(t_sprite *array, void *ptrmlx)
 	}
 }
 
-void	destroy_maps(t_cube *cube)
+void	destroy_enemy_imgs(t_cube *cube)
 {
-	if (cube->imgsmap.north.img)
-		mlx_destroy_image(cube->window.mlx, cube->imgsmap.north.img);
-	if (cube->imgsmap.south.img)
-		mlx_destroy_image(cube->window.mlx, cube->imgsmap.south.img);
-	if (cube->imgsmap.east.img)
-		mlx_destroy_image(cube->window.mlx, cube->imgsmap.east.img);
-	if (cube->imgsmap.west.img)
-		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
 	if (cube->enemy.back->img)
 		destroy_image_array(cube->enemy.back, cube->window.mlx);
 	if (cube->enemy.blft->img)
@@ -133,6 +125,21 @@ void	destroy_maps(t_cube *cube)
 		destroy_image_array(cube->enemy.right, cube->window.mlx);
 	if (cube->enemy.rtbck->img)
 		destroy_image_array(cube->enemy.rtbck, cube->window.mlx);
+}
+
+void	destroy_maps(t_cube *cube)
+{
+	if (cube->imgsmap.north.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.north.img);
+	if (cube->imgsmap.south.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.south.img);
+	if (cube->imgsmap.east.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.east.img);
+	if (cube->imgsmap.west.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
+	if (cube->imgsmap.door.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.door.img);
+	destroy_enemy_imgs(cube);
 }
 
 int	close_window(t_cube *cube)

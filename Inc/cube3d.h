@@ -154,7 +154,7 @@ typedef struct	s_imgsmap
 	t_sprite	south;
 	t_sprite	east;
 	t_sprite	west;
-	int			door;
+	t_sprite	door;
 	int			floor;
 	int			ceiling;
 }	t_imgsmap;
