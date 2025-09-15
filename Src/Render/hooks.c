@@ -51,10 +51,18 @@ void	update_frame_time(t_cube *cube)
 int	loop_hook(t_cube *cube)
 {
 	update_frame_time(cube);
-	player_move_front_back(&cube->player, cube, cube->frame_time);
-	player_move_left_right(&cube->player, cube, cube->frame_time);
-	monster_logic(cube);
-	update_door_animation(&cube->map);
-	draw(cube);
+	if (cube->enemy.state != GAME_OVER)
+	{
+		player_move_front_back(&cube->player, cube, cube->frame_time);
+		player_move_left_right(&cube->player, cube, cube->frame_time);
+		monster_logic(cube);
+		update_door_animation(&cube->map);
+		draw(cube);
+	}
+	else
+	{
+		fade_out(cube);
+		death_monster(cube);
+	}
 	return (0);
 }

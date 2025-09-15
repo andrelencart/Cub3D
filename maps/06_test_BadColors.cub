@@ -1,9 +1,9 @@
-NO ./maps/00_test_EmptyLines.cub 
-SO ./maps/04_test_ExtraMidLines.cub
-WE ./maps/09_test_ExtraPlayer.cub
-EA ./maps/test_00.cub
+NO ./textures/walls/n_test.xpm
+SO ./textures/walls/s_test.xpm
+WE ./textures/walls/w_test.xpm
+EA ./textures/walls/e_test.xpm
 F                    923,1O,1
-C -225, 30,3205568847845252622213
+C -225, 30,32055688478452000022213
 
 
       111111111111111111111111

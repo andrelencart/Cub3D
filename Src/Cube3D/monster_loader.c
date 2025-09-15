@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 int	get_mon_tex(char *tex, void *ptrmlx, t_sprite *img)
@@ -55,6 +54,8 @@ cube->window.mlx, cube->enemy.rtbck))
 int	init_monster(t_cube *cube, t_parse *data)
 {
 	ft_memset(&cube->enemy, 0, sizeof(t_enemy));
+	cube->enemy.fade = 0.9;
+	cube->enemy.fade_timer = 0;
 	cube->enemy.monster.x = data->enemy_x + 0.5;
 	cube->enemy.monster.y = data->enemy_y + 0.5;
 	cube->enemy.monster.dir_x = cube->player.dir_x;
@@ -66,6 +67,6 @@ int	init_monster(t_cube *cube, t_parse *data)
 	cube->enemy.monster.rot_speed = 0.05;
 	cube->enemy.monster.strafing_left = 0;
 	cube->enemy.monster.strafing_right = 0;
-	cube->enemy.anim_speed = 0.17;
+	cube->enemy.anim_speed = 0.08;
 	return (load_mons_tex(cube));
 }

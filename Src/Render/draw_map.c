@@ -59,14 +59,14 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
 	{
 		wall_light(cube, ray, &factor);
-		if (ray->hit_door)
+		/*if (ray->hit_door)
 		{
 			door = find_door(&cube->map, ray->map_x, ray->map_y);
 			if (door && door->state < 1.0)
 				color = DOOR_COLOR;
 		}
-		else
-			color = get_texture_color(cube, ray, *y);
+		else*/
+		color = get_texture_color(cube, ray, *y);
 		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));
 		(*y)++;
 	}

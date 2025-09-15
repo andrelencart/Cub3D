@@ -2,6 +2,8 @@
 
 t_sprite	*get_tex_side(t_ray *ray, t_imgsmap *imgsmap)
 {
+	if (ray->hit_door == 1)
+		return (&imgsmap->door);
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir_x > 0)

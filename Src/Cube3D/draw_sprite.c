@@ -12,17 +12,18 @@ void	draw_sprite_y(int col, int tex_x, t_sprite *img, t_cube *cube)
 		y = 0;
 	while (y < img->draw_e_y && y < WIND_HEIGHT)
 	{
-		d = (y - img->draw_s_y) * 256; 
+		d = (y - img->draw_s_y) * 256;
 		tex_y = ((d * img->height) / img->sprt_h) / 256;
 		color = *(unsigned int *)(img->addr + (tex_y * img->line + tex_x * \
 (img->bpp / 8)));
 		if ((color & 0xFF000000) != 0xFF000000)
-			my_mlx_pixel_put(&cube->window, col, y, dim_color(color, img->factor));
+			my_mlx_pixel_put(&cube->window, col, y, dim_color(color, \
+img->factor));
 		y++;
 	}
 }
 
-void	draw_sprite_x(t_sprite *img, t_cube * cube)
+void	draw_sprite_x(t_sprite *img, t_cube *cube)
 {
 	int		col;
 	int		tex_x;
@@ -46,7 +47,7 @@ cube->zbuffer[col])
 	}
 }
 
-void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube)
+void	calculate_sprite(t_sprite *img, t_player *player, t_cube *cube)
 {
 	img->sprite_x = img->pos_x - player->x;
 	img->sprite_y = img->pos_y - player->y;
@@ -65,7 +66,7 @@ player->plane_x * img->sprite_y);
 	img->draw_s_x = -img->sprt_w / 2 + img->sprt_scrn_x;
 	if (img->draw_s_x < 0)
 		img->draw_s_x = 0;
-	img->draw_e_x = img->sprt_w /2 + img->sprt_scrn_x;
+	img->draw_e_x = img->sprt_w / 2 + img->sprt_scrn_x;
 	if (img->draw_e_x >= WIND_WIDTH)
 		img->draw_e_x = WIND_WIDTH - 1;
 	draw_sprite_x(img, cube);
@@ -96,9 +97,9 @@ t_sprite	*find_monster_dir(t_enemy *enemy, int index)
 
 void	draw_monster(t_enemy *enemy, t_cube *cube)
 {
-	double	dx;
-	double	dy;
-	double	relative_angle;
+	double		dx;
+	double		dy;
+	double		relative_angle;
 	t_sprite	*dir;
 
 	dx = cube->player.x - enemy->monster.x;

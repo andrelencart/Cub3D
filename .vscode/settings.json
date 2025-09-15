@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"libft.h": "c",
-		"cube3d.h": "c",
-		"map": "c",
-		"format": "c"
-	}
-}

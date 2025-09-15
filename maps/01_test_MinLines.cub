@@ -1,7 +1,7 @@
-NO ./maps/test_00.cub  
-SO ./Inc/cube3d.h   
-WE ./Src/Parsing/checker_helper.c 
-EA ./Src/Parsing/cub_checker.c 
+NO ./textures/walls/n_test.xpm
+SO ./textures/walls/s_test.xpm
+WE ./textures/walls/w_test.xpm
+EA ./textures/walls/e_test.xpm
 F 123,10,1
 C 225,30,132
       11111111111111111111
