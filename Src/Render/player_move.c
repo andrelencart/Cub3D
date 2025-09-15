@@ -21,22 +21,20 @@ int	rotate_player(t_player *player, double rot_speed)
 
 int mouse_move_handler(int x, int y, t_cube *cube)
 {
-	double		sensitivity;
 	static int	last_x = -1;
 	int			delta_x;
 
 	(void)y;
-	sensitivity = 0.0045;
 	if (last_x == -1)
 	{
 		last_x = x;
 		return (0);
 	}
-	window_edge_rotation(&last_x, x, cube, sensitivity);
+	window_edge_rotation(&last_x, x, cube, SENSITIVITY);
 	delta_x = x - last_x;
 	last_x = x;
 	if (delta_x != 0 )
-		rotate_player(&cube->player, delta_x * sensitivity);
+		rotate_player(&cube->player, delta_x * SENSITIVITY);
 	return (0);
 }
 
@@ -44,13 +42,13 @@ int	window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity)
 {
 	if (x <= 0)
 	{
-		rotate_player(&cube->player, -sensitivity * 10); // rotate left
+		rotate_player(&cube->player, -sensitivity * 10);
 		*last_x = x;
 		return (0);
 	}	
 	if (x >= WIND_WIDTH - 1)
 	{
-		rotate_player(&cube->player, sensitivity * 10); // rotate right
+		rotate_player(&cube->player, sensitivity * 10);
 		*last_x = x;
 		return (0);
 	}

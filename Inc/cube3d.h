@@ -1,11 +1,20 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/15 18:45:01 by andcarva          #+#    #+#             */
+/*   Updated: 2025/09/15 18:50:28 by andcarva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
 // LIBS
 # include "Libft/libft.h"
-// # include "cube_structs.h"
 # include <limits.h>
 # include <stddef.h>
 # include <stdbool.h>
@@ -17,7 +26,7 @@
 # include <unistd.h>
 # include "../minilibx-linux/mlx.h"
 # include "../Inc/Libft/libft.h"
-# include "cube_parse.h"//Parsing structs & functions - by ddiogo-f
+# include "cube_parse.h"
 
 // MAP_DEF
 # define WIND_WIDTH 1920
@@ -25,7 +34,7 @@
 # define TILE_SIZE 20
 
 // MATH
-# define PI 3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912
+# define PI 3.141592653589793238462643383279502884197169399375105820974944592
 
 // KEY_DEF
 # define ESC 65307
@@ -70,11 +79,12 @@
 # define DIM_FACTOR 0.05
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
+# define SENSITIVITY 0.0015
 # define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
 # define PLAYER_INTERACTION 0.9
-# define MINIMAP_VIEW_SIZE 11 // Pixels
-# define MINIMAP_TILE_SIZE 20 // Pixels
+# define MINIMAP_VIEW_SIZE 11
+# define MINIMAP_TILE_SIZE 20
 
 // // CORD_DEF
 // # define X 0
@@ -90,32 +100,9 @@
 # define ERROR_CHAR "INVALID CHARACTER IN MAP"
 # define ERROR_FORMAT "MAP NOT RETANGULAR"
 
-// MAP's
-
-// char *test_map[] = {
-// 	"1111111111",
-//     "1000000001",
-//     "1011111101",
-//     "1010000101",
-//     "1010P00101",
-//     "1010111101",
-//     "1000000001",
-//     "1111111111",
-//     NULL
-// };
-
-// static char *test_map[] = {
-//     "111111",
-//     "100001",
-//     "100001",
-//     "111111",
-// 	NULL
-// };
-
 // STRUCTS
 
-//struct for texture storage & usage
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	void	*img;
 	char	*addr;
@@ -124,31 +111,25 @@ typedef struct	s_sprite
 	int		line;
 	int		width;//image width
 	int		height;//image height
-
 	double	pos_x;//position in map || posicion in texture x
 	double	pos_y;//position in map || posicion in texture y
-
 	double	sprite_x;//coord relative to player/camera
 	double	sprite_y;
-
 	double	inv_det;//for camera space coord
 	double	trans_x;
 	double	trans_y;
-
 	int		sprt_scrn_x;//sprite center in screen coord
 	int		sprt_h;//sprite height || tex heigth * factor
 	int		sprt_w;//sprite width || tex width * factor
-
 	int		draw_s_y;//screen coord to start and end drawing // || draw start y
 	int		draw_e_y;
 	int		draw_s_x;// || draw start x
 	int		draw_e_x;
-
 	double	factor;// || zoom in end
 }	t_sprite;
 
 //Wall textures, floor & ceiling colors
-typedef struct	s_imgsmap
+typedef struct s_imgsmap
 {
 	t_sprite	north;
 	t_sprite	south;
@@ -159,7 +140,7 @@ typedef struct	s_imgsmap
 	int			ceiling;
 }	t_imgsmap;
 
-typedef	struct s_window
+typedef struct s_window
 {
 	void	*mlx;
 	void	*mlx_window;
@@ -217,7 +198,7 @@ typedef struct s_enemy
 	int			fade_timer;
 }				t_enemy;
 
-typedef struct  s_ray
+typedef struct s_ray
 {
 	double	ray_dir_x;
 	double	ray_dir_y;
@@ -241,15 +222,15 @@ typedef struct  s_ray
 	double	raydir_light[4];
 }			t_ray;
 
-typedef	struct s_door
+typedef struct s_door
 {
 	int		cord_x;
 	int		cord_y;
-	double	state; 		// 0.0 closed | 1.0 opened
-	int		anim_state;	// 1 opened | -1 closed | 0 idle
+	double	state;// 0.0 closed | 1.0 opened
+	int		anim_state;// 1 opened | -1 closed | 0 idle
 }			t_door;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char	**grid;
 	int		width;
@@ -269,15 +250,15 @@ typedef struct s_light
 	double	m_m_fov;
 }			t_light;
 
-typedef	struct s_mini_map
+typedef struct s_mini_map
 {
 	int		offset_x;
 	int		offset_y;
-	int 	player_size;
+	int		player_size;
 	int		player_mini_x;
 	int		player_mini_y;
-	int 	num_rays;
-	int 	ray_length;
+	int		num_rays;
+	int		ray_length;
 	int		tile_size;
 	int		color;
 	double	camera_x;
@@ -305,102 +286,105 @@ typedef struct s_cube
 
 // INIT
 
-void	init(t_cube *cube, t_parse *data);
-void	init_lighting(t_light *light);
-void	init_player(t_player *player, t_parse *data, int map_height);
-void	init_map(t_map *temap, t_parse *data);
-void	init_door(t_map *map);
-void	init_mini_map(t_mini_map *mini_map);
-void	init_window(t_window *window);
-void	init_ray(t_player *player, t_ray *ray, int x);
-void	init_ray(t_player *player, t_ray *ray, int x);
-void	init_dda(t_player *player, t_ray *ray);
-void	init_steps(t_player *player, t_ray *ray);
-void	set_player_camera_plane(t_player *player);
-int		init_imgsmap(void *ptrmlx, t_imgsmap *imgsmap, t_parse *data);
-int		load_imgsmaps(void *ptrmlx, t_sprite *sprite, char *filepath);
+void			init(t_cube *cube, t_parse *data);
+void			init_lighting(t_light *light);
+void			init_player(t_player *player, t_parse *data, int map_height);
+void			init_map(t_map *temap, t_parse *data);
+void			init_door(t_map *map);
+void			init_mini_map(t_mini_map *mini_map);
+void			init_window(t_window *window);
+void			init_ray(t_player *player, t_ray *ray, int x);
+void			init_ray(t_player *player, t_ray *ray, int x);
+void			init_dda(t_player *player, t_ray *ray);
+void			init_steps(t_player *player, t_ray *ray);
+void			set_player_camera_plane(t_player *player);
+int				init_imgsmap(void *ptrmlx, t_imgsmap *imgsmap, t_parse *data);
+int				load_imgsmaps(void *ptrmlx, t_sprite *sprite, char *filepath);
 
 // HOOKS
 
-int		testkey(int key_code, t_window *wind);
-void	hook_control(t_cube *cube);
-int		loop_hook(t_cube *cube);
-int		key_press(int key_code, t_cube *cube);
-int		key_release(int key_code, t_cube *cube);
-int		move_update_flag_release(int keycode, t_cube *cube);
-int		move_update_flag_press(int keycode, t_cube *cube);
+int				testkey(int key_code, t_window *wind);
+void			hook_control(t_cube *cube);
+int				loop_hook(t_cube *cube);
+int				key_press(int key_code, t_cube *cube);
+int				key_release(int key_code, t_cube *cube);
+int				move_update_flag_release(int keycode, t_cube *cube);
+int				move_update_flag_press(int keycode, t_cube *cube);
 
 // DRAW
 
-void	draw(t_cube *cube);
-void	my_mlx_pixel_put(t_window *win, int x, int y, int color);
-void	raycast(t_cube *cube);
-int		raycast_wall_hit(t_ray *ray, int map_height, int map_width);
-void	dda_loop(t_ray *ray, char **map, int map_height, int map_width);
-void	calc_wall_dist(t_player *player, t_ray *ray);
-void	draw_3d_map(t_cube *cube, t_ray *ray, int x);
-int		get_texture_color(t_cube *cube, t_ray *ray, int y);
-void	draw_monster(t_enemy *enemy, t_cube *cube);
-void	calculate_sprite(t_sprite *img, t_player *player, t_cube * cube);
-void	fade_out(t_cube *cube);
+void			draw(t_cube *cube);
+void			my_mlx_pixel_put(t_window *win, int x, int y, int color);
+void			raycast(t_cube *cube);
+int				raycast_wall_hit(t_ray *ray, int map_height, int map_width);
+void			dda_loop(t_ray *ray, char **map, int map_height, int map_width);
+void			calc_wall_dist(t_player *player, t_ray *ray);
+void			draw_3d_map(t_cube *cube, t_ray *ray, int x);
+int				get_texture_color(t_cube *cube, t_ray *ray, int y);
+void			draw_monster(t_enemy *enemy, t_cube *cube);
+void			calculate_sprite(t_sprite *img, t_player *player, t_cube *cube);
+void			fade_out(t_cube *cube);
+
 // LIGHT
 
 unsigned int	dim_color(unsigned int color, double factor);
 void			wall_light(t_cube *cube, t_ray *ray, double *factor);
-void			get_row_distance_and_rays(t_cube *cube, int y, double *row_distance);
-void			compute_floor_pos(int x, double row_distance, t_cube *cube, double floor[2]);
-double			get_light_factor(double px, double py, t_player *player, t_light *light);
-// double			get_vertical_light_factor(int y, int draw_end, int window_height, double min, double max);
+void			get_row_distance_and_rays(t_cube *cube, int y, \
+double *row_distance);
+void			compute_floor_pos(int x, double row_distance, \
+t_cube *cube, double floor[2]);
+double			get_light_factor(double px, double py, \
+t_player *player, t_light *light);
 
 // MINI MAP
 
-void	draw_tile(t_window *win, int start_x, int start_y, int color);
-void	draw_mini_map(t_cube *cube);
-void	draw_centered_mini_map(t_cube *cube, int half_view);
-void	draw_player_mini_map(t_cube *cube, int half_view);
-void	vision_mini_map(t_cube *cube, int half_view);
-void	get_mini_map_color(t_cube *cube, int x, int y, int half_view);
-void	vision_mini_map_init(t_cube *cube, int half_view);
-void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
+void			draw_tile(t_window *win, int start_x, int start_y, int color);
+void			draw_mini_map(t_cube *cube);
+void			draw_centered_mini_map(t_cube *cube, int half_view);
+void			draw_player_mini_map(t_cube *cube, int half_view);
+void			vision_mini_map(t_cube *cube, int half_view);
+void			get_mini_map_color(t_cube *cube, int x, int y, int half_view);
+void			vision_mini_map_init(t_cube *cube, int half_view);
+void			mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
 
-int		init_monster(t_cube *cube, t_parse *data);
-void	monster_logic(t_cube *cube);
-void	death_monster(t_cube *cube);
+int				init_monster(t_cube *cube, t_parse *data);
+void			monster_logic(t_cube *cube);
+void			death_monster(t_cube *cube);
 
 // DOORS
 
-void	door_interaction(t_map *map, t_player *player);
-void	update_door_animation(t_map *map);
-void	count_doors(t_map *map);
-t_door *find_door(t_map *map, int x, int y);
+void			door_interaction(t_map *map, t_player *player);
+void			update_door_animation(t_map *map);
+void			count_doors(t_map *map);
+t_door			*find_door(t_map *map, int x, int y);
 
 // UTILS
 
-int		get_tile_color(char c, t_cube *cube);
-void	update_frame_time(t_cube *cube);
-void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
-void	calc_wall_x(t_ray *ray, t_player *player);
-// void 	get_floor_pixel_pos(t_ray *ray, t_cube *cube, int y, double floor[2]);
-// void	get_floor_pixel_pos(int x, int y, t_cube *cube, double floor[2]);
-int		can_move(t_cube *cube, double x, double y, double radius);
-int		is_wall(t_cube *cube, double x, double y);
-void	print_map(t_map *map);
+int				get_tile_color(char c, t_cube *cube);
+void			update_frame_time(t_cube *cube);
+void			floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
+void			calc_wall_x(t_ray *ray, t_player *player);
+int				can_move(t_cube *cube, double x, double y, double radius);
+int				is_wall(t_cube *cube, double x, double y);
+void			print_map(t_map *map);
 
 // PLAYER MOVEMENT
 
-int		player_rotation(t_player *player, int key_code);
-int		rotate_player(t_player *player, double rot_speed);
-// int		player_move_left_right(t_player *player, char **map, double frame_time, int map_height);
-int		player_move_left_right(t_player *player, t_cube *cube, double frame_time);
-int		player_move_front_back(t_player *player, t_cube *cube, double frame_time);
-int		mouse_move_handler(int x, int y, t_cube *cube);
-int		window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity);
+int				player_rotation(t_player *player, int key_code);
+int				rotate_player(t_player *player, double rot_speed);
+int				player_move_left_right(t_player *player, \
+t_cube *cube, double frame_time);
+int				player_move_front_back(t_player *player, \
+t_cube *cube, double frame_time);
+int				mouse_move_handler(int x, int y, t_cube *cube);
+int				window_edge_rotation(int *last_x, int x, \
+t_cube *cube, double sensitivity);
 
 // CLOSE
 
-int		close_window(t_cube *cube);
-void	destroy_maps(t_cube *cube);
+int				close_window(t_cube *cube);
+void			destroy_maps(t_cube *cube);
 
 #endif //CUBE3D_H

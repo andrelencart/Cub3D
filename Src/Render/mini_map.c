@@ -22,13 +22,12 @@ void	draw_centered_mini_map(t_cube *cube, int half_view)
 		while (x <= half_view)
 		{
 			get_mini_map_color(cube, x, y, half_view);
-			// draw_tile(&cube->window, cube->mini_map.offset_x + x * TILE_SIZE, cube->mini_map.offset_y + y * TILE_SIZE,
-			// get_tile_color(cube->map.grid[y][x]));
 			x++;
 		}
 		y++;
 	}
 }
+
 void	draw_player_mini_map(t_cube *cube, int half_view)
 {
 	int	x;
