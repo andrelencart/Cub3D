@@ -26,7 +26,7 @@ int mouse_move_handler(int x, int y, t_cube *cube)
 	int			delta_x;
 
 	(void)y;
-	sensitivity = 0.0015;
+	sensitivity = 0.0045;
 	if (last_x == -1)
 	{
 		last_x = x;

@@ -68,11 +68,11 @@
 
 // UTILS
 # define DIM_FACTOR 0.05
-# define LIGHT_RAD 1.7
+# define LIGHT_RAD 2.7
 # define MOVE_SPEED 1.5
 # define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
-# define PLAYER_INTERACTION 0.7
+# define PLAYER_INTERACTION 0.9
 # define MINIMAP_VIEW_SIZE 11 // Pixels
 # define MINIMAP_TILE_SIZE 20 // Pixels
 
