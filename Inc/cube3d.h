@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/15 18:45:01 by andcarva          #+#    #+#             */
-/*   Updated: 2025/09/15 18:50:28 by andcarva         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
@@ -35,6 +23,7 @@
 
 // MATH
 # define PI 3.141592653589793238462643383279502884197169399375105820974944592
+// # define PI 4 * (1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + 1/13 - 1/15)
 
 // KEY_DEF
 # define ESC 65307
@@ -79,7 +68,7 @@
 # define DIM_FACTOR 0.05
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
-# define SENSITIVITY 0.0015
+# define SENSITIVITY 0.0020
 # define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
 # define PLAYER_INTERACTION 0.9
@@ -359,12 +348,14 @@ void			door_interaction(t_map *map, t_player *player);
 void			update_door_animation(t_map *map);
 void			count_doors(t_map *map);
 t_door			*find_door(t_map *map, int x, int y);
+void			state_of_animation(t_map *map, t_door *door);
 
 // UTILS
 
 int				get_tile_color(char c, t_cube *cube);
 void			update_frame_time(t_cube *cube);
-void			floors_walls(t_cube *cube, t_ray *ray, int x, int *y);
+void			walls(t_cube *cube, t_ray *ray, int x, int *y);
+void			floors(t_cube *cube, double floor[2], int x, int *y);
 void			calc_wall_x(t_ray *ray, t_player *player);
 int				can_move(t_cube *cube, double x, double y, double radius);
 int				is_wall(t_cube *cube, double x, double y);

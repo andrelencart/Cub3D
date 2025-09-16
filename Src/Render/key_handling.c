@@ -1,9 +1,7 @@
-
 #include "../../Inc/cube3d.h"
 
 int	move_update_flag_press(int keycode, t_cube *cube)
 {
-	// printf("entrou flag\n");
 	if (keycode == W)
 		cube->player.moving_forward = 1;
 	else if (keycode == S)

@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 void	init_door(t_map *map)
@@ -37,7 +36,7 @@ void	count_doors(t_map *map)
 
 	y = 0;
 	map->n_doors = 0;
-	while (y < map->height) 
+	while (y < map->height)
 	{
 		x = 0;
 		while (x < map->width)
@@ -59,31 +58,12 @@ void	update_door_animation(t_map *map)
 	while (i < map->n_doors)
 	{
 		door = &map->doors[i];
-		if (door->anim_state == -1)
-		{
-			door->state += DOOR_SPEED;
-			if (door->state >= 1.0)
-			{
-				door->state = 1.0;
-				door->anim_state = 0;
-				map->grid[door->cord_y][door->cord_x] = 'O';
-			}
-		}
-		if (door->anim_state == 1)
-		{
-			door->state -= DOOR_SPEED;
-			if (door->state <= 0.0)
-			{
-				door->state = 0.0;
-				door->anim_state = 0;
-				map->grid[door->cord_y][door->cord_x] = 'D';
-			}
-		}
+		state_of_animation(map, door);
 		i++;
 	}
 }
 
-t_door *find_door(t_map *map, int x, int y)
+t_door	*find_door(t_map *map, int x, int y)
 {
 	int	i;
 
@@ -99,16 +79,17 @@ t_door *find_door(t_map *map, int x, int y)
 
 void	door_interaction(t_map *map, t_player *player)
 {
-	int	front_x;
-	int	front_y;
-	t_door *door;
+	int		front_x;
+	int		front_y;
+	t_door	*door;
 
 	front_x = (int)(player->x + player->dir_x * PLAYER_INTERACTION);
 	front_y = (int)(player->y + player->dir_y * PLAYER_INTERACTION);
-	if (front_x <= 0 || front_y <= 0 || front_x >= map->width || front_y >= map->height \
-|| map->grid[(int)player->y][(int)player->x] == 'O')
+	if (front_x <= 0 || front_y <= 0 || front_x >= map->width \
+|| front_y >= map->height || map->grid[(int)player->y][(int)player->x] == 'O')
 		return ;
-	if (map->grid[front_y][front_x] == 'D' || map->grid[front_y][front_x] == 'O')
+	if (map->grid[front_y][front_x] == 'D' \
+|| map->grid[front_y][front_x] == 'O')
 	{
 		door = find_door(map, front_x, front_y);
 		if (door && door->anim_state == 0)
@@ -120,5 +101,3 @@ void	door_interaction(t_map *map, t_player *player)
 		}
 	}
 }
-
-

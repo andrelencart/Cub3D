@@ -2,15 +2,13 @@
 
 void	draw(t_cube *cube)
 {
-	// mlx_mouse_hide(cube->window.mlx, cube->window.mlx_window);
-	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT * (cube->window.bitpp / 8));
-	// mlx_destroy_image(cube->window.mlx, cube->window.img);
-	// cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
-	// mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
+	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT \
+* (cube->window.bitpp / 8));
 	raycast(cube);
 	draw_monster(&cube->enemy, cube);
 	draw_mini_map(cube);
-	mlx_put_image_to_window(cube->window.mlx,cube->window.mlx_window, cube->window.img, 0, 0);
+	mlx_put_image_to_window(cube->window.mlx, \
+cube->window.mlx_window, cube->window.img, 0, 0);
 }
 
 void	raycast(t_cube *cube)
@@ -39,21 +37,21 @@ void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 	int	y;
 
 	y = 0;
-	while (y < ray->draw_start) // CEILING
+	while (y < ray->draw_start)
 	{
-		my_mlx_pixel_put(&cube->window, x, y, dim_color(cube->imgsmap.ceiling, cube->light.min));
+		my_mlx_pixel_put(&cube->window, x, y, \
+dim_color(cube->imgsmap.ceiling, cube->light.min));
 		y++;
 	}
-	floors_walls(cube, ray, x, &y);
+	walls(cube, ray, x, &y);
 }
 
-void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
+void	walls(t_cube *cube, t_ray *ray, int x, int *y)
 {
 	double	floor[2];
-	double	row_distance;
 	double	factor;
 	int		color;
-	t_door *door;
+	t_door	*door;
 
 	factor = 0.0;
 	while (*y <= ray->draw_end && *y < WIND_HEIGHT)
@@ -70,12 +68,23 @@ void	floors_walls(t_cube *cube, t_ray *ray, int x, int *y)
 		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));
 		(*y)++;
 	}
+	floors(cube, floor, x, y);
+}
+
+void	floors(t_cube *cube, double floor[2], int x, int *y)
+{
+	double	row_distance;
+	double	factor;
+
+	factor = 0.0;
 	while (*y < WIND_HEIGHT)
 	{
 		get_row_distance_and_rays(cube, *y, &row_distance);
 		compute_floor_pos(x, row_distance, cube, floor);
-		factor = get_light_factor(floor[0], floor[1], &cube->player, &cube->light);
-		my_mlx_pixel_put(&cube->window, x, *y, dim_color(cube->imgsmap.floor, factor));
+		factor = get_light_factor(floor[0], floor[1], \
+&cube->player, &cube->light);
+		my_mlx_pixel_put(&cube->window, x, *y, \
+dim_color(cube->imgsmap.floor, factor));
 		(*y)++;
 	}
 }
