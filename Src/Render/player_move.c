@@ -60,7 +60,7 @@ int	player_move_front_back(t_player *player, t_cube *cube, double frame_time)
 	double	new_x;
 	double	new_y;
 
-	move_speed = frame_time * MOVE_SPEED;
+	move_speed = frame_time * cube->player.move_speed;
 	if (player->moving_forward)
 	{
 		new_x = player->x + player->dir_x * move_speed;
@@ -88,7 +88,7 @@ int	player_move_left_right(t_player *player, t_cube *cube, double frame_time)
 	double	new_x;
 	double	new_y;
 
-	move_speed = frame_time * MOVE_SPEED;
+	move_speed = frame_time * cube->player.move_speed;
 	if (player->strafing_right)
 	{
 		new_x = player->x + player->plane_x * move_speed;

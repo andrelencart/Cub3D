@@ -51,6 +51,7 @@
 # define M 109
 # define R 114
 # define E 101
+# define ENTER 65293
 
 // COLOR_DEF
 # define WHITE 0xFFFFFF
@@ -68,7 +69,7 @@
 # define DIM_FACTOR 0.05
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
-# define SENSITIVITY 0.0020
+# define SENSITIVITY 0.0017
 # define DOOR_SPEED 0.2
 # define PLAYER_COLL_RAD 0.2
 # define PLAYER_INTERACTION 0.9
@@ -107,7 +108,7 @@ typedef struct s_sprite
 	double	inv_det;//for camera space coord
 	double	trans_x;
 	double	trans_y;
-	int		sprt_scrn_x;//sprite center in screen coord
+	int		sprt_scrn_x;//sprimove_speedte center in screen coord
 	int		sprt_h;//sprite height || tex heigth * factor
 	int		sprt_w;//sprite width || tex width * factor
 	int		draw_s_y;//screen coord to start and end drawing // || draw start y
@@ -151,6 +152,7 @@ typedef struct s_player
 	double	plane_x;	// Camera plane for FOV
 	double	plane_y;
 	double	rot_speed;
+	double	move_speed;
 	int		moving_forward;
 	int		moving_backward;
 	int		strafing_left;
@@ -160,6 +162,8 @@ typedef struct s_player
 
 typedef enum e_state
 {
+	MENU,
+	GAME,
 	WANDER,
 	PURSUIT,
 	GAME_OVER
@@ -266,6 +270,7 @@ typedef struct s_cube
 	t_imgsmap		imgsmap;
 	t_light			light;
 	t_enemy			enemy;
+	t_state			state;
 	double			frame_time;
 	double			*zbuffer;
 	struct timeval	last_time;
@@ -359,7 +364,8 @@ void			floors(t_cube *cube, double floor[2], int x, int *y);
 void			calc_wall_x(t_ray *ray, t_player *player);
 int				can_move(t_cube *cube, double x, double y, double radius);
 int				is_wall(t_cube *cube, double x, double y);
-void			print_map(t_map *map);
+void			game_menu(t_cube *cube);
+// void			print_map(t_map *map);
 
 // PLAYER MOVEMENT
 

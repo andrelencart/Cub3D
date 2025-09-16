@@ -4,6 +4,7 @@ void	init(t_cube *cube, t_parse *data)
 {
 	ft_memset(cube, 0, sizeof(t_cube));
 	init_window(&cube->window);
+	cube->state = MENU;
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
 	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
@@ -42,6 +43,7 @@ void	init_player(t_player *player, t_parse *data, int map_height)
 	player->moving_backward = 0;
 	player->strafing_left = 0;
 	player->strafing_right = 0;
+	player->move_speed = MOVE_SPEED;
 }
 
 void	init_map(t_map *map, t_parse *data)
@@ -72,7 +74,4 @@ void	init_window(t_window *window)
 	window->mlx = mlx_init();
 	window->mlx_window = mlx_new_window(window->mlx, WIND_WIDTH, \
 WIND_HEIGHT, "CUBE3D");
-	window->img = mlx_new_image(window->mlx, WIND_WIDTH, WIND_HEIGHT);
-	window->addr = mlx_get_data_addr(window->img, &window->bitpp, \
-&window->line_length, &window->endian);
 }

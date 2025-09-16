@@ -13,6 +13,8 @@ int	key_press(int key_code, t_cube *cube)
 {
 	if (key_code == ESC)
 		close_window(cube);
+	else if (key_code == ENTER && cube->state == MENU)
+		cube->state = GAME;
 	else if (key_code == RA || key_code == LA)
 		player_rotation(&cube->player, key_code);
 	else if (key_code == W || key_code == A || \
@@ -21,7 +23,7 @@ key_code == S || key_code == D)
 	else if (key_code == E)
 		door_interaction(&cube->map, &cube->player);
 	else if (key_code == SHIFT_LEFT || key_code == SHIFT_RIGHT)
-		cube->player.is_crouching = 1;
+		cube->player.move_speed = MOVE_SPEED + 0.5;
 	return (0);
 }
 
@@ -31,7 +33,7 @@ int	key_release(int key_code, t_cube *cube)
 key_code == S || key_code == D)
 		move_update_flag_release(key_code, cube);
 	else if (key_code == SHIFT_LEFT || key_code == SHIFT_RIGHT)
-		cube->player.is_crouching = 0;
+		cube->player.move_speed = MOVE_SPEED;
 	return (0);
 }
 
@@ -50,18 +52,27 @@ void	update_frame_time(t_cube *cube)
 int	loop_hook(t_cube *cube)
 {
 	update_frame_time(cube);
-	if (cube->enemy.state != GAME_OVER)
+	if (cube->state == MENU)
+		game_menu(cube);
+	if (cube->state == GAME)
 	{
-		player_move_front_back(&cube->player, cube, cube->frame_time);
-		player_move_left_right(&cube->player, cube, cube->frame_time);
-		monster_logic(cube);
-		update_door_animation(&cube->map);
-		draw(cube);
-	}
-	else
-	{
-		fade_out(cube);
-		death_monster(cube);
+		mlx_destroy_image(cube->window.mlx, cube->window.img);
+		cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+		cube->window.addr = mlx_get_data_addr(cube->window.img, &cube->window.bitpp, \
+&cube->window.line_length, &cube->window.endian);
+		if (cube->enemy.state != GAME_OVER)
+		{
+			player_move_front_back(&cube->player, cube, cube->frame_time);
+			player_move_left_right(&cube->player, cube, cube->frame_time);
+			monster_logic(cube);
+			update_door_animation(&cube->map);
+			draw(cube);
+		}
+		else
+		{
+			fade_out(cube);
+			death_monster(cube);
+		}
 	}
 	return (0);
 }

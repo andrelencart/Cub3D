@@ -28,7 +28,9 @@ MAIN_C			=	cube3D_main.c \
 					texture_loader.c
 
 #RENDER_MAIN_C	=	render_main.c
-RENDER_FILES_C	=	hooks.c init.c \
+RENDER_FILES_C	=	hooks.c \
+					init.c \
+					entry_window.c \
 					draw_utils.c \
 					draw_map.c \
 					raycast.c \
@@ -41,7 +43,7 @@ RENDER_FILES_C	=	hooks.c init.c \
 					mini_map_utils.c \
 					doors.c \
 					frees_gen_utils.c \
-					close_destroy.c
+					close_destroy.c \
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
