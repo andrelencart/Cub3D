@@ -2,13 +2,13 @@
 
 void	draw(t_cube *cube)
 {
-	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT \
-* (cube->window.bitpp / 8));
+// 	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT \
+// * (cube->window.bitpp / 8));
 	raycast(cube);
 	draw_monster(&cube->enemy, cube);
 	draw_mini_map(cube);
 	mlx_put_image_to_window(cube->window.mlx, \
-cube->window.mlx_window, cube->window.img, 0, 0);
+cube->window.mlx_window, cube->game_img.img, 0, 0);
 }
 
 void	raycast(t_cube *cube)
@@ -39,7 +39,7 @@ void	draw_3d_map(t_cube *cube, t_ray *ray, int x)
 	y = 0;
 	while (y < ray->draw_start)
 	{
-		my_mlx_pixel_put(&cube->window, x, y, \
+		my_mlx_pixel_put(&cube->game_img, x, y, \
 dim_color(cube->imgsmap.ceiling, cube->light.min));
 		y++;
 	}
@@ -65,7 +65,7 @@ void	walls(t_cube *cube, t_ray *ray, int x, int *y)
 		}
 		else
 			color = get_texture_color(cube, ray, *y);
-		my_mlx_pixel_put(&cube->window, x, *y, dim_color(color, factor));
+		my_mlx_pixel_put(&cube->game_img, x, *y, dim_color(color, factor));
 		(*y)++;
 	}
 	floors(cube, floor, x, y);
@@ -83,7 +83,7 @@ void	floors(t_cube *cube, double floor[2], int x, int *y)
 		compute_floor_pos(x, row_distance, cube, floor);
 		factor = get_light_factor(floor[0], floor[1], \
 &cube->player, &cube->light);
-		my_mlx_pixel_put(&cube->window, x, *y, \
+		my_mlx_pixel_put(&cube->game_img, x, *y, \
 dim_color(cube->imgsmap.floor, factor));
 		(*y)++;
 	}

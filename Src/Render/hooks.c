@@ -15,6 +15,8 @@ int	key_press(int key_code, t_cube *cube)
 		close_window(cube);
 	else if (key_code == ENTER && cube->state == MENU)
 		cube->state = GAME;
+	else if (key_code == ENTER && cube->state == GAME)
+		cube->state = MENU;
 	else if (key_code == RA || key_code == LA)
 		player_rotation(&cube->player, key_code);
 	else if (key_code == W || key_code == A || \
@@ -56,10 +58,6 @@ int	loop_hook(t_cube *cube)
 		game_menu(cube);
 	if (cube->state == GAME)
 	{
-		mlx_destroy_image(cube->window.mlx, cube->window.img);
-		cube->window.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
-		cube->window.addr = mlx_get_data_addr(cube->window.img, &cube->window.bitpp, \
-&cube->window.line_length, &cube->window.endian);
 		if (cube->enemy.state != GAME_OVER)
 		{
 			player_move_front_back(&cube->player, cube, cube->frame_time);

@@ -12,7 +12,7 @@ int	get_tile_color(char c, t_cube *cube)
 	return (WHITE);
 }
 
-void	draw_tile(t_window *win, int start_x, int start_y, int color)
+void	draw_tile(t_cube *cube, int start_x, int start_y, int color)
 {
 	int	y;
 	int	x;
@@ -23,7 +23,7 @@ void	draw_tile(t_window *win, int start_x, int start_y, int color)
 		x = 0;
 		while (x < TILE_SIZE)
 		{
-			my_mlx_pixel_put(win, start_x + x, start_y + y, color);
+			my_mlx_pixel_put(&cube->game_img, start_x + x, start_y + y, color);
 			x++;
 		}
 		y++;

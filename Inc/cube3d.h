@@ -134,12 +134,16 @@ typedef struct s_window
 {
 	void	*mlx;
 	void	*mlx_window;
+}			t_window;
+
+typedef struct s_image
+{
 	void	*img;
 	char	*addr;
 	int		bitpp;
 	int		line_length;
 	int		endian;
-}			t_window;
+}			t_image;
 
 typedef struct s_player
 {
@@ -271,6 +275,8 @@ typedef struct s_cube
 	t_light			light;
 	t_enemy			enemy;
 	t_state			state;
+	t_image			game_img;
+	t_image			menu_img;
 	double			frame_time;
 	double			*zbuffer;
 	struct timeval	last_time;
@@ -286,7 +292,7 @@ void			init_player(t_player *player, t_parse *data, int map_height);
 void			init_map(t_map *temap, t_parse *data);
 void			init_door(t_map *map);
 void			init_mini_map(t_mini_map *mini_map);
-void			init_window(t_window *window);
+void			init_window(t_cube *cube);
 void			init_ray(t_player *player, t_ray *ray, int x);
 void			init_ray(t_player *player, t_ray *ray, int x);
 void			init_dda(t_player *player, t_ray *ray);
@@ -308,7 +314,7 @@ int				move_update_flag_press(int keycode, t_cube *cube);
 // DRAW
 
 void			draw(t_cube *cube);
-void			my_mlx_pixel_put(t_window *win, int x, int y, int color);
+void			my_mlx_pixel_put(t_image *win, int x, int y, int color);
 void			raycast(t_cube *cube);
 int				raycast_wall_hit(t_ray *ray, int map_height, int map_width);
 void			dda_loop(t_ray *ray, char **map, int map_height, int map_width);
@@ -332,7 +338,7 @@ t_player *player, t_light *light);
 
 // MINI MAP
 
-void			draw_tile(t_window *win, int start_x, int start_y, int color);
+void			draw_tile(t_cube *cube, int start_x, int start_y, int color);
 void			draw_mini_map(t_cube *cube);
 void			draw_centered_mini_map(t_cube *cube, int half_view);
 void			draw_player_mini_map(t_cube *cube, int half_view);

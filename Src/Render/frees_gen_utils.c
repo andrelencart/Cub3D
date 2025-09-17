@@ -24,7 +24,7 @@ void	state_of_animation(t_map *map, t_door *door)
 	}
 }
 
-void	my_mlx_pixel_put(t_window *win, int x, int y, int color)
+void	my_mlx_pixel_put(t_image *win, int x, int y, int color)
 {
 	char	*dst;
 

@@ -18,7 +18,7 @@ void	get_mini_map_color(t_cube *cube, int x, int y, int half_view)
 && map_y < cube->map.height)
 		cube->mini_map.color = get_tile_color \
 (cube->map.grid[map_y][map_x], cube);
-	draw_tile(&cube->window, pixel_x, pixel_y, cube->mini_map.color);
+	draw_tile(cube, pixel_x, pixel_y, cube->mini_map.color);
 }
 
 void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y)
@@ -42,7 +42,7 @@ void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y)
 cube->mini_map.ray_dir_x * distance * MINIMAP_TILE_SIZE);
 		draw_y = (int)(cube->mini_map.player_mini_y + \
 cube->mini_map.ray_dir_y * distance * MINIMAP_TILE_SIZE);
-		my_mlx_pixel_put(&cube->window, draw_x, draw_y, cube->imgsmap.floor);
+		my_mlx_pixel_put(&cube->game_img, draw_x, draw_y, cube->imgsmap.floor);
 		distance += step;
 	}
 }

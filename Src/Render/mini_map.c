@@ -43,7 +43,7 @@ void	draw_player_mini_map(t_cube *cube, int half_view)
 		x = -cube->mini_map.player_size;
 		while (x <= cube->mini_map.player_size)
 		{
-			my_mlx_pixel_put(&cube->window, cube->mini_map.player_mini_x + x, \
+			my_mlx_pixel_put(&cube->game_img, cube->mini_map.player_mini_x + x, \
 cube->mini_map.player_mini_y + y, cube->imgsmap.floor);
 			x++;
 		}

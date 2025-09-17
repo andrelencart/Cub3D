@@ -3,8 +3,9 @@
 void	init(t_cube *cube, t_parse *data)
 {
 	ft_memset(cube, 0, sizeof(t_cube));
-	init_window(&cube->window);
+	init_window(cube);
 	cube->state = MENU;
+	// cube->state = GAME;
 	init_map(&cube->map, data);
 	init_player(&cube->player, data, cube->map.height);
 	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
@@ -69,9 +70,13 @@ void	init_mini_map(t_mini_map *mini_map)
 	mini_map->color = 0;
 }
 
-void	init_window(t_window *window)
+void	init_window(t_cube *cube)
 {
-	window->mlx = mlx_init();
-	window->mlx_window = mlx_new_window(window->mlx, WIND_WIDTH, \
+	cube->window.mlx = mlx_init();
+	cube->window.mlx_window = mlx_new_window(cube->window.mlx, WIND_WIDTH, \
 WIND_HEIGHT, "CUBE3D");
+	cube->game_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+	// cube->menu_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, &cube->game_img.bitpp, \
+&cube->game_img.line_length, &cube->game_img.endian);
 }
