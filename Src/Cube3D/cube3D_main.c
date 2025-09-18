@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 		return (free_data(data), 1);
 	if (init(&cube, data) == 1)
 	{
-		free_data(data);
+		release_data(data);
 		close_window(&cube);
 		return (0);
 	}
