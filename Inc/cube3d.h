@@ -20,7 +20,6 @@
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
 # define TILE_SIZE 20
-// # define malloc(x) NULL
 
 // MATH
 # define PI 3.141592653589793238462643383279502884197169399375105820974944592
@@ -75,11 +74,6 @@
 # define PLAYER_INTERACTION 0.9
 # define MINIMAP_VIEW_SIZE 11
 # define MINIMAP_TILE_SIZE 20
-
-// // CORD_DEF
-// # define X 0
-// # define Y 1
-// # define Z 2
 
 // ERRORS
 # define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
