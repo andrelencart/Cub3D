@@ -52,7 +52,7 @@ int	close_window(t_cube *cube)
 	if (cube->zbuffer)
 		free(cube->zbuffer);
 	destroy_maps(cube);
-	if (!cube->map.grid)
+	if (cube->map.grid)
 		free_split(cube->map.grid);
 	if (cube->map.doors)
 		free(cube->map.doors);
