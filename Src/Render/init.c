@@ -5,25 +5,15 @@ int	init(t_cube *cube, t_parse *data)
 	ft_memset(cube, 0, sizeof(t_cube));
 	init_window(cube);
 	if (init_map(&cube->map, data) == 1)
-		return (free_data(data), 1);
+		return (1);
 	init_player(&cube->player, data, cube->map.height);
 	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
 	if (!cube->zbuffer)
-	{
-		ft_printf_fd(2, "Failed to allocate zbuffer memory");
-		free_data(data);
-		return (1);
-	}
+		return (ft_printf_fd(2, "Failed to allocate zbuffer memory"), 1);
 	if (init_imgsmap(cube->window.mlx, &cube->imgsmap, data))
-	{
-		free_data(data);
 		return (1);
-	}
 	if (init_monster(cube, data))
-	{
-		free_data(data);
 		return (1);
-	}
 	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
 	return (0);
