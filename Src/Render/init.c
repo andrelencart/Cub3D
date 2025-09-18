@@ -1,12 +1,11 @@
 #include "../../Inc/cube3d.h"
 
-void	init(t_cube *cube, t_parse *data)
+int	init(t_cube *cube, t_parse *data)
 {
 	ft_memset(cube, 0, sizeof(t_cube));
 	init_window(cube);
-	cube->state = MENU;
-	// cube->state = GAME;
-	init_map(&cube->map, data);
+	if (init_map(&cube->map, data) == 1)
+		return (1);
 	init_player(&cube->player, data, cube->map.height);
 	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
 	if (!cube->zbuffer)
@@ -27,6 +26,7 @@ void	init(t_cube *cube, t_parse *data)
 	}
 	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
+	return (0);
 }
 
 void	init_player(t_player *player, t_parse *data, int map_height)
@@ -47,14 +47,16 @@ void	init_player(t_player *player, t_parse *data, int map_height)
 	player->move_speed = MOVE_SPEED;
 }
 
-void	init_map(t_map *map, t_parse *data)
+int	init_map(t_map *map, t_parse *data)
 {
 	map->grid = data->map;
 	map->width = ft_strlen(map->grid[0]);
 	map->height = 0;
 	while (map->grid[map->height])
 		map->height++;
-	init_door(map);
+	if (init_door(map) == 1)
+		return (1);
+	return (0);
 }
 
 void	init_mini_map(t_mini_map *mini_map)
@@ -72,11 +74,18 @@ void	init_mini_map(t_mini_map *mini_map)
 
 void	init_window(t_cube *cube)
 {
+	int	width;
+	int	height;
+	
 	cube->window.mlx = mlx_init();
 	cube->window.mlx_window = mlx_new_window(cube->window.mlx, WIND_WIDTH, \
 WIND_HEIGHT, "CUBE3D");
 	cube->game_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
-	// cube->menu_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
 	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, &cube->game_img.bitpp, \
 &cube->game_img.line_length, &cube->game_img.endian);
+	cube->state = MENU;
+	cube->menu_img.img = mlx_xpm_file_to_image(cube->window.mlx, \
+"./textures/monster/monster_rr_3.xpm", &width, &height);
+	cube->menu_img.addr = mlx_get_data_addr(cube->menu_img.img, &cube->menu_img.bitpp, \
+&cube->menu_img.line_length, &cube->menu_img.endian);
 }

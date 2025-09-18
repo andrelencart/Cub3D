@@ -16,7 +16,11 @@ int	main(int ac, char **av)
 		return (free_data(data), 1);
 	if (square_map(data))
 		return (free_data(data), 1);
-	init(&cube, data);
+	if (init(&cube, data) == 1)
+	{
+		close_window(&cube);
+		return (0);
+	}
 	release_data(data);
 	hook_control(&cube);
 	mlx_loop_hook(cube.window.mlx, loop_hook, &cube);
