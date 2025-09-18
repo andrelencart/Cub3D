@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 void	draw_mini_map(t_cube *cube)
@@ -22,20 +21,21 @@ void	draw_centered_mini_map(t_cube *cube, int half_view)
 		while (x <= half_view)
 		{
 			get_mini_map_color(cube, x, y, half_view);
-			// draw_tile(&cube->window, cube->mini_map.offset_x + x * TILE_SIZE, cube->mini_map.offset_y + y * TILE_SIZE,
-			// get_tile_color(cube->map.grid[y][x]));
 			x++;
 		}
 		y++;
 	}
 }
+
 void	draw_player_mini_map(t_cube *cube, int half_view)
 {
 	int	x;
 	int	y;
 
-	cube->mini_map.player_mini_x = cube->mini_map.offset_x + half_view * MINIMAP_TILE_SIZE;
-	cube->mini_map.player_mini_y = cube->mini_map.offset_y + half_view * MINIMAP_TILE_SIZE;
+	cube->mini_map.player_mini_x = cube->mini_map.offset_x \
++ half_view * MINIMAP_TILE_SIZE;
+	cube->mini_map.player_mini_y = cube->mini_map.offset_y \
++ half_view * MINIMAP_TILE_SIZE;
 	cube->mini_map.player_size = MINIMAP_TILE_SIZE / 3;
 	y = -cube->mini_map.player_size;
 	while (y <= cube->mini_map.player_size)
@@ -43,8 +43,8 @@ void	draw_player_mini_map(t_cube *cube, int half_view)
 		x = -cube->mini_map.player_size;
 		while (x <= cube->mini_map.player_size)
 		{
-			my_mlx_pixel_put(&cube->window, cube->mini_map.player_mini_x + x, \
-			cube->mini_map.player_mini_y + y, cube->imgsmap.floor);
+			my_mlx_pixel_put(&cube->game_img, cube->mini_map.player_mini_x + x, \
+cube->mini_map.player_mini_y + y, cube->imgsmap.floor);
 			x++;
 		}
 		y++;
@@ -64,10 +64,9 @@ void	vision_mini_map(t_cube *cube, int half_view)
 	vision_mini_map_init(cube, half_view);
 	while (ray < cube->mini_map.num_rays)
 	{
-		// cube->mini_map.camera_x = - (2 * ray / (double)(cube->mini_map.num_rays - 1) - 1);
-		// cube->mini_map.ray_dir_x = (cube->player.dir_x + cube->player.plane_x * cube->mini_map.camera_x);
-		// cube->mini_map.ray_dir_y = (cube->player.dir_y + cube->player.plane_y * cube->mini_map.camera_x);
-		angle = cube->mini_map.light.start_angle + ray * (cube->mini_map.light.end_angle - cube->mini_map.light.start_angle) / (cube->mini_map.num_rays - 1);
+		angle = cube->mini_map.light.start_angle + ray * \
+(cube->mini_map.light.end_angle - cube->mini_map.light.start_angle) \
+/ (cube->mini_map.num_rays - 1);
 		cube->mini_map.ray_dir_x = cos(angle);
 		cube->mini_map.ray_dir_y = sin(angle);
 		mini_map_vision_draw(cube, draw_x, draw_y);

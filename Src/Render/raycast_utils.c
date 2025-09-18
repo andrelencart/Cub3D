@@ -1,4 +1,3 @@
-
 #include "../../Inc/cube3d.h"
 
 int	raycast_wall_hit(t_ray *ray, int map_height, int map_width)
@@ -15,10 +14,10 @@ int	raycast_wall_hit(t_ray *ray, int map_height, int map_width)
 		ray->map_y += ray->step_y;
 		ray->side = 1;
 	}
-	if (ray->map_x < 0 || ray->map_x >= map_width ||
-		ray->map_y < 0 || ray->map_y >= map_height)
+	if (ray->map_x < 0 || ray->map_x >= map_width || \
+ray->map_y < 0 || ray->map_y >= map_height)
 	{
-		ray->hit = 1; // Stop if out of bounds
+		ray->hit = 1;
 		return (1);
 	}
 	return (0);
@@ -27,7 +26,8 @@ int	raycast_wall_hit(t_ray *ray, int map_height, int map_width)
 void	wall_light(t_cube *cube, t_ray *ray, double *factor)
 {
 	if (ray->perp_wall_dist <= cube->light.radius)
-		*factor = cube->light.min + (cube->light.max - cube->light.min) * (1.0 - ray->perp_wall_dist / cube->light.radius);
+		*factor = cube->light.min + (cube->light.max - cube->light.min) \
+* (1.0 - ray->perp_wall_dist / cube->light.radius);
 	else
 		*factor = cube->light.min;
 }

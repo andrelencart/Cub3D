@@ -1,60 +1,103 @@
-
 #include "../../Inc/cube3d.h"
 
-void	init_door(t_door *door)
+void	init_door(t_map *map)
 {
-	door->cord_x = 0;
-	door->cord_y = 0;
-	door->anim_state = 0;
-	door->state = 0;
+	int	x;
+	int	y;
+	int	d;
+
+	count_doors(map);
+	map->doors = malloc(sizeof(t_door) * map->n_doors);
+	y = 0;
+	d = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->grid[y][x] == 'D')
+			{
+				map->doors[d].cord_x = x;
+				map->doors[d].cord_y = y;
+				map->doors[d].state = 0.0;
+				map->doors[d].anim_state = 0;
+				d++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	count_doors(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	map->n_doors = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->grid[y][x] == 'D')
+				map->n_doors++;
+			x++;
+		}
+		y++;
+	}
 }
 
 void	update_door_animation(t_map *map)
 {
-	if (map->door.anim_state == -1)
+	int		i;
+	t_door	*door;
+
+	i = 0;
+	while (i < map->n_doors)
 	{
-		map->door.state += DOOR_SPEED;
-		if (map->door.state >= 1.0)
-		{
-			map->door.state = 1.0;
-			map->door.anim_state = 0;
-			map->grid[map->door.cord_y][map->door.cord_x] = 'O';
-		}
+		door = &map->doors[i];
+		state_of_animation(map, door);
+		i++;
 	}
-	if (map->door.anim_state == 1)
+}
+
+t_door	*find_door(t_map *map, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->n_doors)
 	{
-		map->door.state -= DOOR_SPEED;
-		if (map->door.state <= 0.0)
-		{
-			map->door.state = 0.0;
-			map->door.anim_state = 0;
-			map->grid[map->door.cord_y][map->door.cord_x] = 'D';
-		}
+		if (map->doors[i].cord_x == x && map->doors[i].cord_y == y)
+			return (&map->doors[i]);
+		i++;
 	}
+	return (NULL);
 }
 
 void	door_interaction(t_map *map, t_player *player)
 {
-	int	front_x;
-	int	front_y;
+	int		front_x;
+	int		front_y;
+	t_door	*door;
 
 	front_x = (int)(player->x + player->dir_x * PLAYER_INTERACTION);
 	front_y = (int)(player->y + player->dir_y * PLAYER_INTERACTION);
-	if (front_x <= 0 || front_y <= 0 || front_x >= map->width || front_y >= map->height \
-|| map->grid[(int)player->y][(int)player->x] == 'O')
+	if (front_x <= 0 || front_y <= 0 || front_x >= map->width \
+|| front_y >= map->height || map->grid[(int)player->y][(int)player->x] == 'O')
 		return ;
-	if (map->grid[front_y][front_x] == 'D' || map->grid[front_y][front_x] == 'O')
+	if (map->grid[front_y][front_x] == 'D' \
+|| map->grid[front_y][front_x] == 'O')
 	{
-		if (map->door.anim_state == 0)
+		door = find_door(map, front_x, front_y);
+		if (door && door->anim_state == 0)
 		{
-			if (map->door.state < 1)
-				map->door.anim_state = -1;
+			if (door->state < 1)
+				door->anim_state = -1;
 			else
-				map->door.anim_state = 1;
+				door->anim_state = 1;
 		}
-		map->door.cord_x = front_x;
-		map->door.cord_y = front_y;
 	}
 }
-
-

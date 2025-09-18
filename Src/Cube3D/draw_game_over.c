@@ -29,8 +29,8 @@ void	fade_out(t_cube *cube)
 			x = 0;
 			while (x < WIND_WIDTH)
 			{
-				pixel = cube->window.addr + (y * cube->window.line_length + x * \
-(cube->window.bitpp / 8));
+				pixel = cube->game_img.addr + (y * cube->game_img.line_length + x * \
+(cube->game_img.bitpp / 8));
 				*(int *)pixel = change_pixel(cube->enemy.fade, *(int *)pixel);
 				x++;
 			}
@@ -57,8 +57,8 @@ sprite->line + ((int)((double)x / sprite->factor)) * (sprite->bpp / 8)));
 		if (screen_x >= 0 && screen_x < WIND_WIDTH && screen_y >= 0 \
 && screen_y < WIND_HEIGHT)
 		{
-			dst = cube->window.addr + (screen_y * cube->window.line_length + \
-screen_x * (cube->window.bitpp / 8));
+			dst = cube->game_img.addr + (screen_y * cube->game_img.line_length + \
+screen_x * (cube->game_img.bitpp / 8));
 			*(int *)dst = color;
 		}
 	}
@@ -102,5 +102,5 @@ void	death_monster(t_cube *cube)
 	sprite->draw_s_y = 0;
 	draw_scaled_sprite(cube, sprite);
 	mlx_put_image_to_window(cube->window.mlx, cube->window.mlx_window, \
-cube->window.img, 0, 0);
+cube->game_img.img, 0, 0);
 }

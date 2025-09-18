@@ -17,7 +17,7 @@ void	draw_sprite_y(int col, int tex_x, t_sprite *img, t_cube *cube)
 		color = *(unsigned int *)(img->addr + (tex_y * img->line + tex_x * \
 (img->bpp / 8)));
 		if ((color & 0xFF000000) != 0xFF000000)
-			my_mlx_pixel_put(&cube->window, col, y, dim_color(color, \
+			my_mlx_pixel_put(&cube->game_img, col, y, dim_color(color, \
 img->factor));
 		y++;
 	}

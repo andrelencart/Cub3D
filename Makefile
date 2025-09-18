@@ -6,7 +6,7 @@ MLX		=	./minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g -o3 #-fsanitize=address
 #VAL		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 #FDFLAGS	=	--track-fds=yes #--trace-children=yes
 SUPP	=	--suppressions=readline.supp
@@ -27,10 +27,23 @@ MAIN_C			=	cube3D_main.c \
 					monster_logic.c \
 					texture_loader.c
 
-RENDER_MAIN_C	=	render_main.c
-RENDER_FILES_C	=	hooks.c init.c draw_utils.c draw_map.c raycast.c raycast_utils.c \
-					player_move.c key_handling.c mini_map.c light.c movement_utils.c \
-					mini_map_utils.c doors.c
+#RENDER_MAIN_C	=	render_main.c
+RENDER_FILES_C	=	hooks.c \
+					init.c \
+					entry_window.c \
+					draw_utils.c \
+					draw_map.c \
+					raycast.c \
+					raycast_utils.c \
+					player_move.c \
+					key_handling.c \
+					mini_map.c \
+					light.c \
+					movement_utils.c \
+					mini_map_utils.c \
+					doors.c \
+					frees_gen_utils.c \
+					close_destroy.c \
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \
@@ -49,7 +62,7 @@ PARSE_MAIN		=	$(addprefix	$(PARSE_DIR)/, $(PARSE_MAIN_C))
 OBJS_PARSE			=	$(addprefix $(OBJS_DIR)/, $(PARSE_FILES_C:.c=.o))
 OBJS_RENDER			=	$(addprefix $(OBJS_DIR)/, $(RENDER_FILES_C:.c=.o))
 OBJS_MAIN			=	$(addprefix $(OBJS_DIR)/, $(MAIN_C:.c=.o))
-OBJS_MAIN_RENDER	=	$(addprefix $(OBJS_DIR)/, $(RENDER_MAIN_C:.c=.o))
+#OBJS_MAIN_RENDER	=	$(addprefix $(OBJS_DIR)/, $(RENDER_MAIN_C:.c=.o))
 OBJS_MAIN_PARSE		=	$(addprefix $(OBJS_DIR)/, $(PARSE_MAIN_C:.c=.o))
 
 # -->┊( RULES )
@@ -78,10 +91,10 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx-linux -s
 
-render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX)
-	$(M_COMP_E)
-	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX) -lm -lz -lXext -lX11 -o $(NAME)
-	$(M_DONE)
+#render: $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX)
+#	$(M_COMP_E)
+#	@$(CC) $(CFLAGS) $(OBJS_MAIN_RENDER) $(OBJS_RENDER) $(LIBFT) $(MLX) -lm -lz -lXext -lX11 -o $(NAME)
+#	$(M_DONE)
 
 parse: $(OBJS_MAIN_PARSE) $(OBJS_PARSE) $(LIBFT)
 	$(M_COMP_P)
