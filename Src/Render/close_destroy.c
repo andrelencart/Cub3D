@@ -52,8 +52,10 @@ int	close_window(t_cube *cube)
 	if (cube->zbuffer)
 		free(cube->zbuffer);
 	destroy_maps(cube);
-	free_split(cube->map.grid);
-	free(cube->map.doors);
+	if (!cube->map.grid)
+		free_split(cube->map.grid);
+	if (cube->map.doors)
+		free(cube->map.doors);
 	mlx_destroy_image(cube->window.mlx, cube->game_img.img);
 	mlx_destroy_image(cube->window.mlx, cube->menu_img.img);
 	mlx_destroy_window(cube->window.mlx, cube->window.mlx_window);
