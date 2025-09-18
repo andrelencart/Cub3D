@@ -1,6 +1,6 @@
 #include "../../Inc/cube3d.h"
 
-void	init_door(t_map *map)
+int	init_door(t_map *map)
 {
 	int	x;
 	int	y;
@@ -8,6 +8,8 @@ void	init_door(t_map *map)
 
 	count_doors(map);
 	map->doors = malloc(sizeof(t_door) * map->n_doors);
+	if (!map->doors)
+		return (1);
 	y = 0;
 	d = 0;
 	while (y < map->height)
@@ -27,6 +29,7 @@ void	init_door(t_map *map)
 		}
 		y++;
 	}
+	return (0);
 }
 
 void	count_doors(t_map *map)

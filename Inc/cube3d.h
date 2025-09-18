@@ -20,10 +20,10 @@
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
 # define TILE_SIZE 20
+# define malloc(x) NULL
 
 // MATH
 # define PI 3.141592653589793238462643383279502884197169399375105820974944592
-// # define PI 4 * (1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + 1/13 - 1/15)
 
 // KEY_DEF
 # define ESC 65307
@@ -286,11 +286,11 @@ typedef struct s_cube
 
 // INIT
 
-void			init(t_cube *cube, t_parse *data);
+int				init(t_cube *cube, t_parse *data);
 void			init_lighting(t_light *light);
 void			init_player(t_player *player, t_parse *data, int map_height);
-void			init_map(t_map *temap, t_parse *data);
-void			init_door(t_map *map);
+int				init_map(t_map *temap, t_parse *data);
+int				init_door(t_map *map);
 void			init_mini_map(t_mini_map *mini_map);
 void			init_window(t_cube *cube);
 void			init_ray(t_player *player, t_ray *ray, int x);
