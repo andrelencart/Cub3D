@@ -2,8 +2,7 @@
 
 void	draw(t_cube *cube)
 {
-// 	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT \
-// * (cube->window.bitpp / 8));
+// 	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT * (cube->window.bitpp / 8));
 	raycast(cube);
 	draw_monster(&cube->enemy, cube);
 	draw_mini_map(cube);

@@ -29,8 +29,8 @@ void	fade_out(t_cube *cube)
 			x = 0;
 			while (x < WIND_WIDTH)
 			{
-				pixel = cube->game_img.addr + (y * cube->game_img.line_length + x * \
-(cube->game_img.bitpp / 8));
+				pixel = cube->game_img.addr + (y * cube->game_img.line_length \
++ x * (cube->game_img.bitpp / 8));
 				*(int *)pixel = change_pixel(cube->enemy.fade, *(int *)pixel);
 				x++;
 			}
