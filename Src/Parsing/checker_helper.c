@@ -36,7 +36,7 @@ int	find_map(t_parse *data, int i)
 	j = 0;
 	while (data->map[i][j])
 	{
-		if (ft_strchr(" 01NSEWM\n", data->map[i][j]))
+		if (ft_strchr(" 01NSEWMX\n", data->map[i][j]))
 			j++;
 		else
 		{

@@ -18,7 +18,8 @@ void	get_mini_map_color(t_cube *cube, int x, int y, int half_view)
 && map_y < cube->map.height)
 		cube->mini_map.color = get_tile_color \
 (cube->map.grid[map_y][map_x], cube);
-	draw_tile(cube, pixel_x, pixel_y, cube->mini_map.color);
+	draw_tile(cube, pixel_x + cube->mini_map.offset_x, \
+pixel_y + cube->mini_map.offset_y, cube->mini_map.color);
 }
 
 void	mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y)
