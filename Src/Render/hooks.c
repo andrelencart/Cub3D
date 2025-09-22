@@ -23,7 +23,12 @@ int	key_press(int key_code, t_cube *cube)
 key_code == S || key_code == D)
 		move_update_flag_press(key_code, cube);
 	else if (key_code == E)
-		door_interaction(&cube->map, &cube->player);
+	{
+		if (cube->ray.hit_door)
+			door_interaction(&cube->map, &cube->player);
+		else
+			exit_interaction(&cube->map, &cube->player);
+	}
 	else if (key_code == SHIFT_LEFT || key_code == SHIFT_RIGHT)
 		cube->player.move_speed = MOVE_SPEED + 0.5;
 	return (0);
