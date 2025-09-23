@@ -17,6 +17,7 @@ int	init(t_cube *cube, t_parse *data)
 		return (1);
 	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
+	cube->data = data;
 	return (0);
 }
 

@@ -66,7 +66,7 @@
 # define EXIT_COLOR 0x4D4D4D
 
 // UTILS
-# define DIM_FACTOR 0.05
+# define DIM_FACTOR 0.08
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
 # define SENSITIVITY 0.0017
@@ -75,6 +75,8 @@
 # define PLAYER_INTERACTION 0.9
 # define MINIMAP_VIEW_SIZE 11
 # define MINIMAP_TILE_SIZE 20
+# define MAX_MINIMAP_SIZE 32
+
 
 // ERRORS
 # define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
@@ -258,6 +260,7 @@ typedef struct s_mini_map
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
+	int		visible_vision[MAX_MINIMAP_SIZE][MAX_MINIMAP_SIZE];
 	t_light	light;
 }			t_mini_map;
 
@@ -274,8 +277,10 @@ typedef struct s_cube
 	t_state			state;
 	t_image			game_img;
 	t_image			menu_img;
+	t_parse			*data;
 	double			frame_time;
 	double			*zbuffer;
+	int				mouse_warp;
 	struct timeval	last_time;
 }					t_cube;
 
@@ -344,6 +349,9 @@ void			vision_mini_map(t_cube *cube, int half_view);
 void			get_mini_map_color(t_cube *cube, int x, int y, int half_view);
 void			vision_mini_map_init(t_cube *cube, int half_view);
 void			mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
+// void			mini_map_vision_draw(t_cube *cube, int half_view);
+// int				get_tile_color_raw(char c, t_cube *cube);
+// int				is_tile_visible_to_player(t_cube *cube, int map_x, int map_y);
 
 // MONSTER
 
@@ -388,5 +396,6 @@ t_cube *cube, double sensitivity);
 
 int				close_window(t_cube *cube);
 void			destroy_maps(t_cube *cube);
+void			exit_clean(t_cube *cube);
 
 #endif //CUBE3D_H

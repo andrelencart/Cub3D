@@ -54,6 +54,8 @@ int	close_window(t_cube *cube)
 	if (cube->zbuffer)
 		free(cube->zbuffer);
 	destroy_maps(cube);
+	if (cube->data)
+		release_data(cube->data);
 	if (cube->map.grid)
 		free_split(cube->map.grid);
 	if (cube->map.doors)
@@ -66,4 +68,33 @@ int	close_window(t_cube *cube)
 	mlx_destroy_display(cube->window.mlx);
 	free(cube->window.mlx);
 	exit(0);
+}
+
+void	exit_clean(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
+	cube->state = MENU;
+	free(cube->map.doors);
+	while (cube->map.grid[y])
+	{
+		x = 0;
+		while (cube->map.grid[y][x])
+		{
+			if (cube->map.grid[y][x] == 'F')
+			cube->map.grid[y][x] = 'X';
+			if (cube->map.grid[y][x] == 'O')
+			cube->map.grid[y][x] = 'D';
+			x++;
+		}
+		y++;
+	}
+	mlx_destroy_image(cube->window.mlx, cube->enemy.front->img);
+	// needs sprite frees;
+	init_player(&cube->player, cube->data, 0);
+	init_door(&cube->map);
+	init_monster(cube, cube->data);
 }

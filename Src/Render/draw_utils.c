@@ -4,14 +4,14 @@ int	get_tile_color(char c, t_cube *cube)
 {
 	(void)cube;
 	if (c == '1' || c == ' ')
-		return (CEILING_COLOR_DK_G);
+		return (dim_color(CEILING_COLOR_DK_G, 0.5));
 	if (c == '0' || c == 'P' || c == 'O' \
 || c == 'F')
-		return (WALL_COLOR_MG);
+		return (dim_color(WALL_COLOR_MG, 0.5));
 	if (c == 'D')
-		return (DOOR_COLOR);
+		return (dim_color(DOOR_COLOR, 0.5));
 	if (c == 'X')
-		return (EXIT_COLOR);
+		return (dim_color(EXIT_COLOR, 0.5));
 	return (WHITE);
 }
 
