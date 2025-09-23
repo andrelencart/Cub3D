@@ -63,7 +63,7 @@ void	walls(t_cube *cube, t_ray *ray, int x, int *y)
 				color = get_texture_color(cube, ray, *y);
 		}
 		if (ray->hit_exit)
-			color = EXIT_COLOR;
+			color = get_texture_color(cube, ray, *y);
 		else
 			color = get_texture_color(cube, ray, *y);
 		my_mlx_pixel_put(&cube->game_img, x, *y, dim_color(color, factor));

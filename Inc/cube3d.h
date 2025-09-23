@@ -121,6 +121,7 @@ typedef struct s_imgsmap
 	t_sprite	east;
 	t_sprite	west;
 	t_sprite	door;
+	t_sprite	exit;
 	int			floor;
 	int			ceiling;
 }	t_imgsmap;

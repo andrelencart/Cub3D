@@ -44,6 +44,8 @@ void	destroy_maps(t_cube *cube)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
 	if (cube->imgsmap.door.img)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.door.img);
+	if (cube->imgsmap.exit.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.exit.img);
 	destroy_enemy_imgs(cube);
 }
 

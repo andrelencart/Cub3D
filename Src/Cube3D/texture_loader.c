@@ -49,6 +49,10 @@ int	init_imgsmap(void *ptrmlx, t_imgsmap *imgsmap, t_parse *data)
 	if (load_imgsmaps(ptrmlx, &imgsmap->west, data->w_face))
 		return (parse_error("Failed to load texture", data->w_face));
 	if (load_doormaps(ptrmlx, &imgsmap->door, "./textures/walls/door.xpm"))
-		return (parse_error("Failed to load texture", data->w_face));
+		return (parse_error("Failed to load texture", \
+"./textures/walls/door.xpm"));
+	if (load_doormaps(ptrmlx, &imgsmap->exit, "./textures/walls/exit.xpm"))
+		return (parse_error("Failed to load texture", \
+"./textures/walls/exit.xpm"));
 	return (0);
 }
