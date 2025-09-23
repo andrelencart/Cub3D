@@ -5,10 +5,13 @@ int	get_tile_color(char c, t_cube *cube)
 	(void)cube;
 	if (c == '1' || c == ' ')
 		return (CEILING_COLOR_DK_G);
-	if (c == '0' || c == 'P' || c == 'O')
+	if (c == '0' || c == 'P' || c == 'O' \
+|| c == 'F')
 		return (WALL_COLOR_MG);
 	if (c == 'D')
 		return (DOOR_COLOR);
+	if (c == 'X')
+		return (EXIT_COLOR);
 	return (WHITE);
 }
 

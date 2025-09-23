@@ -17,14 +17,7 @@ int	init_door(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if (map->grid[y][x] == 'D')
-			{
-				map->doors[d].cord_x = x;
-				map->doors[d].cord_y = y;
-				map->doors[d].state = 0.0;
-				map->doors[d].anim_state = 0;
-				d++;
-			}
+			init_the_door(map, y, x, &d);
 			x++;
 		}
 		y++;

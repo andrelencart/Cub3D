@@ -42,8 +42,9 @@ RENDER_FILES_C	=	hooks.c \
 					movement_utils.c \
 					mini_map_utils.c \
 					doors.c \
+					doors_utils.c \
 					frees_gen_utils.c \
-					close_destroy.c \
+					close_destroy.c 
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \

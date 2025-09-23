@@ -10,6 +10,8 @@ int	move_update_flag_press(int keycode, t_cube *cube)
 		cube->player.strafing_right = 1;
 	else if (keycode == A)
 		cube->player.strafing_left = 1;
+	if (cube->map.grid[(int)cube->player.y][(int)cube->player.x] == 'F')
+		close_window(cube);
 	return (0);
 }
 
@@ -23,6 +25,8 @@ int	move_update_flag_release(int keycode, t_cube *cube)
 		cube->player.strafing_right = 0;
 	else if (keycode == A)
 		cube->player.strafing_left = 0;
+	if (cube->map.grid[(int)cube->player.y][(int)cube->player.x] == 'F')
+		close_window(cube);
 	return (0);
 }
 
