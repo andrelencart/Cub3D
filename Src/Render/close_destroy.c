@@ -92,9 +92,7 @@ void	exit_clean(t_cube *cube)
 		}
 		y++;
 	}
-	mlx_destroy_image(cube->window.mlx, cube->enemy.front->img);
-	// needs sprite frees;
 	init_player(&cube->player, cube->data, 0);
 	init_door(&cube->map);
-	init_monster(cube, cube->data);
+	init_monster(cube, cube->data, false);
 }

@@ -260,7 +260,6 @@ typedef struct s_mini_map
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int		visible_vision[MAX_MINIMAP_SIZE][MAX_MINIMAP_SIZE];
 	t_light	light;
 }			t_mini_map;
 
@@ -355,7 +354,7 @@ void			mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
 
-int				init_monster(t_cube *cube, t_parse *data);
+int				init_monster(t_cube *cube, t_parse *data, bool first);
 void			monster_logic(t_cube *cube);
 void			death_monster(t_cube *cube);
 
@@ -378,6 +377,7 @@ void			calc_wall_x(t_ray *ray, t_player *player);
 int				can_move(t_cube *cube, double x, double y, double radius);
 int				is_wall(t_cube *cube, double x, double y);
 void			game_menu(t_cube *cube);
+void			free_sprites(t_cube *cube);
 // void			print_map(t_map *map);
 
 // PLAYER MOVEMENT

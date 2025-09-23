@@ -13,7 +13,7 @@ int	init(t_cube *cube, t_parse *data)
 		return (ft_printf_fd(2, "Failed to allocate zbuffer memory"), 1);
 	if (init_imgsmap(cube->window.mlx, &cube->imgsmap, data))
 		return (1);
-	if (init_monster(cube, data))
+	if (init_monster(cube, data, true))
 		return (1);
 	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
