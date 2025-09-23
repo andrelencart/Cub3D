@@ -6,7 +6,7 @@ MLX		=	./minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -o3 #-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g -O3 #-fsanitize=address
 #VAL		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 #FDFLAGS	=	--track-fds=yes #--trace-children=yes
 SUPP	=	--suppressions=readline.supp
