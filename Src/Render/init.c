@@ -68,19 +68,20 @@ int	init_window(t_cube *cube)
 {
 	int	width;
 	int	height;
-	
+
 	cube->window.mlx = mlx_init();
 	cube->window.mlx_window = mlx_new_window(cube->window.mlx, WIND_WIDTH, \
 WIND_HEIGHT, "CUBE3D");
-	cube->game_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
-	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, &cube->game_img.bitpp, \
-&cube->game_img.line_length, &cube->game_img.endian);
+	cube->game_img.img = mlx_new_image \
+(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, \
+&cube->game_img.bitpp, &cube->game_img.line_length, &cube->game_img.endian);
 	cube->state = MENU;
 	cube->menu_img.img = mlx_xpm_file_to_image(cube->window.mlx, \
 "./textures/screen/monster_screen.xpm", &width, &height);
 	if (!cube->menu_img.img)
 		return (1);
-	cube->menu_img.addr = mlx_get_data_addr(cube->menu_img.img, &cube->menu_img.bitpp, \
-&cube->menu_img.line_length, &cube->menu_img.endian);
+	cube->menu_img.addr = mlx_get_data_addr(cube->menu_img.img, \
+&cube->menu_img.bitpp, &cube->menu_img.line_length, &cube->menu_img.endian);
 	return (0);
 }

@@ -55,6 +55,7 @@ int	window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity)
 	}
 	return (0);
 }
+
 int	player_move_front_back(t_player *player, t_cube *cube, double frame_time)
 {
 	double	move_speed;

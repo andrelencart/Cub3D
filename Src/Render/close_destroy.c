@@ -85,9 +85,9 @@ void	exit_clean(t_cube *cube)
 		while (cube->map.grid[y][x])
 		{
 			if (cube->map.grid[y][x] == 'F')
-			cube->map.grid[y][x] = 'X';
+				cube->map.grid[y][x] = 'X';
 			if (cube->map.grid[y][x] == 'O')
-			cube->map.grid[y][x] = 'D';
+				cube->map.grid[y][x] = 'D';
 			x++;
 		}
 		y++;

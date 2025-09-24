@@ -22,7 +22,6 @@ int	main(int ac, char **av)
 		close_window(&cube);
 		return (0);
 	}
-	//release_data(data);
 	hook_control(&cube);
 	mlx_loop_hook(cube.window.mlx, loop_hook, &cube);
 	mlx_loop(cube.window.mlx);

@@ -77,7 +77,6 @@
 # define MINIMAP_TILE_SIZE 20
 # define MAX_MINIMAP_SIZE 32
 
-
 // ERRORS
 # define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
 # define ERROR_INIT "NOT INICIALIZED"
@@ -292,7 +291,7 @@ void			init_lighting(t_light *light);
 void			init_player(t_player *player, t_parse *data, int map_height);
 int				init_map(t_map *temap, t_parse *data);
 int				init_door(t_map *map);
-void		init_the_door(t_map *map, int y, int x, int *d);
+void			init_the_door(t_map *map, int y, int x, int *d);
 void			init_mini_map(t_mini_map *mini_map);
 int				init_window(t_cube *cube);
 void			init_ray(t_player *player, t_ray *ray, int x);
@@ -348,9 +347,6 @@ void			vision_mini_map(t_cube *cube, int half_view);
 void			get_mini_map_color(t_cube *cube, int x, int y, int half_view);
 void			vision_mini_map_init(t_cube *cube, int half_view);
 void			mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
-// void			mini_map_vision_draw(t_cube *cube, int half_view);
-// int				get_tile_color_raw(char c, t_cube *cube);
-// int				is_tile_visible_to_player(t_cube *cube, int map_x, int map_y);
 
 // MONSTER
 

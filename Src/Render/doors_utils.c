@@ -32,7 +32,7 @@ void	init_the_door(t_map *map, int y, int x, int *d)
 		map->doors[*d].cord_y = y;
 		map->doors[*d].state = 0.0;
 		map->doors[*d].anim_state = 0;
-		(*d)++;;
+		(*d)++;
 	}
 }
 
