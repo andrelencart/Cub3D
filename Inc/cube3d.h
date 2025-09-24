@@ -168,7 +168,8 @@ typedef enum e_state
 	GAME,
 	WANDER,
 	PURSUIT,
-	GAME_OVER
+	GAME_OVER,
+	GAME_RESTART
 }	t_state;
 
 typedef struct s_enemy
@@ -377,6 +378,7 @@ void			calc_wall_x(t_ray *ray, t_player *player);
 int				can_move(t_cube *cube, double x, double y, double radius);
 int				is_wall(t_cube *cube, double x, double y);
 void			game_menu(t_cube *cube);
+void			game_restart(t_cube *cube);
 void			free_sprites(t_cube *cube);
 // void			print_map(t_map *map);
 

@@ -15,6 +15,8 @@ int	key_press(int key_code, t_cube *cube)
 		close_window(cube);
 	else if (key_code == ENTER && cube->state == MENU)
 		cube->state = GAME;
+	else if (key_code == ENTER && cube->state == GAME_RESTART)
+		cube->state = GAME;
 	else if (key_code == RA || key_code == LA)
 		player_rotation(&cube->player, key_code);
 	else if (key_code == W || key_code == A || \
@@ -73,5 +75,7 @@ int	loop_hook(t_cube *cube)
 			death_monster(cube);
 		}
 	}
+	else if (cube->state == GAME_RESTART)
+		game_restart(cube);
 	return (0);
 }

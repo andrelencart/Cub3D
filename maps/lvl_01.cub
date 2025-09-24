@@ -1,0 +1,18 @@
+NO ./textures/walls/wall_N.xpm
+SO ./textures/walls/wall_S.xpm
+WE ./textures/walls/wall_W.xpm
+EA ./textures/walls/wall_E.xpm
+F 123,10,1
+C 225,30,132
+   11111111111111111    
+   1000W000000000001    
+   10111111101111101    
+   101     1M1   101    
+   101     101   101
+   10111111101111101
+   10000000000000001    
+   11110111111111111    
+      101                 
+      101                 
+      1X1                 
+      111                 
