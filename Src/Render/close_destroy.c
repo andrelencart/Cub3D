@@ -77,7 +77,7 @@ void	exit_clean(t_cube *cube)
 
 	y = 0;
 	mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
-	cube->state = MENU;
+	cube->state = GAME_RESTART;
 	free(cube->map.doors);
 	while (cube->map.grid[y])
 	{
