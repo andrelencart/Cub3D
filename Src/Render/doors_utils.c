@@ -43,8 +43,8 @@ void	exit_interaction(t_map *map, t_player *player)
 
 	front_x = (int)(player->x + player->dir_x * PLAYER_INTERACTION);
 	front_y = (int)(player->y + player->dir_y * PLAYER_INTERACTION);
-	if (front_x <= 0 || front_y <= 0 || front_x >= map->width \
-|| front_y >= map->height || map->grid[(int)player->y][(int)player->x] == 'O')
+	if (front_x >= map->width || front_y >= map->height \
+|| map->grid[(int)player->y][(int)player->x] == 'O')
 		return ;
 	if (map->grid[front_y][front_x] == 'X')
 		map->grid[front_y][front_x] = 'F';
