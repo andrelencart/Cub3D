@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   frees_gen_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 15:43:06 by andcarva          #+#    #+#             */
+/*   Updated: 2025/09/24 15:43:08 by andcarva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Inc/cube3d.h"
 
 void	my_mlx_pixel_put(t_image *win, int x, int y, int color)
@@ -16,17 +28,3 @@ int	testkey(int key_code, t_window *wind)
 	ft_printf("key_code: %d\n", key_code);
 	return (0);
 }
-
-// void print_map(t_map *map)
-// {
-//     int y, x;
-//     for (y = 0; y < map->height; y++)
-//     {
-//         for (x = 0; x < map->width; x++)
-//         {
-//             printf("%c", map->grid[y][x]);
-//         }
-//         printf("\n");
-//     }
-//     printf("\n");
-// }

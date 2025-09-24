@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monster_loader.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 15:41:17 by andcarva          #+#    #+#             */
+/*   Updated: 2025/09/24 15:41:18 by andcarva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../Inc/cube3d.h"
 
 int	get_mon_tex(char *tex, void *ptrmlx, t_sprite *img)
@@ -53,7 +65,7 @@ cube->window.mlx, cube->enemy.rtbck))
 
 int	init_monster(t_cube *cube, t_parse *data, bool first)
 {
-	if(first)
+	if (first)
 		ft_memset(&cube->enemy, 0, sizeof(t_enemy));
 	cube->enemy.fade = 0.9;
 	cube->enemy.fade_timer = 0;
