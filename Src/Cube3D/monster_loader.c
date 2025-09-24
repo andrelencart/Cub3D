@@ -51,9 +51,10 @@ cube->window.mlx, cube->enemy.rtbck))
 	return (0);
 }
 
-int	init_monster(t_cube *cube, t_parse *data)
+int	init_monster(t_cube *cube, t_parse *data, bool first)
 {
-	ft_memset(&cube->enemy, 0, sizeof(t_enemy));
+	if(first)
+		ft_memset(&cube->enemy, 0, sizeof(t_enemy));
 	cube->enemy.fade = 0.9;
 	cube->enemy.fade_timer = 0;
 	cube->enemy.monster.x = data->enemy_x + 0.5;
@@ -68,5 +69,7 @@ int	init_monster(t_cube *cube, t_parse *data)
 	cube->enemy.monster.strafing_left = 0;
 	cube->enemy.monster.strafing_right = 0;
 	cube->enemy.anim_speed = 0.08;
-	return (load_mons_tex(cube));
+	if (first)
+		return (load_mons_tex(cube));
+	return (0);
 }

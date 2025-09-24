@@ -18,10 +18,10 @@ int	main(int ac, char **av)
 		return (free_data(data), 1);
 	if (init(&cube, data) == 1)
 	{
+		release_data(data);
 		close_window(&cube);
 		return (0);
 	}
-	release_data(data);
 	hook_control(&cube);
 	mlx_loop_hook(cube.window.mlx, loop_hook, &cube);
 	mlx_loop(cube.window.mlx);

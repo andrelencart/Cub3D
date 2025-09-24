@@ -3,29 +3,21 @@
 int	init(t_cube *cube, t_parse *data)
 {
 	ft_memset(cube, 0, sizeof(t_cube));
-	init_window(cube);
+	if (init_window(cube))
+		return (free_split(data->map), 1);
 	if (init_map(&cube->map, data) == 1)
 		return (1);
 	init_player(&cube->player, data, cube->map.height);
 	cube->zbuffer = ft_calloc(WIND_WIDTH, sizeof(double));
 	if (!cube->zbuffer)
-	{
-		ft_printf_fd(2, "Failed to allocate zbuffer memory");
-		free_data(data);
-		close_window(cube);
-	}
+		return (ft_printf_fd(2, "Failed to allocate zbuffer memory"), 1);
 	if (init_imgsmap(cube->window.mlx, &cube->imgsmap, data))
-	{
-		free_data(data);
-		close_window(cube);
-	}
-	if (init_monster(cube, data))
-	{
-		free_data(data);
-		close_window(cube);
-	}
+		return (1);
+	if (init_monster(cube, data, true))
+		return (1);
 	init_mini_map(&cube->mini_map);
 	init_lighting(&cube->light);
+	cube->data = data;
 	return (0);
 }
 
@@ -72,20 +64,24 @@ void	init_mini_map(t_mini_map *mini_map)
 	mini_map->color = 0;
 }
 
-void	init_window(t_cube *cube)
+int	init_window(t_cube *cube)
 {
 	int	width;
 	int	height;
-	
+
 	cube->window.mlx = mlx_init();
 	cube->window.mlx_window = mlx_new_window(cube->window.mlx, WIND_WIDTH, \
 WIND_HEIGHT, "CUBE3D");
-	cube->game_img.img = mlx_new_image(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
-	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, &cube->game_img.bitpp, \
-&cube->game_img.line_length, &cube->game_img.endian);
+	cube->game_img.img = mlx_new_image \
+(cube->window.mlx, WIND_WIDTH, WIND_HEIGHT);
+	cube->game_img.addr = mlx_get_data_addr(cube->game_img.img, \
+&cube->game_img.bitpp, &cube->game_img.line_length, &cube->game_img.endian);
 	cube->state = MENU;
 	cube->menu_img.img = mlx_xpm_file_to_image(cube->window.mlx, \
-"./textures/monster/monster_rr_3.xpm", &width, &height);
-	cube->menu_img.addr = mlx_get_data_addr(cube->menu_img.img, &cube->menu_img.bitpp, \
-&cube->menu_img.line_length, &cube->menu_img.endian);
+"./textures/screen/monster_screen.xpm", &width, &height);
+	if (!cube->menu_img.img)
+		return (1);
+	cube->menu_img.addr = mlx_get_data_addr(cube->menu_img.img, \
+&cube->menu_img.bitpp, &cube->menu_img.line_length, &cube->menu_img.endian);
+	return (0);
 }

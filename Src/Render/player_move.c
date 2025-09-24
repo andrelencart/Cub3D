@@ -24,12 +24,18 @@ int	mouse_move_handler(int x, int y, t_cube *cube)
 	int			delta_x;
 
 	(void)y;
+	if (cube->mouse_warp)
+	{
+		cube->mouse_warp = 0;
+		return (0);
+	}
 	if (last_x == -1)
 	{
 		last_x = x;
 		return (0);
 	}
-	window_edge_rotation(&last_x, x, cube, SENSITIVITY);
+	if (window_edge_rotation(&last_x, x, cube, SENSITIVITY))
+		return (0);
 	delta_x = x - last_x;
 	last_x = x;
 	if (delta_x != 0)
@@ -39,17 +45,13 @@ int	mouse_move_handler(int x, int y, t_cube *cube)
 
 int	window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity)
 {
-	if (x <= 0)
+	(void)sensitivity;
+	if (x <= 0 || x >= WIND_WIDTH - 1)
 	{
-		rotate_player(&cube->player, -sensitivity * 10);
-		*last_x = x;
-		return (0);
-	}
-	if (x >= WIND_WIDTH - 1)
-	{
-		rotate_player(&cube->player, sensitivity * 10);
-		*last_x = x;
-		return (0);
+		*last_x = 960;
+		mlx_mouse_move(cube->window.mlx, cube->window.mlx_window, 960, 540);
+		cube->mouse_warp = 1;
+		return (1);
 	}
 	return (0);
 }

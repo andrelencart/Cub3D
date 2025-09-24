@@ -12,8 +12,8 @@ void	draw_centered_mini_map(t_cube *cube, int half_view)
 	int	x;
 	int	y;
 
-	cube->mini_map.offset_x = 0;
-	cube->mini_map.offset_y = 0;
+	cube->mini_map.offset_x = 28;
+	cube->mini_map.offset_y = 28;
 	y = -half_view;
 	while (y <= half_view)
 	{

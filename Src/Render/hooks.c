@@ -15,15 +15,18 @@ int	key_press(int key_code, t_cube *cube)
 		close_window(cube);
 	else if (key_code == ENTER && cube->state == MENU)
 		cube->state = GAME;
-	else if (key_code == ENTER && cube->state == GAME)
-		cube->state = MENU;
+	else if (key_code == ENTER && cube->state == GAME_RESTART)
+		cube->state = GAME;
 	else if (key_code == RA || key_code == LA)
 		player_rotation(&cube->player, key_code);
 	else if (key_code == W || key_code == A || \
 key_code == S || key_code == D)
 		move_update_flag_press(key_code, cube);
 	else if (key_code == E)
+	{
 		door_interaction(&cube->map, &cube->player);
+		exit_interaction(&cube->map, &cube->player);
+	}
 	else if (key_code == SHIFT_LEFT || key_code == SHIFT_RIGHT)
 		cube->player.move_speed = MOVE_SPEED + 0.5;
 	return (0);
@@ -56,7 +59,7 @@ int	loop_hook(t_cube *cube)
 	update_frame_time(cube);
 	if (cube->state == MENU)
 		game_menu(cube);
-	if (cube->state == GAME)
+	else if (cube->state == GAME)
 	{
 		if (cube->enemy.state != GAME_OVER)
 		{
@@ -72,5 +75,7 @@ int	loop_hook(t_cube *cube)
 			death_monster(cube);
 		}
 	}
+	else if (cube->state == GAME_RESTART)
+		game_restart(cube);
 	return (0);
 }

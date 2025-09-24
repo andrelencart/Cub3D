@@ -44,6 +44,8 @@ void	destroy_maps(t_cube *cube)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.west.img);
 	if (cube->imgsmap.door.img)
 		mlx_destroy_image(cube->window.mlx, cube->imgsmap.door.img);
+	if (cube->imgsmap.exit.img)
+		mlx_destroy_image(cube->window.mlx, cube->imgsmap.exit.img);
 	destroy_enemy_imgs(cube);
 }
 
@@ -52,12 +54,45 @@ int	close_window(t_cube *cube)
 	if (cube->zbuffer)
 		free(cube->zbuffer);
 	destroy_maps(cube);
-	free_split(cube->map.grid);
-	free(cube->map.doors);
-	mlx_destroy_image(cube->window.mlx, cube->game_img.img);
-	mlx_destroy_image(cube->window.mlx, cube->menu_img.img);
+	if (cube->data)
+		release_data(cube->data);
+	if (cube->map.grid)
+		free_split(cube->map.grid);
+	if (cube->map.doors)
+		free(cube->map.doors);
+	if (cube->game_img.img)
+		mlx_destroy_image(cube->window.mlx, cube->game_img.img);
+	if (cube->menu_img.img)
+		mlx_destroy_image(cube->window.mlx, cube->menu_img.img);
 	mlx_destroy_window(cube->window.mlx, cube->window.mlx_window);
 	mlx_destroy_display(cube->window.mlx);
 	free(cube->window.mlx);
 	exit(0);
+}
+
+void	exit_clean(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	mlx_clear_window(cube->window.mlx, cube->window.mlx_window);
+	cube->state = GAME_RESTART;
+	free(cube->map.doors);
+	while (cube->map.grid[y])
+	{
+		x = 0;
+		while (cube->map.grid[y][x])
+		{
+			if (cube->map.grid[y][x] == 'F')
+				cube->map.grid[y][x] = 'X';
+			if (cube->map.grid[y][x] == 'O')
+				cube->map.grid[y][x] = 'D';
+			x++;
+		}
+		y++;
+	}
+	init_player(&cube->player, cube->data, 0);
+	init_door(&cube->map);
+	init_monster(cube, cube->data, false);
 }

@@ -2,8 +2,6 @@
 
 void	draw(t_cube *cube)
 {
-// 	ft_memset(cube->window.addr, 0, WIND_WIDTH * WIND_HEIGHT \
-// * (cube->window.bitpp / 8));
 	raycast(cube);
 	draw_monster(&cube->enemy, cube);
 	draw_mini_map(cube);
@@ -63,6 +61,8 @@ void	walls(t_cube *cube, t_ray *ray, int x, int *y)
 			if (door && door->state < 1.0)
 				color = get_texture_color(cube, ray, *y);
 		}
+		if (ray->hit_exit)
+			color = get_texture_color(cube, ray, *y);
 		else
 			color = get_texture_color(cube, ray, *y);
 		my_mlx_pixel_put(&cube->game_img, x, *y, dim_color(color, factor));

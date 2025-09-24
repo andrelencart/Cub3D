@@ -49,6 +49,7 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 {
 	ray->hit = 0;
 	ray->hit_door = 0;
+	ray->hit_exit = 0;
 	while (ray->hit == 0)
 	{
 		if (raycast_wall_hit(ray, map_height, map_width) == 1)
@@ -59,6 +60,11 @@ void	dda_loop(t_ray *ray, char **map, int map_height, int map_width)
 		{
 			ray->hit = 1;
 			ray->hit_door = 1;
+		}
+		else if (map[ray->map_y][ray->map_x] == 'X')
+		{
+			ray->hit = 1;
+			ray->hit_exit = 1;
 		}
 	}
 }

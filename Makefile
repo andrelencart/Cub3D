@@ -6,7 +6,7 @@ MLX		=	./minilibx-linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g -o3 #-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g -O3 #-fsanitize=address
 #VAL		=	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s
 #FDFLAGS	=	--track-fds=yes #--trace-children=yes
 SUPP	=	--suppressions=readline.supp
@@ -42,8 +42,9 @@ RENDER_FILES_C	=	hooks.c \
 					movement_utils.c \
 					mini_map_utils.c \
 					doors.c \
+					doors_utils.c \
 					frees_gen_utils.c \
-					close_destroy.c \
+					close_destroy.c 
 
 PARSE_MAIN_C	=	parsing_main.c
 PARSE_FILES_C	=	checker_helper.c \

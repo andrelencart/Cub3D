@@ -20,7 +20,6 @@
 # define WIND_WIDTH 1920
 # define WIND_HEIGHT 1080
 # define TILE_SIZE 20
-# define malloc(x) NULL
 
 // MATH
 # define PI 3.141592653589793238462643383279502884197169399375105820974944592
@@ -64,9 +63,10 @@
 # define WALL_COLOR_MG 0x666666
 # define WALL_COLOR_MB 0x225588
 # define DOOR_COLOR 0x8B0000
+# define EXIT_COLOR 0x4D4D4D
 
 // UTILS
-# define DIM_FACTOR 0.05
+# define DIM_FACTOR 0.08
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
 # define SENSITIVITY 0.0017
@@ -75,11 +75,7 @@
 # define PLAYER_INTERACTION 0.9
 # define MINIMAP_VIEW_SIZE 11
 # define MINIMAP_TILE_SIZE 20
-
-// // CORD_DEF
-// # define X 0
-// # define Y 1
-// # define Z 2
+# define MAX_MINIMAP_SIZE 32
 
 // ERRORS
 # define ERROR_ARGS "WRONG NUMBER OF ARGUMENTS"
@@ -126,6 +122,7 @@ typedef struct s_imgsmap
 	t_sprite	east;
 	t_sprite	west;
 	t_sprite	door;
+	t_sprite	exit;
 	int			floor;
 	int			ceiling;
 }	t_imgsmap;
@@ -170,7 +167,8 @@ typedef enum e_state
 	GAME,
 	WANDER,
 	PURSUIT,
-	GAME_OVER
+	GAME_OVER,
+	GAME_RESTART
 }	t_state;
 
 typedef struct s_enemy
@@ -212,6 +210,7 @@ typedef struct s_ray
 	double	side_dist_y;
 	int		hit;
 	int		hit_door;
+	int		hit_exit;
 	int		side;
 	int		line_height;
 	int		draw_start;
@@ -277,8 +276,10 @@ typedef struct s_cube
 	t_state			state;
 	t_image			game_img;
 	t_image			menu_img;
+	t_parse			*data;
 	double			frame_time;
 	double			*zbuffer;
+	int				mouse_warp;
 	struct timeval	last_time;
 }					t_cube;
 
@@ -291,8 +292,9 @@ void			init_lighting(t_light *light);
 void			init_player(t_player *player, t_parse *data, int map_height);
 int				init_map(t_map *temap, t_parse *data);
 int				init_door(t_map *map);
+void			init_the_door(t_map *map, int y, int x, int *d);
 void			init_mini_map(t_mini_map *mini_map);
-void			init_window(t_cube *cube);
+int				init_window(t_cube *cube);
 void			init_ray(t_player *player, t_ray *ray, int x);
 void			init_ray(t_player *player, t_ray *ray, int x);
 void			init_dda(t_player *player, t_ray *ray);
@@ -349,7 +351,7 @@ void			mini_map_vision_draw(t_cube *cube, int draw_x, int draw_y);
 
 // MONSTER
 
-int				init_monster(t_cube *cube, t_parse *data);
+int				init_monster(t_cube *cube, t_parse *data, bool first);
 void			monster_logic(t_cube *cube);
 void			death_monster(t_cube *cube);
 
@@ -360,6 +362,7 @@ void			update_door_animation(t_map *map);
 void			count_doors(t_map *map);
 t_door			*find_door(t_map *map, int x, int y);
 void			state_of_animation(t_map *map, t_door *door);
+void			exit_interaction(t_map *map, t_player *player);
 
 // UTILS
 
@@ -371,6 +374,8 @@ void			calc_wall_x(t_ray *ray, t_player *player);
 int				can_move(t_cube *cube, double x, double y, double radius);
 int				is_wall(t_cube *cube, double x, double y);
 void			game_menu(t_cube *cube);
+void			game_restart(t_cube *cube);
+void			free_sprites(t_cube *cube);
 // void			print_map(t_map *map);
 
 // PLAYER MOVEMENT
@@ -389,5 +394,6 @@ t_cube *cube, double sensitivity);
 
 int				close_window(t_cube *cube);
 void			destroy_maps(t_cube *cube);
+void			exit_clean(t_cube *cube);
 
 #endif //CUBE3D_H
