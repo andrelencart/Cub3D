@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:38:00 by andcarva          #+#    #+#             */
-/*   Updated: 2025/09/25 17:44:24 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:29:00 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include "cube_parse.h"
 
 // MAP_DEF
-# define WIND_WIDTH 800
-# define WIND_HEIGHT 600
+# define WIND_WIDTH 1920
+# define WIND_HEIGHT 1080
 # define TILE_SIZE 20
 
 // MATH
