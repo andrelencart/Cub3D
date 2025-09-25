@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:38:00 by andcarva          #+#    #+#             */
-/*   Updated: 2025/09/25 18:29:00 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/09/25 18:58:45 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@
 # define EXIT_COLOR 0x4D4D4D
 
 // UTILS
-# define DIM_FACTOR 0.08
+# define DIM_FACTOR 1
 # define LIGHT_RAD 1.7
 # define MOVE_SPEED 1.5
 # define SENSITIVITY 0.0017
