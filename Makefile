@@ -1,6 +1,6 @@
 
 # -->┊( NAMES )
-NAME	=	cube3D
+NAME	=	cub3D
 LIBFT	=	./Inc/Libft/libft.a
 MLX		=	./minilibx-linux/libmlx.a
 
@@ -27,7 +27,6 @@ MAIN_C			=	cube3D_main.c \
 					monster_logic.c \
 					texture_loader.c
 
-#RENDER_MAIN_C	=	render_main.c
 RENDER_FILES_C	=	hooks.c \
 					init.c \
 					entry_window.c \

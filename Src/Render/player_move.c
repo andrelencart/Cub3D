@@ -6,7 +6,7 @@
 /*   By: andcarva <andcarva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:44:10 by andcarva          #+#    #+#             */
-/*   Updated: 2025/09/24 15:44:12 by andcarva         ###   ########.fr       */
+/*   Updated: 2025/09/25 17:44:06 by andcarva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ int	window_edge_rotation(int *last_x, int x, t_cube *cube, double sensitivity)
 	(void)sensitivity;
 	if (x <= 0 || x >= WIND_WIDTH - 1)
 	{
-		*last_x = 960;
-		mlx_mouse_move(cube->window.mlx, cube->window.mlx_window, 960, 540);
+		*last_x = WIND_WIDTH / 2;
+		mlx_mouse_move(cube->window.mlx, cube->window.mlx_window, \
+WIND_WIDTH / 2, WIND_HEIGHT / 2);
 		cube->mouse_warp = 1;
 		return (1);
 	}
