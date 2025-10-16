@@ -1,6 +1,6 @@
-# Cube3D
+# Cub3D
 
-Cube3D is a 3D raycasting project written in C, inspired by classic games like Wolfenstein 3D. It allows the player to explore a maze from a first-person perspective, featuring basic movement, wall rendering, simple monster following, and player sprint, using the MiniLibX graphics library.
+Cub3D is a 3D raycasting project written in C, inspired by classic games like Wolfenstein 3D. It allows the player to explore a maze from a first-person perspective, featuring basic movement, wall rendering, simple monster following, and player sprint, using the MiniLibX graphics library.
 
 ## Features
 
