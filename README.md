@@ -38,8 +38,7 @@ Run:
 
 ## Credits
 
-Developed by [andrelencart](https://github.com/andrelencart) and [DiogoFTL-Gomes]((https://github.com/DiogoFTL-Gomes))
-license
+Developed by [andrelencart](https://github.com/andrelencart) and [DiogoGomes]((https://github.com/DiogoFTL-Gomes))
 
 ---
 
