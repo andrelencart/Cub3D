@@ -23,7 +23,7 @@ Cub3D is a 3D raycasting project written in C, inspired by classic games like Wo
 Clone the repository:
 ```sh
 git clone https://github.com/andrelencart/Cube3D.git
-cd Cube3D
+cd Cub3D
 ```
 
 Compile:
@@ -40,6 +40,4 @@ Run:
 
 Developed by [andrelencart](https://github.com/andrelencart) and [DiogoGomes](https://github.com/DiogoFTL-Gomes)
 
----
 
-Feel free to update this README as your project progresses!
